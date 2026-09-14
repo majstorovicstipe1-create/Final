@@ -1,0 +1,869 @@
+<!DOCTYPE html>  
+<html lang="hr">  
+<head>  
+  <meta charset="UTF-8">  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <title>Aurelius Lux - Luksuzni Izleti Brodom</title>  
+    
+  <!-- Fontovi: Cinzel Decorative, Cinzel i Montserrat -->  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Cinzel:wght@600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">  
+  
+  <!-- EmailJS & Supabase SDK -->  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script type="text/javascript">  
+    (function(){  
+      emailjs.init("_5f_h2OMqwIAUV6Mg");  
+    })();  
+  </script>  
+  
+  <style>  
+    * { box-sizing: border-box; margin: 0; padding: 0; }  
+    body { background-color: #07080a; color: #d1d5db; font-family: 'Montserrat', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; scroll-behavior: smooth; }  
+    h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 1.5px; }  
+  
+    /* LUKSUZNI ZLATNI TEKST I EFEKTI */  
+    .gold-text-luxury {  
+      font-family: 'Cinzel Decorative', serif;  
+      font-weight: 900;  
+      text-transform: uppercase;  
+      background: linear-gradient(135deg, #b38728 0%, #fbf5b7 25%, #bf953f 50%, #fcf6ba 75%, #aa771c 100%);  
+      -webkit-background-clip: text;  
+      -webkit-text-fill-color: transparent;  
+      filter: drop-shadow(0 2px 8px rgba(179, 135, 40, 0.4));  
+    }  
+  
+    /* FIKSNI HEADER */  
+    .site-header {  
+      position: fixed; top: 0; left: 0; width: 100%; height: 80px;  
+      background: rgba(10, 11, 16, 0.9); backdrop-filter: blur(12px);  
+      border-bottom: 1px solid rgba(212, 175, 55, 0.2);  
+      display: flex; justify-content: space-between; align-items: center;  
+      padding: 0 40px; z-index: 1000;  
+    }  
+
+    .nav-brand-title {  
+      font-family: 'Cinzel Decorative', serif; font-size: 1.3rem; letter-spacing: 3px;  
+      background: linear-gradient(135deg, #b38728, #fcf6ba, #aa771c);  
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;  
+      text-decoration: none; display: flex; align-items: center; gap: 10px;  
+    }  
+  
+    .compass-icon {  
+      vertical-align: middle; display: inline-block;  
+      transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);  
+      filter: drop-shadow(0px 0px 8px rgba(212, 175, 55, 0.6));  
+    }  
+    .compass-icon:hover { transform: rotate(360deg); }  
+
+    /* NAVIGACIJA S DESNE STRANE */  
+    .main-nav ul { display: flex; list-style: none; gap: 30px; align-items: center; }  
+    .main-nav a {  
+      text-decoration: none; color: #d4af37; font-size: 0.85rem;  
+      font-weight: 600; letter-spacing: 2px; text-transform: uppercase; transition: color 0.3s;  
+    }  
+    .main-nav a:hover { color: #ffffff; }  
+
+    .hamburger-icon {     
+      display: none; font-size: 1.4rem; color: #fcf6ba; cursor: pointer;     
+      padding: 8px; border: 1px solid rgba(212, 175, 55, 0.4);     
+      border-radius: 6px; background: rgba(17, 34, 64, 0.6); transition: all 0.3s;     
+    }  
+    .hamburger-icon:hover { border-color: #fcf6ba; background: rgba(212, 175, 55, 0.15); }  
+  
+    .floating-menu-btn {  
+      position: fixed; bottom: 25px; right: 25px; width: 55px; height: 55px;  
+      border-radius: 50%; background: linear-gradient(135deg, #b38728, #fcf6ba, #aa771c);  
+      color: #07080a; display: flex; align-items: center; justify-content: center;  
+      font-size: 1.3rem; box-shadow: 0 6px 25px rgba(212, 175, 55, 0.6);  
+      cursor: pointer; z-index: 1500; transition: transform 0.3s ease, box-shadow 0.3s ease;  
+      border: 1px solid #fff;  
+    }  
+    .floating-menu-btn:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(212, 175, 55, 0.9); }  
+  
+    .dropdown-menu {  
+      display: none; position: fixed; top: 90px; right: 40px;  
+      background: #0d1b2a; border: 1px solid #d4af37; border-radius: 10px;  
+      width: 280px; box-shadow: 0 15px 40px rgba(0,0,0,0.9); padding: 20px;  
+      flex-direction: column; gap: 12px; z-index: 1501;  
+    }  
+    .dropdown-menu.active { display: flex; }  
+    .dropdown-menu a {  
+      color: #cbd5e1; text-decoration: none; font-size: 0.85rem; font-weight: 300;  
+      padding: 10px 12px; border-radius: 6px; display: flex; align-items: center; gap: 12px;  
+      transition: all 0.2s;  
+    }  
+    .dropdown-menu a:hover { background: rgba(212, 175, 55, 0.15); color: #fcf6ba; transform: translateX(4px); }  
+  
+    .lang-selector { margin-top: 10px; padding-top: 12px; border-top: 1px solid rgba(212, 175, 55, 0.25); }  
+    .lang-selector label { font-size: 0.72rem; color: #d4af37; text-transform: uppercase; display: block; margin-bottom: 6px; font-weight: 400; letter-spacing: 1px; }  
+    .lang-select { width: 100%; background: #07080a; color: #fcf6ba; border: 1px solid rgba(212, 175, 55, 0.5); padding: 8px; border-radius: 6px; font-weight: 300; outline: none; font-size: 0.85rem; }  
+  
+    /* HERO ODJELJAK S RUŽOM VJETROVA */  
+    .hero-section {  
+      background: radial-gradient(circle at center, #0d2137 0%, #07080a 85%);  
+      min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;  
+      text-align: center; padding: 120px 20px 70px 20px; border-bottom: 2px solid rgba(212, 175, 55, 0.3);  
+      position: relative; overflow: hidden;  
+    }  
+    .hero-section::before {  
+      content: ''; position: absolute; width: 100%; height: 100%;  
+      background: url('https://images.unsplash.com/photo-1500375592092-40eb2168fd21?q=80&w=1920&auto=format&fit=crop') no-repeat center center/cover;  
+      opacity: 0.12; z-index: 0;  
+    }  
+    .hero-content-wrapper { position: relative; z-index: 1; max-width: 900px; display: flex; flex-direction: column; align-items: center; }  
+    .hero-compass-big {  
+      width: 130px; height: 130px; margin-bottom: 20px;  
+      animation: rotateCompassSlow 45s linear infinite;  
+      filter: drop-shadow(0px 0px 25px rgba(212, 175, 55, 0.7));  
+    }  
+    @keyframes rotateCompassSlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }  
+  
+    .hero-title {     
+      font-family: 'Cinzel Decorative', serif; font-size: 3.8rem; margin-bottom: 10px; line-height: 1.1;  
+      letter-spacing: 4px; background: linear-gradient(135deg, #b38728 0%, #fbf5b7 20%, #d4af37 40%, #fff 60%, #fbf5b7 80%, #aa771c 100%);  
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 0 10px 30px rgba(0,0,0,0.8);  
+    }  
+    .hero-subtitle {     
+      font-size: 0.85rem; letter-spacing: 5px; color: #d4af37; text-transform: uppercase;     
+      margin-bottom: 30px; font-weight: 300; border-top: 1px solid rgba(212, 175, 55, 0.3);  
+      border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding: 6px 20px; display: inline-block;  
+    }  
+    .hero-section p { font-size: 1rem; color: #94a3b8; max-width: 650px; margin: 0 auto 35px auto; font-weight: 300; line-height: 1.7; }  
+  
+    .btn-gold {  
+      background: linear-gradient(135deg, #b38728, #fcf6ba, #aa771c);  
+      color: #07080a; padding: 15px 35px; border-radius: 6px; text-decoration: none;  
+      font-weight: 500; font-family: 'Cinzel', serif; letter-spacing: 1.5px;  
+      text-transform: uppercase; font-size: 0.85rem; border: none; cursor: pointer;  
+      box-shadow: 0 6px 25px rgba(212, 175, 55, 0.4); transition: all 0.3s ease;  
+    }  
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 35px rgba(212, 175, 55, 0.7); background: linear-gradient(135deg, #c59738, #fffaaa, #bc831e); }  
+  
+    .container { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }  
+    .section-header { text-align: center; margin-bottom: 45px; }  
+    .section-header h2 { font-size: 1.8rem; margin-bottom: 8px; font-weight: 400; }  
+    .gold-divider { height: 2px; width: 60px; background: linear-gradient(90deg, transparent, #d4af37, transparent); margin: 12px auto 0 auto; }  
+  
+    .tours-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 35px; margin-top: 30px; }  
+    .tour-card {  
+      background: #0d1b2a; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 12px;  
+      overflow: hidden; display: flex; flex-direction: column; transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;  
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);  
+    }  
+    .tour-card:hover { transform: translateY(-8px); border-color: #fcf6ba; box-shadow: 0 20px 45px rgba(212, 175, 55, 0.25); }  
+  
+    .tour-img { height: 220px; width: 100%; position: relative; display: flex; align-items: center; justify-content: center; background-size: cover; background-position: center; }  
+    .img-private { background: linear-gradient(rgba(7, 8, 10, 0.3), rgba(7, 8, 10, 0.8)), url('https://static1.nautal.com/v1/p/v2yKwMnnDzariMp67OsnPrZkPlU0UpPJ.big.jpg'); background-size: cover; }  
+    .img-shared { background: linear-gradient(rgba(7, 8, 10, 0.3), rgba(7, 8, 10, 0.8)), url('https://croboat.com/images/blue-lagoon-krknjasi2.jpg'); background-size: cover; }  
+    .img-sunset { background: linear-gradient(rgba(7, 8, 10, 0.3), rgba(7, 8, 10, 0.8)), url('https://media-cdn.tripadvisor.com/media/attractions-splice-spp-674x446/r/33/85/21/f6/caption.jpg'); background-size: cover; }  
+  
+    .tour-badge { position: absolute; top: 15px; right: 15px; background: rgba(7, 8, 10, 0.9); border: 1px solid #d4af37; color: #fcf6ba; padding: 5px 14px; border-radius: 20px; font-size: 0.7rem; font-weight: 300; letter-spacing: 0.8px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }  
+    .tour-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }  
+    .tour-header-box { margin-bottom: 12px; }  
+    .tour-card-title { font-size: 1.2rem; color: #fcf6ba; margin-bottom: 6px; font-weight: 400; }  
+    .tour-time { font-size: 0.8rem; color: #d4af37; font-weight: 300; display: flex; align-items: center; gap: 8px; }  
+    .tour-card-desc { font-size: 0.85rem; color: #94a3b8; margin-bottom: 20px; font-weight: 300; line-height: 1.6; }  
+    .tour-features { list-style: none; margin-bottom: 20px; font-size: 0.82rem; color: #cbd5e1; font-weight: 300; }  
+    .tour-features li { margin-bottom: 8px; display: flex; align-items: flex-start; gap: 10px; }  
+    .tour-features li i { color: #d4af37; font-size: 0.8rem; margin-top: 3px; }  
+    .tour-card-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 16px; margin-top: auto; }  
+    .tour-price-tag { font-family: 'Cinzel Decorative', serif; font-size: 1.25rem; color: #fcf6ba; font-weight: 700; }  
+    .btn-card-book { background: transparent; border: 1px solid #d4af37; color: #fcf6ba; padding: 8px 16px; border-radius: 6px; font-size: 0.75rem; font-weight: 400; letter-spacing: 1px; cursor: pointer; transition: all 0.3s; text-transform: uppercase; }  
+    .btn-card-book:hover { background: #d4af37; color: #07080a; box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4); }  
+  
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px; margin-top: 35px; }  
+    .feature-box { background: #0d1b2a; border: 1px solid rgba(212, 175, 55, 0.2); padding: 25px; border-radius: 10px; text-align: center; transition: transform 0.3s, border-color 0.3s; }  
+    .feature-box:hover { transform: translateY(-5px); border-color: #d4af37; }  
+    .feature-box i { font-size: 2rem; color: #d4af37; margin-bottom: 12px; filter: drop-shadow(0 2px 8px rgba(212,175,55,0.3)); }  
+    .feature-box h4 { font-size: 0.95rem; color: #fcf6ba; margin-bottom: 8px; font-weight: 400; }  
+    .feature-box p { font-size: 0.82rem; color: #94a3b8; line-height: 1.5; font-weight: 300; }  
+  
+    /* MODALNI PROZORI */  
+    .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(7, 8, 10, 0.92); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 15px; backdrop-filter: blur(8px); }  
+    .modal-card { background: #0d1b2a; border: 1px solid #d4af37; border-radius: 12px; padding: 25px 22px; max-width: 520px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.95); position: relative; max-height: 92vh; overflow-y: auto; }  
+    .close-btn { position: absolute; top: 12px; right: 18px; color: #94a3b8; font-size: 1.6rem; cursor: pointer; transition: color 0.2s; }  
+    .close-btn:hover { color: #fcf6ba; }  
+  
+    .calendar-controls { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; }  
+    .cal-btn { background: #07080a; border: 1px solid #d4af37; color: #fcf6ba; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: 400; transition: background 0.2s; }  
+    .cal-btn:hover { background: rgba(212, 175, 55, 0.2); }  
+  
+    .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center; width: 100%; }  
+    .day-name { font-weight: 400; color: #d4af37; font-size: 0.72rem; padding: 6px 0; letter-spacing: 0.8px; }  
+    .date-btn { background: #07080a; border: 1px solid rgba(212, 175, 55, 0.25); color: #e2e8f0; padding: 8px 0; border-radius: 6px; cursor: pointer; font-size: 0.85rem; font-weight: 400; display: flex; flex-direction: column; align-items: center; min-height: 50px; justify-content: center; position: relative; width: 100%; transition: all 0.2s; }  
+    .date-btn:hover:not(.disabled-past):not(.booked) { border-color: #fcf6ba; background: rgba(212, 175, 55, 0.15); transform: scale(1.03); }  
+    .date-btn .pax-tag { font-size: 0.58rem; margin-top: 3px; font-weight: 300; line-height: 1; }  
+    .date-btn.disabled-past { background: #030406; border-color: rgba(255, 255, 255, 0.02); color: #334155; cursor: not-allowed; opacity: 0.3; }  
+    .date-btn.booked { background: #111e35; border-color: #1e293b; color: #475569; cursor: not-allowed; opacity: 0.4; }  
+    .date-btn.out-season { background: transparent; border: none; color: transparent; cursor: default; }  
+  
+    .form-group { margin-bottom: 14px; text-align: left; position: relative; }  
+    .form-group label { display: block; font-size: 0.78rem; color: #d4af37; margin-bottom: 6px; font-weight: 400; letter-spacing: 0.5px; }  
+    .form-input { width: 100%; background: #07080a; border: 1px solid rgba(212, 175, 55, 0.35); padding: 9px 12px; border-radius: 6px; color: #fcf6ba; font-size: 0.9rem; font-weight: 300; transition: border-color 0.3s; outline: none; }  
+    .form-input:focus { border-color: #fcf6ba; box-shadow: 0 0 10px rgba(212,175,55,0.25); }  
+    .form-input.invalid { border-color: #e63946 !important; background: rgba(230, 57, 70, 0.1); }  
+    .error-msg { font-size: 0.72rem; color: #ff758f; margin-top: 4px; display: none; font-weight: 300; }  
+  
+    .terms-box { display: flex; align-items: flex-start; gap: 10px; margin: 16px 0; font-size: 0.76rem; color: #94a3b8; text-align: left; font-weight: 300; }  
+    .terms-box input { margin-top: 3px; cursor: pointer; accent-color: #d4af37; width: 15px; height: 15px; }  
+  
+    .admin-day { background: #07080a; border: 1px solid rgba(212, 175, 55, 0.2); border-radius: 6px; padding: 6px 2px; min-height: 56px; display: flex; flex-direction: column; align-items: center; justify-content: space-between; font-size: 0.8rem; font-weight: 300; position: relative; width: 100%; }  
+    .admin-day.status-empty { color: #475569; border-color: rgba(255,255,255,0.03); }  
+    .admin-day.status-private { background: #113f2d; border-color: #2d6a4f; color: #2ec4b6; font-weight: 400; }  
+    .admin-day.status-high-pax { background: #002238; border-color: #0077b6; color: #64dfdf; font-weight: 400; }  
+    .admin-day.status-mid-pax { background: #020342; border-color: #0096c7; color: #90e0ef; font-weight: 400; }  
+    .admin-day.status-low-pax { background: #3c0911; border-color: #e63946; color: #ff758f; font-weight: 400; }  
+  
+    .sunset-indicator { font-size: 0.65rem; color: #ff9f43; font-weight: 400; }  
+    .legend-box { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 15px 0; padding: 10px; background: #07080a; border-radius: 8px; font-size: 0.72rem; border: 1px solid rgba(212,175,55,0.2); font-weight: 300; }  
+    .legend-item { display: flex; align-items: center; gap: 6px; color: #cbd5e1; }  
+    .legend-color { width: 12px; height: 12px; border-radius: 3px; }  
+  
+    .tour-option { background: #07080a; border: 1px solid rgba(212, 175, 55, 0.3); border-radius: 8px; padding: 14px; margin-top: 10px; cursor: pointer; text-align: left; transition: all 0.2s; }  
+    .tour-option:hover { border-color: #fcf6ba; background: #112240; transform: translateY(-2px); }  
+    .pax-select-box { margin-top: 12px; background: #07080a; padding: 14px; border-radius: 8px; border: 1px solid rgba(212, 175, 55, 0.3); text-align: center; display: none; }  
+    .admin-section { display: none; background: #030406; border: 1px solid #d4af37; padding: 20px; border-radius: 10px; margin-top: 40px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }  
+    .admin-table { width: 100%; margin-top: 16px; border-collapse: collapse; text-align: left; font-size: 0.82rem; font-weight: 300; }  
+    .admin-table th, .admin-table td { padding: 9px; border: 1px solid rgba(212, 175, 55, 0.2); }  
+    .admin-table th { background: #0d1b2a; color: #fcf6ba; font-weight: 400; letter-spacing: 0.5px; }  
+      
+    .btn-delete-item { background: #3c0911; border: 1px solid #e63946; color: #ff758f; padding: 3px 8px; border-radius: 4px; font-size: 0.72rem; cursor: pointer; margin-top: 4px; float: right; font-weight: 300; transition: background 0.2s; }  
+    .btn-delete-item:hover { background: #e63946; color: #fff; }  
+  
+    footer { text-align: center; padding: 35px 20px; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid rgba(212, 175, 55, 0.2); margin-top: 6px; background: #030406; font-weight: 300; }  
+
+    @media (max-width: 900px) {
+      .site-header { padding: 0 20px; }
+      .main-nav { display: none; }
+      .hamburger-icon { display: block; }
+    }
+  </style>  
+</head>  
+<body>  
+  
+  <!-- RUŽA VJETROVA SVG -->  
+  <svg style="display:none;">  
+    <g id="svg-compass-rose">  
+      <circle cx="50" cy="50" r="46" fill="none" stroke="url(#goldGrad)" stroke-width="1.8" opacity="0.9"/>  
+      <circle cx="50" cy="50" r="41" fill="none" stroke="url(#goldGrad)" stroke-width="0.8" opacity="0.6"/>  
+      <circle cx="50" cy="50" r="38" fill="none" stroke="url(#goldGradDark)" stroke-width="0.5" stroke-dasharray="2 2"/>  
+      <polygon points="50,4 56,44 50,50 44,44" fill="url(#goldGrad)"/>  
+      <polygon points="50,96 56,56 50,50 44,56" fill="url(#goldGradDark)"/>  
+      <polygon points="96,50 56,56 50,50 56,44" fill="url(#goldGrad)"/>  
+      <polygon points="4,50 44,56 50,50 44,44" fill="url(#goldGradDark)"/>  
+      <polygon points="83,17 54,46 50,50 46,46" fill="url(#goldGradDark)"/>  
+      <polygon points="83,83 54,54 50,50 46,54" fill="url(#goldGrad)"/>  
+      <polygon points="17,83 46,54 50,50 54,54" fill="url(#goldGradDark)"/>  
+      <polygon points="17,17 46,46 50,50 54,46" fill="url(#goldGrad)"/>  
+      <circle cx="50" cy="50" r="4.5" fill="#07080a" stroke="url(#goldGrad)" stroke-width="1.5"/>  
+      <circle cx="50" cy="50" r="2" fill="#fcf6ba"/>  
+      <defs>  
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">  
+          <stop offset="0%" stop-color="#bf953f"/>  
+          <stop offset="35%" stop-color="#fcf6ba"/>  
+          <stop offset="70%" stop-color="#b38728"/>  
+          <stop offset="100%" stop-color="#aa771c"/>  
+        </linearGradient>  
+        <linearGradient id="goldGradDark" x1="0%" y1="0%" x2="100%" y2="100%">  
+          <stop offset="0%" stop-color="#8a671c"/>  
+          <stop offset="100%" stop-color="#3b2905"/>  
+        </linearGradient>  
+      </defs>  
+    </g>  
+  </svg>  
+  
+  <!-- FIKSNI HEADER -->  
+  <header class="site-header" id="mainNavbar">  
+    <a href="#" class="nav-brand-title">  
+      <svg class="compass-icon" viewBox="0 0 100 100" style="width: 30px; height: 30px;"><use href="#svg-compass-rose"></use></svg>  
+      AURELIUS LUX  
+    </a>  
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" id="menuHomeText">Početna</a></li>
+        <li><a href="#tours" id="menuToursText">Naše Ture</a></li>
+        <li><a href="#features" id="menuFeaturesText">Oprema</a></li>
+        <li><a href="#about" id="menuAboutText">O nama</a></li>
+        <li><a href="javascript:void(0);" onclick="openTourSelectModal();" style="color: #fcf6ba;" id="menuBookText">Rezerviraj</a></li>
+        <li><a href="javascript:void(0);" onclick="adminLogin();" style="color: #d4af37;" id="menuAdminText">Admin</a></li>
+      </ul>
+    </nav>  
+    <div class="hamburger-icon" onclick="toggleDropdown(event)"><i class="fa-solid fa-bars"></i></div>  
+  </header>  
+  
+  <!-- PLUTAJUĆI GUMB -->  
+  <div class="floating-menu-btn" onclick="toggleDropdown(event)">  
+    <i class="fa-solid fa-anchor"></i>  
+  </div>  
+  
+  <div id="dropdownMenu" class="dropdown-menu">  
+    <a href="#" id="menuHome"><i class="fa-solid fa-house"></i> Početna stranica</a>  
+    <a href="#tours" id="menuTours"><i class="fa-solid fa-ship"></i> Naše Ture</a>  
+    <a href="#features" id="menuFeatures"><i class="fa-solid fa-anchor"></i> Oprema i Usluga</a>  
+    <a href="#about" id="menuAbout"><i class="fa-solid fa-circle-info"></i> O nama</a>  
+    <a href="javascript:void(0);" onclick="openTourSelectModal();" style="color: #fcf6ba;" id="menuBook"><i class="fa-solid fa-calendar-check"></i> Rezerviraj termin</a>  
+    <a href="javascript:void(0);" onclick="adminLogin();" style="color: #d4af37;" id="menuAdmin"><i class="fa-solid fa-user-lock"></i> Admin panel</a>  
+  
+    <div class="lang-selector">  
+      <label id="lblLang"><i class="fa-solid fa-globe"></i> Odaberite Jezik</label>  
+      <select class="lang-select" onchange="changeLanguage(this.value)">  
+        <option value="hr">🇭🇷 Hrvatski</option>  
+        <option value="en">🇬🇧 English</option>  
+        <option value="de">🇩🇪 Deutsch</option>  
+      </select>  
+    </div>  
+  </div>  
+  
+  <!-- HERO SA VELIKOM RUŽOM VJETROVA -->  
+  <header class="hero-section" id="heroHeader">  
+    <div class="hero-content-wrapper">  
+      <svg class="hero-compass-big" viewBox="0 0 100 100"><use href="#svg-compass-rose"></use></svg>  
+      <h1 class="hero-title">AURELIUS LUX</h1>  
+      <div class="hero-subtitle" id="txtSubtitle">Ekskluzivni Izleti Brodom</div>  
+      <p id="txtHeroDesc">Privatne i vođene morske avanture duž najljepših skrivenih uvala Jadranskog mora. Vrhunski komfor, beskompromisna elegancija i nezaboravan doživljaj.</p>  
+      <button class="btn-gold" id="btnBooking" onclick="openTourSelectModal()">Rezervirajte Termin</button>  
+    </div>  
+  </header>  
+  
+  <!-- SEKCIJA TURA -->  
+  <div class="container" id="tours">  
+    <div class="section-header">  
+      <h2 class="gold-text-luxury" id="txtToursSectionTitle">Ekskluzivne Ture i Doživljaji</h2>  
+      <div class="gold-divider"></div>  
+      <p id="txtToursSectionSub" style="color: #94a3b8; margin-top: 12px; font-size: 0.9rem; font-weight: 300;">Odaberite vožnju prilagođenu vašim najvišim željama</p>  
+    </div>  
+  
+    <div class="tours-grid">  
+      <!-- TURA 1 -->  
+      <div class="tour-card">  
+        <div class="tour-img img-private">  
+          <span class="tour-badge" id="b1"><i class="fa-solid fa-crown"></i> VIP Ekskluziva</span>  
+        </div>  
+        <div class="tour-content">  
+          <div class="tour-header-box">  
+            <h3 class="tour-card-title" id="t1CardTitle">Privatna Cjelodnevna Tura</h3>  
+            <div class="tour-time" id="t1CardTime"><i class="fa-regular fa-clock"></i> 08:30 - 19:00 (Zakup broda)</div>  
+          </div>  
+          <p class="tour-card-desc" id="t1CardDesc">Preuzmite potpunu kontrolu nad danom na moru. Zakupite cijeli brod ekskluzivno za svoju obitelj ili društvo i kreirajte rutu po vlastitom ritmu uz iskusnog lokalnog skipera.</p>  
+          <ul class="tour-features">  
+            <li><i class="fa-solid fa-check"></i> <span id="t1f1">Privatni brod za vašu grupu (do 10 osoba)</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t1f2">Uključen licencirani i iskusni skiper</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t1f3">T-Top sjena i vrhunsko JL Audio ozvučenje</span></li>  
+            <li><i class="fa-solid fa-circle-info" style="color:#ff9f43"></i> <span id="t1f4">Gorivo se plaća po utrošku na kraju ture</span></li>  
+          </ul>  
+          <div class="tour-card-footer">  
+            <div class="tour-price-tag">450 € <span style="font-size: 0.7rem; font-family:'Montserrat'; font-weight:300; color:#94a3b8;" id="t1Per">/ dan</span></div>  
+            <button class="btn-card-book" id="t1Btn" onclick="selectTourType('private')">Odaberi Termin</button>  
+          </div>  
+        </div>  
+      </div>  
+  
+      <!-- TURA 2 -->  
+      <div class="tour-card">  
+        <div class="tour-img img-shared">  
+          <span class="tour-badge" id="b2"><i class="fa-solid fa-compass"></i> Najpopularnije</span>  
+        </div>  
+        <div class="tour-content">  
+          <div class="tour-header-box">  
+            <h3 class="tour-card-title" id="t2CardTitle">Tura Tri Otoka (Dijeljena)</h3>  
+            <div class="tour-time" id="t2CardTime"><i class="fa-regular fa-clock"></i> 08:30 - 18:30 (Cjelodnevni izlet)</div>  
+          </div>  
+          <p class="tour-card-desc" id="t2CardDesc">Istražite najljepše bisere akvatorija u opuštenoj atmosferi. Vožnja obuhvaća posjet tirkiznoj Plavoj Laguni (Drvenik Veliki), otoku Drvenik Mali te uvalama otoka Šolte.</p>  
+          <ul class="tour-features">  
+            <li><i class="fa-solid fa-check"></i> <span id="t2f1">Posjet: Plava Laguna, Drvenik Mali i Šolta</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t2f2">Kupanje i ronjenje u kristalnom moru</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t2f3">Oprema za ronjenje (maske) na brodu</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t2f4">Uključeni skiper i gorivo u cijeni</span></li>  
+          </ul>  
+          <div class="tour-card-footer">  
+            <div class="tour-price-tag">65 € <span style="font-size: 0.7rem; font-family:'Montserrat'; font-weight:300; color:#94a3b8;" id="t2Per">/ osobi</span></div>  
+            <button class="btn-card-book" id="t2Btn" onclick="showPaxSelectorStepFromCard()">Odaberi Mjesta</button>  
+          </div>  
+        </div>  
+      </div>  
+  
+      <!-- TURA 3 -->  
+      <div class="tour-card">  
+        <div class="tour-img img-sunset">  
+          <span class="tour-badge" id="b3"><i class="fa-solid fa-heart"></i> Romantični Bijeg</span>  
+        </div>  
+        <div class="tour-content">  
+          <div class="tour-header-box">  
+            <h3 class="tour-card-title" id="t3CardTitle">Romantična Sunset Tura</h3>  
+            <div class="tour-time" id="t3CardTime"><i class="fa-regular fa-clock"></i> Večernji termin (Zalazak sunca)</div>  
+          </div>  
+          <p class="tour-card-desc" id="t3CardDesc">Ekskluzivan izlet na otvorenu morsku pučinu namijenjen za dvije osobe. Uživajte u privatnosti i čarobnom zalasku sunca uz šampanjac ili vino te dalmatinsku platu.</p>  
+          <ul class="tour-features">  
+            <li><i class="fa-solid fa-check"></i> <span id="t3f1">Potpuna privatnost na pučini za 2 osobe</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t3f2">Vrhunski šampanjac ili rashlađeno vino</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t3f3">Dalmatinska plata (domaći pršut i sir)</span></li>  
+            <li><i class="fa-solid fa-check"></i> <span id="t3f4">Nezaboravan pogled na zalazak sunca</span></li>  
+          </ul>  
+          <div class="tour-card-footer">  
+            <div class="tour-price-tag">150 € <span style="font-size: 0.7rem; font-family:'Montserrat'; font-weight:300; color:#94a3b8;" id="t3Per">/ par</span></div>  
+            <button class="btn-card-book" id="t3Btn" onclick="selectTourType('sunset')">Rezerviraj Sunset</button>  
+          </div>  
+        </div>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <!-- POGODNOSTI -->  
+  <div class="container" id="features">  
+    <div class="section-header">  
+      <h2 class="gold-text-luxury" id="txtFeatTitle">Vrhunska Oprema i Usluga</h2>  
+      <div class="gold-divider"></div>  
+    </div>  
+    <div class="features-grid">  
+      <div class="feature-box">  
+        <i class="fa-solid fa-music"></i>  
+        <h4 id="fBox1Title">JL Audio Ozvučenje</h4>  
+        <p id="fBox1Desc">Uživajte u omiljenoj glazbi uz kristalno čist zvuk visoke klase na moru.</p>  
+      </div>  
+      <div class="feature-box">  
+        <i class="fa-solid fa-umbrella-beach"></i>  
+        <h4 id="fBox2Title">T-Top Velika Sjena</h4>  
+        <p id="fBox2Desc">Kvalitetna zaštita od sunca i udoban prostor za opuštanje tijekom vrućih dana.</p>  
+      </div>  
+      <div class="feature-box">  
+        <i class="fa-solid fa-water"></i>  
+        <h4 id="fBox3Title">Oprema za Ronjenje</h4>  
+        <p id="fBox3Desc">Besplatne maske i oprema za istraživanje podmorja skrivenih uvala.</p>  
+      </div>  
+      <div class="feature-box">  
+        <i class="fa-solid fa-user-shield"></i>  
+        <h4 id="fBox4Title">Iskusni Lokalni Skiper</h4>  
+        <p id="fBox4Desc">Sigurna vožnja i vođenje do najljepših lokacija poznatih samo lokalnim pomorcima.</p>  
+      </div>  
+    </div>  
+  </div>  
+  
+  <!-- O NAMA & ADMIN -->  
+  <div class="container" id="about">  
+    <div class="section-header">  
+      <h2 class="gold-text-luxury" id="txtAboutTitle">O Obrtu Aurelius Lux</h2>  
+      <div class="gold-divider"></div>  
+      <p id="txtAboutDesc" style="color: #94a3b8; margin-top: 15px; font-size: 0.9rem; max-width: 750px; margin-left: auto; margin-right: auto; line-height: 1.7; font-weight: 300;">  
+        Nudimo vrhunske privatne i grupne ekskurzije brodom s polascima iz Splita, Kaštela i Trogira. Naš cilj je pružiti vam autentičan i luksuzan doživljaj Jadranskog mora uz maksimalnu udobnost i sigurnost.  
+      </p>  
+    </div>  
+  
+    <!-- ADMIN PANEL -->  
+    <div id="adminPanel" class="admin-section">  
+      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.3rem;" id="adminTitle">ADMIN PANEL - Pregled Popunjenosti i Gosti</h3>  
+        
+      <div class="legend-box">  
+        <div class="legend-item"><div class="legend-color" style="background:#113f2d; border:1px solid #2d6a4f;"></div> Privatno / Sunset</div>
+        <div class="legend-item"><div class="legend-color" style="background:#002238; border:1px solid #0077b6;"></div> Grupno (8-10 putnika)</div>
+        <div class="legend-item"><div class="legend-color" style="background:#020342; border:1px solid #0096c7;"></div> Grupno (4-7 putnika)</div>
+        <div class="legend-item"><div class="legend-color" style="background:#3c0911; border:1px solid #e63946;"></div> Grupno (1-3 putnika)</div>
+      </div>
+
+      <div class="calendar-controls">  
+        <button class="cal-btn" onclick="changeAdminMonth(-1)"><i class="fa-solid fa-chevron-left"></i> Prethodni</button>  
+        <span id="adminMonthYearLabel" style="font-family:'Cinzel'; color:#fcf6ba; font-weight:600; letter-spacing:1px;"></span>  
+        <button class="cal-btn" onclick="changeAdminMonth(1)">Sljedeći <i class="fa-solid fa-chevron-right"></i></button>  
+      </div>  
+
+      <div class="calendar-grid" id="adminCalendarGrid"></div>  
+
+      <h4 style="color: #fcf6ba; margin-top: 30px; margin-bottom: 10px; font-size: 1rem;" id="adminBookingsListTitle"><i class="fa-solid fa-list"></i> Popis svih rezervacija</h4>  
+      <div style="overflow-x: auto;">
+        <table class="admin-table">  
+          <thead>  
+            <tr>  
+              <th id="thDate">Datum</th>  
+              <th id="thTour">Tip Ture</th>  
+              <th id="thName">Ime i Prezime</th>  
+              <th id="thEmail">Email / Kontakt</th>  
+              <th id="thPax">Putnika</th>  
+              <th id="thAction">Akcija</th>  
+            </tr>  
+          </thead>  
+          <tbody id="adminBookingsTableBody"></tbody>  
+        </table>  
+      </div>
+    </div>  
+  </div>  
+
+  <!-- MODAL: ODABIR TURE -->
+  <div id="tourSelectModal" class="modal-overlay">
+    <div class="modal-card">
+      <span class="close-btn" onclick="closeAllModals()">&times;</span>
+      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.1rem; margin-bottom: 15px;">Odaberite Vrstu Ture</h3>
+      <div class="tour-option" onclick="selectTourType('private')">
+        <h4 style="color:#fcf6ba; font-size:0.95rem;">Privatna Cjelodnevna Tura (450 €)</h4>
+        <p style="font-size:0.8rem; color:#94a3b8;">Zakup cijelog broda (do 10 osoba)</p>
+      </div>
+      <div class="tour-option" onclick="selectTourType('shared')">
+        <h4 style="color:#fcf6ba; font-size:0.95rem;">Tura Tri Otoka - Dijeljena (65 € / osobi)</h4>
+        <p style="font-size:0.8rem; color:#94a3b8;">Plava Laguna, Drvenik Mali i Šolta</p>
+      </div>
+      <div class="tour-option" onclick="selectTourType('sunset')">
+        <h4 style="color:#fcf6ba; font-size:0.95rem;">Romantična Sunset Tura (150 € / par)</h4>
+        <p style="font-size:0.8rem; color:#94a3b8;">Večernji izlet za dvoje s vinom i platom</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: KALENDAR I REZERVACIJA -->
+  <div id="bookingModal" class="modal-overlay">
+    <div class="modal-card">
+      <span class="close-btn" onclick="closeAllModals()">&times;</span>
+      <h3 id="modalTourTitle" class="gold-text-luxury" style="text-align: center; font-size: 1.1rem; margin-bottom: 10px;">Rezervacija</h3>
+      
+      <div class="calendar-controls">
+        <button class="cal-btn" onclick="changeMonth(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+        <span id="monthYearLabel" style="font-family:'Cinzel'; color:#fcf6ba; font-weight:600; font-size:0.9rem;"></span>
+        <button class="cal-btn" onclick="changeMonth(1)"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+
+      <div class="calendar-grid" id="calendarDaysGrid"></div>
+
+      <div id="paxSelectorBox" class="pax-select-box">
+        <label style="font-size:0.75rem; color:#d4af37; display:block; margin-bottom:6px;">Odaberite broj putnika (preostalo: <span id="spotsLeft">10</span>):</label>
+        <div style="display:flex; justify-content:center; gap:10px; align-items:center;">
+          <button class="cal-btn" onclick="adjustPax(-1)">-</button>
+          <span id="selectedPaxCount" style="font-size:1.1rem; color:#fcf6ba; font-weight:600; width:30px;">1</span>
+          <button class="cal-btn" onclick="adjustPax(1)">+</button>
+        </div>
+        <button class="btn-gold" style="margin-top:12px; padding:8px 20px; font-size:0.75rem;" onclick="proceedToForm()">Nastavi na podatke</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: FORMA ZA UNOS PODATAKA -->
+  <div id="formModal" class="modal-overlay">
+    <div class="modal-card">
+      <span class="close-btn" onclick="closeAllModals()">&times;</span>
+      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.1rem; margin-bottom: 15px;">Podaci o Rezervaciji</h3>
+      
+      <form id="bookingForm" onsubmit="submitBooking(event)">
+        <div class="form-group">
+          <label>Ime i Prezime</label>
+          <input type="text" id="clientName" class="form-input" required placeholder="Unesite ime i prezime">
+        </div>
+        <div class="form-group">
+          <label>Email adresa</label>
+          <input type="email" id="clientEmail" class="form-input" required placeholder="vas@email.com">
+        </div>
+        <div class="form-group">
+          <label>Broj mobitela / WhatsApp</label>
+          <input type="text" id="clientPhone" class="form-input" required placeholder="+385 ...">
+        </div>
+        <div class="terms-box">
+          <input type="checkbox" id="termsCheck" required>
+          <label for="termsCheck" style="color:#94a3b8; font-size:0.75rem; display:inline;">Prihvaćam uvjete korištenja i pravila otkazivanja rezervacije.</label>
+        </div>
+        <button type="submit" class="btn-gold" style="width:100%; padding:12px; margin-top:5px;">Potvrdi i Rezerviraj</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>  
+    <p>&copy; 2026 Aurelius Lux. Sva prava pridržana. | Kaštela - Trogir - Split</p>  
+  </footer>  
+
+  <script>
+    // Globalne varijable za rezervacijski sustav
+    let currentTourType = 'private';
+    let selectedDateStr = '';
+    let selectedPax = 1;
+    let maxCapacity = 10;
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let adminMonth = new Date().getMonth();
+    let adminYear = new Date().getFullYear();
+    let bookingsData = JSON.parse(localStorage.getItem('aurelius_bookings')) || [];
+
+    // Upravljanje izbornikom (hamburger / plutajući gumb)
+    function toggleDropdown(event) {
+      event.stopPropagation();
+      const menu = document.getElementById('dropdownMenu');
+      menu.classList.toggle('active');
+    }
+
+    window.onclick = function(event) {
+      const menu = document.getElementById('dropdownMenu');
+      if (menu && menu.classList.contains('active')) {
+        menu.classList.remove('active');
+      }
+    }
+
+    // Otvaranje / zatvaranje modala
+    function openTourSelectModal() {
+      closeAllModals();
+      document.getElementById('tourSelectModal').style.display = 'flex';
+    }
+
+    function closeAllModals() {
+      document.getElementById('tourSelectModal').style.display = 'none';
+      document.getElementById('bookingModal').style.display = 'none';
+      document.getElementById('formModal').style.display = 'none';
+      document.getElementById('paxSelectorBox').style.display = 'none';
+    }
+
+    function selectTourType(type) {
+      currentTourType = type;
+      closeAllModals();
+      document.getElementById('bookingModal').style.display = 'flex';
+      renderCalendar();
+    }
+
+    function showPaxSelectorStepFromCard() {
+      selectTourType('shared');
+    }
+
+    // Upravljanje Admin Panelom (bez šifre)
+    function adminLogin() {
+      const panel = document.getElementById('adminPanel');
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+      } else {
+        panel.style.display = 'block';
+        panel.scrollIntoView({ behavior: 'smooth' });
+        renderAdminCalendar();
+        renderAdminTable();
+      }
+    }
+
+    // Prikaz kalendara u modalu za rezervacije
+    function renderCalendar() {
+      const grid = document.getElementById('calendarDaysGrid');
+      grid.innerHTML = '';
+      
+      const monthsNames = ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"];
+      document.getElementById('monthYearLabel').innerText = `${monthsNames[currentMonth]} ${currentYear}`;
+      
+      // Dani u tjednu
+      const dayNames = ['Po', 'Ut', 'Sr', 'Če', 'Pe', 'Su', 'Ne'];
+      dayNames.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'day-name';
+        div.innerText = d;
+        grid.appendChild(div);
+      });
+
+      const firstDayIndex = (new Date(currentYear, currentMonth, 1).getDay() + 6) % 7;
+      const totalDays = new Date(currentYear, currentMonth + 1, 0).getDate();
+      const today = new Date();
+      today.setHours(0,0,0,0);
+
+      // Prazna polja prije početka mjeseca
+      for (let i = 0; i < firstDayIndex; i++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'date-btn out-season';
+        grid.appendChild(emptyDiv);
+      }
+
+      // Generiranje dana u mjesecu
+      for (let day = 1; day <= totalDays; day++) {
+        const dateObj = new Date(currentYear, currentMonth, day);
+        dateObj.setHours(0,0,0,0);
+        
+        const btn = document.createElement('div');
+        btn.className = 'date-btn';
+        
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        
+        // Provjera je li prošlost
+        if (dateObj < today) {
+          btn.classList.add('disabled-past');
+          btn.innerHTML = `<span>${day}</span>`;
+        } else {
+          // Provjera postojećih rezervacija za ovaj datum
+          const existing = bookingsData.filter(b => b.date === dateStr);
+          let bookedPax = existing.reduce((sum, b) => sum + parseInt(b.pax), 0);
+          let isPrivateBooked = existing.some(b => b.tourType === 'private' || b.tourType === 'sunset');
+
+          if (isPrivateBooked || (currentTourType === 'private' && bookedPax > 0) || bookedPax >= 10) {
+            btn.classList.add('booked');
+            btn.innerHTML = `<span>${day}</span><span class="pax-tag">Zauzeto</span>`;
+          } else {
+            btn.innerHTML = `<span>${day}</span><span class="pax-tag" style="color:#d4af37;">Slobodno</span>`;
+            btn.onclick = () => selectDate(dateStr, bookedPax);
+          }
+        }
+        grid.appendChild(btn);
+      }
+    }
+
+    function changeMonth(direction) {
+      currentMonth += direction;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      } else if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar();
+    }
+
+    function selectDate(dateStr, bookedPax) {
+      selectedDateStr = dateStr;
+      if (currentTourType === 'private' || currentTourType === 'sunset') {
+        selectedPax = currentTourType === 'sunset' ? 2 : 10;
+        proceedToForm();
+      } else {
+        maxCapacity = 10 - bookedPax;
+        selectedPax = 1;
+        document.getElementById('spotsLeft').innerText = maxCapacity;
+        document.getElementById('selectedPaxCount').innerText = selectedPax;
+        document.getElementById('paxSelectorBox').style.display = 'block';
+      }
+    }
+
+    function adjustPax(amount) {
+      selectedPax += amount;
+      if (selectedPax < 1) selectedPax = 1;
+      if (selectedPax > maxCapacity) selectedPax = maxCapacity;
+      document.getElementById('selectedPaxCount').innerText = selectedPax;
+    }
+
+    function proceedToForm() {
+      document.getElementById('bookingModal').style.display = 'none';
+      document.getElementById('formModal').style.display = 'flex';
+    }
+
+    function submitBooking(event) {
+      event.preventDefault();
+      const name = document.getElementById('clientName').value;
+      const email = document.getElementById('clientEmail').value;
+      const phone = document.getElementById('clientPhone').value;
+
+      const newBooking = {
+        id: Date.now(),
+        date: selectedDateStr,
+        tourType: currentTourType,
+        name: name,
+        email: email,
+        phone: phone,
+        pax: currentTourType === 'private' ? 10 : (currentTourType === 'sunset' ? 2 : selectedPax)
+      };
+
+      bookingsData.push(newBooking);
+      localStorage.setItem('aurelius_bookings', JSON.stringify(bookingsData));
+
+      alert('Uspješno ste rezervirali termin! Hvala vam.');
+      closeAllModals();
+      document.getElementById('bookingForm').reset();
+      
+      if (document.getElementById('adminPanel').style.display === 'block') {
+        renderAdminCalendar();
+        renderAdminTable();
+      }
+    }
+
+    // Admin Kalendar i Tablica
+    function renderAdminCalendar() {
+      const grid = document.getElementById('adminCalendarGrid');
+      grid.innerHTML = '';
+      
+      const monthsNames = ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"];
+      document.getElementById('adminMonthYearLabel').innerText = `${monthsNames[adminMonth]} ${adminYear}`;
+      
+      const dayNames = ['Po', 'Ut', 'Sr', 'Če', 'Pe', 'Su', 'Ne'];
+      dayNames.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'day-name';
+        div.innerText = d;
+        grid.appendChild(div);
+      });
+
+      const firstDayIndex = (new Date(adminYear, adminMonth, 1).getDay() + 6) % 7;
+      const totalDays = new Date(adminYear, adminMonth + 1, 0).getDate();
+
+      for (let i = 0; i < firstDayIndex; i++) {
+        const emptyDiv = document.createElement('div');
+        emptyDiv.className = 'admin-day status-empty';
+        grid.appendChild(emptyDiv);
+      }
+
+      for (let day = 1; day <= totalDays; day++) {
+        const dateStr = `${adminYear}-${String(adminMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+        const dayBookings = bookingsData.filter(b => b.date === dateStr);
+        
+        const btn = document.createElement('div');
+        btn.className = 'admin-day';
+        
+        if (dayBookings.length === 0) {
+          btn.classList.add('status-empty');
+          btn.innerHTML = `<span>${day}</span><span style="font-size:0.6rem;">-</span>`;
+        } else {
+          let totalPax = dayBookings.reduce((sum, b) => sum + parseInt(b.pax), 0);
+          let isPriv = dayBookings.some(b => b.tourType === 'private');
+          let isSun = dayBookings.some(b => b.tourType === 'sunset');
+
+          if (isPriv || isSun) {
+            btn.classList.add('status-private');
+            btn.innerHTML = `<span>${day}</span><span style="font-size:0.65rem;">${isPriv ? 'Privatno' : 'Sunset'}</span>`;
+          } else if (totalPax >= 8) {
+            btn.classList.add('status-high-pax');
+            btn.innerHTML = `<span>${day}</span><span style="font-size:0.65rem;">${totalPax}/10</span>`;
+          } else if (totalPax >= 4) {
+            btn.classList.add('status-mid-pax');
+            btn.innerHTML = `<span>${day}</span><span style="font-size:0.65rem;">${totalPax}/10</span>`;
+          } else {
+            btn.classList.add('status-low-pax');
+            btn.innerHTML = `<span>${day}</span><span style="font-size:0.65rem;">${totalPax}/10</span>`;
+          }
+        }
+        grid.appendChild(btn);
+      }
+      renderAdminTable();
+    }
+
+    function changeAdminMonth(direction) {
+      adminMonth += direction;
+      if (adminMonth > 11) {
+        adminMonth = 0;
+        adminYear++;
+      } else if (adminMonth < 0) {
+        adminMonth = 11;
+        adminYear--;
+      }
+      renderAdminCalendar();
+    }
+
+    function renderAdminTable() {
+      const tbody = document.getElementById('adminBookingsTableBody');
+      tbody.innerHTML = '';
+      
+      if (bookingsData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8;">Nema aktivnih rezervacija.</td></tr>`;
+        return;
+      }
+
+      // Sortiranje po datumu
+      const sorted = [...bookingsData].sort((a,b) => new Date(a.date) - new Date(b.date));
+
+      sorted.forEach(item => {
+        let tourNameText = item.tourType === 'private' ? 'Privatna' : (item.tourType === 'sunset' ? 'Sunset' : 'Tri Otoka');
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${item.date}</td>
+          <td>${tourNameText}</td>
+          <td>${item.name}</td>
+          <td>${item.email}<br><span style="font-size:0.75rem; color:#94a3b8;">${item.phone}</span></td>
+          <td>${item.pax}</td>
+          <td><button class="btn-delete-item" onclick="deleteBooking(${item.id})">Obriši</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function deleteBooking(id) {
+      if (confirm('Jeste li sigurni da želite obrisati ovu rezervaciju?')) {
+        bookingsData = bookingsData.filter(b => b.id !== id);
+        localStorage.setItem('aurelius_bookings', JSON.stringify(bookingsData));
+        renderAdminCalendar();
+      }
+    }
+  </script>
+</body>  
+</html>
