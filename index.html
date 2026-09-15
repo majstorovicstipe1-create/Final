@@ -697,15 +697,15 @@
       
       <div class="form-group">
         <label id="lblGuestName">Ime i prezime:</label>
-        <input type="text" id="guestName" class="form-input" placeholder="npr. Ivan Horvat">
+        <input type="text" id="guestName" class="form-input">
       </div>
       <div class="form-group">
         <label id="lblGuestEmail">E-mail adresa (važeća za potvrdu):</label>
-        <input type="text" id="guestEmail" class="form-input" placeholder="npr. Majstorovic.stipe1@gmail.com" autocomplete="off" autocapitalize="off" spellcheck="false">
+        <input type="text" id="guestEmail" class="form-input" autocomplete="off" autocapitalize="off" spellcheck="false">
       </div>
       <div class="form-group">
         <label id="lblGuestPhone">Broj mobitela:</label>
-        <input type="tel" id="guestPhone" class="form-input" placeholder="npr. +385 91 123 4567">
+        <input type="tel" id="guestPhone" class="form-input">
       </div>
 
       <div class="terms-box" id="termsBoxWrapper">
@@ -1660,7 +1660,7 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // FEEDBACK LOOP: Sigurna provjera formata i slanje maila preko EmailJS-a
+    // AbstractAPI VERIFIKACIJA MAILA PRIJE REZERVACIJE
     async function confirmFinalBooking() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
@@ -1672,13 +1672,6 @@
         return;
       }
 
-      // Stroga provjera formata e-mail adrese (podržava sve validne mailove: gmail, outlook, custom domene)
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("Greška: Unesena e-mail adresa nije u valjanom formatu. Rezervacija je poništena.");
-        return;
-      }
-
       if (!termsAccepted || !termsReadAndAccepted) {
         alert("Morate otvoriti Uvjete korištenja, pročitati ih do kraja i prihvatiti ih.");
         return;
@@ -1686,8 +1679,27 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Slanje potvrde i spremanje...";
+      submitBtn.innerText = "Provjera e-mail adrese...";
       submitBtn.disabled = true;
+
+      try {
+        const apiKey = '0bbf8d8e37ef4003aa728e999c0ddb32';
+        const apiResponse = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(email)}`);
+        
+        if (apiResponse.ok) {
+          const apiData = await apiResponse.json();
+          if (apiData.deliverability !== "DELIVERABLE") {
+            submitBtn.innerText = originalBtnText;
+            submitBtn.disabled = false;
+            alert("Greška: Uneseni e-mail ne postoji ili nije važeći prema provjeri sustava. Molimo unesite ispravnu adresu.");
+            return;
+          }
+        }
+      } catch (err) {
+        console.log("AbstractAPI provjera preskočena ili nedostupna, nastavljamo s osnovnom validacijom.", err);
+      }
+
+      submitBtn.innerText = "Slanje potvrde i spremanje...";
 
       const t = translations[currentLang] || translations['hr'];
       let tourTitle = '';
@@ -1731,12 +1743,9 @@
       };
 
       try {
-        // Slanje maila klijentu preko EmailJS-a
         await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
-        // Slanje maila adminu
         await emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams);
 
-        // TEK NAKON USPJEŠNO POSLANOG MAIL-A: Spremanje rezervacije u Supabase bazu
         await loadCloudBookings();
         const data = bookingsDB[targetDateStr] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
         if (!data.guests) data.guests = [];
@@ -1775,7 +1784,6 @@
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
         console.error("Greška pri slanju maila:", error);
-        
         alert("Došlo je do greške prilikom slanja e-mail potvrde. Rezervacija nije spremljena, molimo pokušajte ponovno.");
       }
     }
