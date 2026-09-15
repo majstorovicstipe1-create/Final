@@ -241,7 +241,7 @@
 
     .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 11, 20, 0.92); display: none; justify-content: center; align-items: center; z-index: 2000; padding: 15px; backdrop-filter: blur(8px); }
     .modal-card { background: #0d1b2a; border: 1px solid #d4af37; border-radius: 12px; padding: 25px 22px; max-width: 520px; width: 100%; box-shadow: 0 25px 60px rgba(0,0,0,0.95); position: relative; max-height: 92vh; overflow-y: auto; }
-    .close-btn { position: absolute; top: 12px; right: 18px; color: #94a3b8; font-size: 1.6rem; cursor: pointer; transition: color 0.2s; }
+    .close-btn { position: absolute; top: 12px; right: 18px; color: #94a3b8; font-size: 1.6rem; cursor: pointer; transition: color 0.2s; z-index: 10; }
     .close-btn:hover { color: #fcf6ba; }
 
     .calendar-controls { display: flex; justify-content: space-between; align-items: center; margin: 16px 0; }
@@ -1660,7 +1660,7 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // ISPRAVLJENO: Precizno čitanje feedbacka EmailJS-a uz ispis u konzolu
+    // ISPRAVLJENO: Pouzdano slanje preko EmailJS-a bez lažnih grešaka i čvrst upis u bazu
     async function confirmFinalBooking() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
@@ -1685,7 +1685,7 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Slanje maila i provjera...";
+      submitBtn.innerText = "Slanje maila i spremanje...";
       submitBtn.disabled = true;
 
       const t = translations[currentLang] || translations['hr'];
@@ -1730,23 +1730,11 @@
       };
 
       try {
-        // Slanje klijentu i dohvat feedbacka
-        const clientRes = await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
-        console.log("EmailJS Feedback (Klijent):", clientRes);
+        // Slanje maila klijentu i adminu
+        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
+        await emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams);
 
-        if (clientRes.status !== 200 && clientRes.text !== 'OK') {
-          throw new Error("EmailJS nije potvrdio slanje klijentu. Status: " + clientRes.status);
-        }
-
-        // Slanje adminu i dohvat feedbacka
-        const adminRes = await emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams);
-        console.log("EmailJS Feedback (Admin):", adminRes);
-
-        if (adminRes.status !== 200 && adminRes.text !== 'OK') {
-          throw new Error("EmailJS nije potvrdio slanje adminu. Status: " + adminRes.status);
-        }
-
-        // Nakon jasnog feedbacka, upisujemo u bazu
+        // Spremanje rezervacije u Supabase bazu
         await loadCloudBookings();
         const data = bookingsDB[targetDateStr] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
         if (!data.guests) data.guests = [];
@@ -1779,13 +1767,13 @@
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
 
-        alert("Uspješno ste rezervirali termin! E-mail potvrda je poslana i spremljena u sustav.");
+        alert("Uspješno ste rezervirali termin! E-mail potvrda je poslana.");
 
       } catch (error) {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
-        console.error("EmailJS Feedback Greška:", error);
-        alert("Greška: EmailJS nije uspio potvrditi isporuku e-maila. Rezervacija je poništena.");
+        console.error("EmailJS / Supabase Greška:", error);
+        alert("Došlo je do pogreške pri slanju maila ili spremanju rezervacije.");
       }
     }
 
@@ -1949,6 +1937,7 @@
       renderAdminCalendar();
     }
 
+    // ISPRAVLJENO: Zatvaranje modala bez skrolanja na vrh stranice
     function closeModals(modalId) {
       if (modalId) {
         const el = document.getElementById(modalId);
