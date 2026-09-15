@@ -756,9 +756,6 @@
     const SUPABASE_URL = "https://bjecmjlmkcniytokdlgv.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_r2D5CWvTW5hgdTjEtyExFg_Dat2-pRs"; 
 
-    // Ovdje možeš staviti svoj besplatni API ključ za provjeru maila (npr. s AbstractAPI) ili ostaviti prazno za osnovnu validaciju
-    const EMAIL_CHECK_API_KEY = ""; 
-
     let bookingsDB = {};
     let activeModalBeforeTerms = null;
     let termsReadAndAccepted = false;
@@ -1663,7 +1660,7 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // FEEDBACK LOOP: Provjera ispravnosti e-maila prije slanja i zapisivanja rezervacije
+    // FEEDBACK LOOP: Sigurna provjera formata i slanje maila preko EmailJS-a
     async function confirmFinalBooking() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
@@ -1675,7 +1672,7 @@
         return;
       }
 
-      // Osnovna provjera formata
+      // Stroga provjera formata e-mail adrese (podržava sve validne mailove: gmail, outlook, custom domene)
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         alert("Greška: Unesena e-mail adresa nije u valjanom formatu. Rezervacija je poništena.");
@@ -1689,65 +1686,51 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Provjera ispravnosti maila...";
+      submitBtn.innerText = "Slanje potvrde i spremanje...";
       submitBtn.disabled = true;
 
+      const t = translations[currentLang] || translations['hr'];
+      let tourTitle = '';
+      let paxVal = 1;
+      let departureTimeStr = '';
+
+      if (selectedTourMode === 'private') {
+        tourTitle = t.mOpt1Title;
+        paxVal = 10;
+        departureTimeStr = '08:30-19:00';
+      } else if (selectedTourMode === 'shared') {
+        tourTitle = t.mOpt2Title;
+        paxVal = selectedPaxCount;
+        departureTimeStr = '08:30-15:30';
+      } else if (selectedTourMode === 'sunset') {
+        tourTitle = t.mOpt3Title;
+        paxVal = 2;
+        departureTimeStr = '1.5 sati';
+      }
+
+      let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Vrijeme/Trajanje: ${departureTimeStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
+
+      const templateParams = {
+        to_email: email,
+        to_name: name,
+        tour_name: tourTitle,
+        booking_date: targetDateStr,
+        pax_count: paxVal,
+        phone: phone,
+        message: bodyText
+      };
+
+      const adminTemplateParams = {
+        to_email: "aureus.lux.travel@gmail.com",
+        to_name: name,
+        tour_name: tourTitle,
+        booking_date: targetDateStr,
+        pax_count: paxVal,
+        phone: phone,
+        email: email
+      };
+
       try {
-        // Ako je unesen API ključ za provjeru maila, provjeravamo postoji li mail u stvarnosti
-        if (EMAIL_CHECK_API_KEY) {
-          const checkResp = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${EMAIL_CHECK_API_KEY}&email=${encodeURIComponent(email)}`);
-          if (checkResp.ok) {
-            const checkData = await checkResp.json();
-            // Provjeradeliverabilnosti (deliverability status: DELIVERABLE)
-            if (checkData.deliverability && checkData.deliverability !== "DELIVERABLE") {
-              throw new Error("E-mail adresa nije isporukjiva.");
-            }
-          }
-        }
-
-        submitBtn.innerText = "Slanje potvrde i spremanje...";
-
-        const t = translations[currentLang] || translations['hr'];
-        let tourTitle = '';
-        let paxVal = 1;
-        let departureTimeStr = '';
-
-        if (selectedTourMode === 'private') {
-          tourTitle = t.mOpt1Title;
-          paxVal = 10;
-          departureTimeStr = '08:30-19:00';
-        } else if (selectedTourMode === 'shared') {
-          tourTitle = t.mOpt2Title;
-          paxVal = selectedPaxCount;
-          departureTimeStr = '08:30-15:30';
-        } else if (selectedTourMode === 'sunset') {
-          tourTitle = t.mOpt3Title;
-          paxVal = 2;
-          departureTimeStr = '1.5 sati';
-        }
-
-        let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Vrijeme/Trajanje: ${departureTimeStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
-
-        const templateParams = {
-          to_email: email,
-          to_name: name,
-          tour_name: tourTitle,
-          booking_date: targetDateStr,
-          pax_count: paxVal,
-          phone: phone,
-          message: bodyText
-        };
-
-        const adminTemplateParams = {
-          to_email: "aureus.lux.travel@gmail.com",
-          to_name: name,
-          tour_name: tourTitle,
-          booking_date: targetDateStr,
-          pax_count: paxVal,
-          phone: phone,
-          email: email
-        };
-
         // Slanje maila klijentu preko EmailJS-a
         await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
         // Slanje maila adminu
@@ -1791,10 +1774,9 @@
       } catch (error) {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
-        console.error("Feedback Loop - Greška:", error);
+        console.error("Greška pri slanju maila:", error);
         
-        // Onemogućavanje rezervacije i obavijest korisniku
-        alert("Greška: Unesena e-mail adresa je nevažeća, neispravna ili ne može primiti poruku. Rezervacija je poništena i termin ostaje slobodan.");
+        alert("Došlo je do greške prilikom slanja e-mail potvrde. Rezervacija nije spremljena, molimo pokušajte ponovno.");
       }
     }
 
