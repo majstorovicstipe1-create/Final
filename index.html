@@ -675,7 +675,7 @@
   <div id="calendarModal" class="modal-overlay">
     <div class="modal-card">
       <span class="close-btn" onclick="closeModals('calendarModal')">&times;</span>
-      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.1rem;" id="calTitle">Slobodni Datumi Za Vaš Izbor</h3>
+      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.1rem;" id="calTitle">Slobodni Datumi Za Vaš Izбор</h3>
       
       <div class="calendar-controls">
         <button class="cal-btn" onclick="changeMonth(-1)" id="btnPrev">&lt; Prethodni</button>
@@ -1660,7 +1660,7 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // ISPRAVLJENO: Pouzdano slanje preko EmailJS-a bez lažnih grešaka i čvrst upis u bazu
+    // POVRATNA PETLJA (FEEDBACK LOOP): Provjera isporuke maila prije zapisivanja rezervacije
     async function confirmFinalBooking() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
@@ -1672,9 +1672,10 @@
         return;
       }
 
+      // Stroga provjera formata e-mail adrese
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        alert("Unesena e-mail adresa nije u valjanom formatu.");
+        alert("Greška: Unesena e-mail adresa nije u valjanom formatu. Rezervacija je poništena.");
         return;
       }
 
@@ -1685,7 +1686,7 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Slanje maila i spremanje...";
+      submitBtn.innerText = "Provjera i slanje maila...";
       submitBtn.disabled = true;
 
       const t = translations[currentLang] || translations['hr'];
@@ -1730,11 +1731,17 @@
       };
 
       try {
-        // Slanje maila klijentu i adminu
-        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
+        // FEEDBACK LOOP: Pokušaj slanja maila klijentu. Ako EmailJS vrati grešku (neispravan/nepostojeći mail), ulazimo u catch blok!
+        const emailResponse = await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
+        
+        if (emailResponse.status !== 200 && emailResponse.status !== undefined && typeof emailResponse.status === 'number' && emailResponse.status >= 400) {
+          throw new Error("Email server odbio isporuku.");
+        }
+
+        // Ako je mail klijentu uspješno poslan, šaljemo obavijest i adminu
         await emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams);
 
-        // Spremanje rezervacije u Supabase bazu
+        // TEK NAKON USPJEŠNO PROŠLOG MAIL-A: Spremanje rezervacije u Supabase bazu
         await loadCloudBookings();
         const data = bookingsDB[targetDateStr] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
         if (!data.guests) data.guests = [];
@@ -1772,8 +1779,10 @@
       } catch (error) {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
-        console.error("EmailJS / Supabase Greška:", error);
-        alert("Došlo je do pogreške pri slanju maila ili spremanju rezervacije.");
+        console.error("Feedback Loop - Greška pri isporuci maila:", error);
+        
+        // Onemogućavanje rezervacije i obavijest korisniku
+        alert("Greška: EmailJS nije uspio potvrditi isporuku e-maila. Unesena adresa je neispravna ili nepostojeća. Rezervacija je poništena i termin ostaje slobodan.");
       }
     }
 
@@ -1937,7 +1946,6 @@
       renderAdminCalendar();
     }
 
-    // ISPRAVLJENO: Zatvaranje modala bez skrolanja na vrh stranice
     function closeModals(modalId) {
       if (modalId) {
         const el = document.getElementById(modalId);
