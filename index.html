@@ -600,6 +600,13 @@
         <div class="legend-item"><span style="color:#ff9f43; font-weight:bold;">🌅</span> Sunset</div>
       </div>
 
+      <!-- W3C VALIDACIJSKI MODUL -->
+      <div style="background: #050b14; border: 1px solid rgba(212,175,55,0.4); padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center;">
+        <h4 style="color: #fcf6ba; font-size: 0.95rem; margin-bottom: 8px;"><i class="fa-solid fa-code"></i> W3C Markup Validation Service</h4>
+        <p style="font-size: 0.78rem; color: #94a3b8; margin-bottom: 12px;">Provjerite službenu ispravnost HTML/CSS strukture ove stranice preko W3C validatora.</p>
+        <button class="cal-btn" style="background: #d4af37; color: #050b14; font-weight: 600; padding: 8px 18px;" onclick="runW3CValidation()">Pokreni W3C Validaciju</button>
+      </div>
+
       <div class="calendar-controls">
         <button class="cal-btn" onclick="changeAdminMonth(-1)">&lt; Prethodni</button>
         <span id="adminMonthYear" style="font-weight: 400; color: #fcf6ba; font-size: 0.95rem;"></span>
@@ -675,7 +682,7 @@
   <div id="calendarModal" class="modal-overlay">
     <div class="modal-card">
       <span class="close-btn" onclick="closeModals('calendarModal')">&times;</span>
-      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.1rem;" id="calTitle">Slobodni Datumi Za Vaš Izбор</h3>
+      <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.1rem;" id="calTitle">Slobodni Datumi Za Vaš Izbor</h3>
       
       <div class="calendar-controls">
         <button class="cal-btn" onclick="changeMonth(-1)" id="btnPrev">&lt; Prethodni</button>
@@ -768,6 +775,23 @@
         stickyHeader.classList.remove('visible');
       }
     });
+
+    function runW3CValidation() {
+      const htmlContent = document.documentElement.outerHTML;
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'https://validator.w3.org/nu/';
+      form.target = '_blank';
+
+      const textarea = document.createElement('textarea');
+      textarea.name = 'content';
+      textarea.value = htmlContent;
+      form.appendChild(textarea);
+
+      document.body.appendChild(form);
+      form.submit();
+      document.body.removeChild(form);
+    }
 
     async function loadCloudBookings() {
       try {
@@ -942,7 +966,7 @@
         mOpt2Title: "Poludnevni izlet: Three Island Tour", mOpt2Desc: "Dijeljena vožnja - odaberite broj ulaznica",
         mOpt3Title: "Romantična Sunset Tura", mOpt3Desc: "Privatni zalazak sunca za dvoje (1,5 sat)",
         lblPaxCount: "Koliko karata želite rezervirati (1-10)?", btnConfirmPax: "Prikaži Slobodne Datume",
-        calTitle: "Slobodni Datumi Za Vaš Izбор", btnPrev: "< Prethodni", btnNext: "Sljedeći >",
+        calTitle: "Slobodni Datumi Za Vaš Izbor", btnPrev: "< Prethodni", btnNext: "Sljedeći >",
         days: ["Pon", "Uto", "Sri", "Čet", "Pet", "Sub", "Ned"],
         months: ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"],
         freePax: "slob.", full: "ZAUZETO", paxWord: "osoba", paxWordPlural: "osobe",
@@ -1283,7 +1307,7 @@
         lblGuestName: "Nombre y apellido:",
         lblGuestEmail: "Dirección de e-mail (necesaria para confirmación):",
         lblGuestPhone: "Número de móvil:",
-        termsLinkText: "He leído y acepto los Términos de Uso y la Política de Cancelación (debe desplazarse hasta el final y hacer clic en Aceptar).",
+        termsLinkText: "He leído y acepto los Términos de Uso y la Política de Cancelación (debe desplazarse hasta il final y hacer clic en Aceptar).",
         submitBtnText: "Confirmar Reserva",
         termsModalTitleHeader: "Términos de Uso y Política de Cancelación",
         acceptTermsBtnText: "Aceptar Términos",
@@ -1440,7 +1464,7 @@
       document.getElementById('b3').innerHTML = t.b3;
       document.getElementById('t3CardTitle').innerText = t.t3Title;
       document.getElementById('t3TimeLabel').innerText = t.t3Time;
-      document.getElementById('t3CardDesc').innerText = t.t3Desc;
+      document.getElementById('t3CardDesc').innerText = t.t3CardDesc;
       document.getElementById('t3f1').innerText = t.t3f1;
       document.getElementById('t3f2').innerText = t.t3f2;
       document.getElementById('t3f3').innerText = t.t3f3;
@@ -1660,7 +1684,7 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // AbstractAPI VERIFIKACIJA MAILA PRIJE REZERVACIJE
+    // SIGURNA POTVRDA REZERVACIJE KOJA NE BLOKIRA SPREMANJE U BAZU
     async function confirmFinalBooking() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
@@ -1679,73 +1703,25 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Provjera e-mail adrese...";
+      submitBtn.innerText = "Spremanje rezervacije...";
       submitBtn.disabled = true;
-
-      try {
-        const apiKey = '0bbf8d8e37ef4003aa728e999c0ddb32';
-        const apiResponse = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${apiKey}&email=${encodeURIComponent(email)}`);
-        
-        if (apiResponse.ok) {
-          const apiData = await apiResponse.json();
-          if (apiData.deliverability !== "DELIVERABLE") {
-            submitBtn.innerText = originalBtnText;
-            submitBtn.disabled = false;
-            alert("Greška: Uneseni e-mail ne postoji ili nije važeći prema provjeri sustava. Molimo unesite ispravnu adresu.");
-            return;
-          }
-        }
-      } catch (err) {
-        console.log("AbstractAPI provjera preskočena ili nedostupna, nastavljamo s osnovnom validacijom.", err);
-      }
-
-      submitBtn.innerText = "Slanje potvrde i spremanje...";
 
       const t = translations[currentLang] || translations['hr'];
       let tourTitle = '';
       let paxVal = 1;
-      let departureTimeStr = '';
 
       if (selectedTourMode === 'private') {
         tourTitle = t.mOpt1Title;
         paxVal = 10;
-        departureTimeStr = '08:30-19:00';
       } else if (selectedTourMode === 'shared') {
         tourTitle = t.mOpt2Title;
         paxVal = selectedPaxCount;
-        departureTimeStr = '08:30-15:30';
       } else if (selectedTourMode === 'sunset') {
         tourTitle = t.mOpt3Title;
         paxVal = 2;
-        departureTimeStr = '1.5 sati';
       }
 
-      let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Vrijeme/Trajanje: ${departureTimeStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
-
-      const templateParams = {
-        to_email: email,
-        to_name: name,
-        tour_name: tourTitle,
-        booking_date: targetDateStr,
-        pax_count: paxVal,
-        phone: phone,
-        message: bodyText
-      };
-
-      const adminTemplateParams = {
-        to_email: "aureus.lux.travel@gmail.com",
-        to_name: name,
-        tour_name: tourTitle,
-        booking_date: targetDateStr,
-        pax_count: paxVal,
-        phone: phone,
-        email: email
-      };
-
       try {
-        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
-        await emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams);
-
         await loadCloudBookings();
         const data = bookingsDB[targetDateStr] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
         if (!data.guests) data.guests = [];
@@ -1778,13 +1754,26 @@
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
 
-        alert("Uspješno ste rezervirali termin! E-mail potvrda je poslana.");
+        alert("Uspješno ste rezervirali termin! Podaci su spremljeni u bazu.");
+
+        // Pokušaj slanja maila u pozadini (ne utječe na rezervaciju ako EmailJS izbaci grešku)
+        try {
+          let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
+
+          const templateParams = { to_email: email, to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, message: bodyText };
+          const adminTemplateParams = { to_email: "aureus.lux.travel@gmail.com", to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, email: email };
+
+          emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams).catch(err => console.log('Email gostu pozadinska greška:', err));
+          emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams).catch(err => console.log('Email adminu pozadinska greška:', err));
+        } catch (mailErr) {
+          console.log('Pozadinski mail servis nije aktivan:', mailErr);
+        }
 
       } catch (error) {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
-        console.error("Greška pri slanju maila:", error);
-        alert("Došlo je do greške prilikom slanja e-mail potvrde. Rezervacija nije spremljena, molimo pokušajte ponovno.");
+        console.error("Greška pri spremanju u bazu:", error);
+        alert("Došlo je do greške prilikom spremanja rezervacije u bazu. Molimo pokušajte ponovno.");
       }
     }
 
