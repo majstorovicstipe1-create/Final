@@ -722,7 +722,22 @@
         </span>
       </div>
 
-      <button id="submitBtn" class="btn-gold" style="width:100%; margin-top:10px; padding: 10px; font-size:0.8rem;" onclick="confirmFinalBooking()">Potvrdi Rezervaciju</button>
+      <button id="submitBtn" class="btn-gold" style="width:100%; margin-top:10px; padding: 10px; font-size:0.8rem;" onclick="initiateEmailVerification()">Pošalji Verifikacijski Kod</button>
+    </div>
+  </div>
+
+  <!-- MODAL ZA VERIFIKACIJSKI KOD -->
+  <div id="verifyModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 420px; text-align: center;">
+      <span class="close-btn" onclick="closeModals('verifyModal')">&times;</span>
+      <h3 class="gold-text-luxury" style="font-size: 1.1rem; margin-bottom: 10px;">Verifikacija E-mail Adrese</h3>
+      <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 20px;">Poslali smo 6-znamenkasti verifikacijski kod na vašu e-mail adresu. Molimo unesite ga ispod kako biste dovršili rezervaciju.</p>
+      
+      <div class="form-group" style="text-align: center;">
+        <input type="text" id="verificationCodeInput" class="form-input" placeholder="Unesite 6-znamenkasti kod" maxlength="6" style="text-align: center; font-size: 1.2rem; letter-spacing: 4px; font-weight: 600;">
+      </div>
+
+      <button id="verifyBtn" class="btn-gold" style="width:100%; margin-top:10px; padding: 10px; font-size:0.8rem;" onclick="verifyCodeAndConfirmBooking()">Potvrdi Kod i Spremi Rezervaciju</button>
     </div>
   </div>
 
@@ -766,6 +781,10 @@
     let bookingsDB = {};
     let activeModalBeforeTerms = null;
     let termsReadAndAccepted = false;
+    
+    // Varijable za verifikaciju koda
+    let generatedVerificationCode = "";
+    let pendingBookingData = null;
 
     window.addEventListener('scroll', function() {
       const stickyHeader = document.getElementById('stickyHeader');
@@ -976,7 +995,7 @@
         lblGuestEmail: "E-mail adresa (važeća za potvrdu):",
         lblGuestPhone: "Broj mobitela:",
         termsLinkText: "Pročitao/la sam i slažem se s Uvjetima korištenja i otkazivanja (obavezno skrolati do dna uvjeta i pritisnuti Prihvaćam).",
-        submitBtnText: "Potvrdi Rezervaciju",
+        submitBtnText: "Pošalji Verifikacijski Kod",
         termsModalTitleHeader: "Uvjeti korištenja i otkazivanja",
         acceptTermsBtnText: "Prihvaćam uvjete",
         scrollPromptText: "↓ Molimo skrolajte do samog dna teksta da biste mogli prihvatiti uvjete ↓",
@@ -1059,7 +1078,7 @@
         lblGuestEmail: "E-mail address (required for confirmation):",
         lblGuestPhone: "Mobile number:",
         termsLinkText: "I have read and agree to the Terms of Use and Cancellation Policy (must scroll to bottom and click Accept).",
-        submitBtnText: "Confirm Booking",
+        submitBtnText: "Send Verification Code",
         termsModalTitleHeader: "Terms of Use and Cancellation Policy",
         acceptTermsBtnText: "Accept Terms",
         scrollPromptText: "↓ Please scroll to the very bottom of the text to accept the terms ↓",
@@ -1142,7 +1161,7 @@
         lblGuestEmail: "E-mail Adresse (für Bestätigung erforderlich):",
         lblGuestPhone: "Mobiltelefonnummer:",
         termsLinkText: "Ich habe die Nutzungs- und Stornierungsbedingungen gelesen und stimme zu (muss nach unten scrollen und Akzeptieren klicken).",
-        submitBtnText: "Buchung Bestätigen",
+        submitBtnText: "Bestätigungscode Senden",
         termsModalTitleHeader: "Nutzungs- und Stornierungsbedingungen",
         acceptTermsBtnText: "Bedingungen Akzeptieren",
         scrollPromptText: "↓ Bitte scrollen Sie ganz nach unten, um die Bedingungen zu akzeptieren ↓",
@@ -1225,7 +1244,7 @@
         lblGuestEmail: "Indirizzo e-mail (necessario per la conferma):",
         lblGuestPhone: "Numero di cellulare:",
         termsLinkText: "Ho letto e accetto i Termini di Utilizzo e la Politica di Cancellazione (è necessario scorrere fino in fondo e clicca Accetta).",
-        submitBtnText: "Conferma Prenotazione",
+        submitBtnText: "Invia Codice di Verifica",
         termsModalTitleHeader: "Termini di Utilizzo e Politica di Cancellazione",
         acceptTermsBtnText: "Accetta Termini",
         scrollPromptText: "↓ Si prega di scorrere fino in fondo al testo per accettare i termini ↓",
@@ -1308,7 +1327,7 @@
         lblGuestEmail: "Dirección de e-mail (necesaria para confirmación):",
         lblGuestPhone: "Número de móvil:",
         termsLinkText: "He leído y acepto los Términos de Uso y la Política de Cancelación (debe desplazarse hasta il final y hacer clic en Aceptar).",
-        submitBtnText: "Confirmar Reserva",
+        submitBtnText: "Enviar Código de Verificación",
         termsModalTitleHeader: "Términos de Uso y Política de Cancelación",
         acceptTermsBtnText: "Aceptar Términos",
         scrollPromptText: "↓ Por favor, desplácese hasta el final del texto para aceptar los términos ↓",
@@ -1391,7 +1410,7 @@
         lblGuestEmail: "Adresse e-mail (requise pour la confirmation) :",
         lblGuestPhone: "Numéro de mobile :",
         termsLinkText: "J'ai lu et j'accepte les Conditions d'Utilisation et la Politique d'Annulation (faites défiler jusqu'en bas et cliquez sur Accepter).",
-        submitBtnText: "Confirmer la Réservation",
+        submitBtnText: "Envoyer le Code de Vérification",
         termsModalTitleHeader: "Conditions d'Utilisation et Politique d'Annulation",
         acceptTermsBtnText: "Accepter les Conditions",
         scrollPromptText: "↓ Veuillez faire défiler tout en bas du texte pour accepter les conditions ↓",
@@ -1464,7 +1483,7 @@
       document.getElementById('b3').innerHTML = t.b3;
       document.getElementById('t3CardTitle').innerText = t.t3Title;
       document.getElementById('t3TimeLabel').innerText = t.t3Time;
-      document.getElementById('t3CardDesc').innerText = t.t3CardDesc;
+      document.getElementById('t3CardDesc').innerText = t.t3Desc;
       document.getElementById('t3f1').innerText = t.t3f1;
       document.getElementById('t3f2').innerText = t.t3f2;
       document.getElementById('t3f3').innerText = t.t3f3;
@@ -1684,8 +1703,8 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // SIGURNA POTVRDA REZERVACIJE KOJA NE BLOKIRA SPREMANJE U BAZU
-    async function confirmFinalBooking() {
+    // INICIJACIJA SLANJA VERIFIKACIJSKOG KODA NA E-MAIL
+    async function initiateEmailVerification() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
@@ -1703,9 +1722,59 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Spremanje rezervacije...";
+      submitBtn.innerText = "Slanje verifikacijskog koda...";
       submitBtn.disabled = true;
 
+      // Generiranje slučajnog 6-znamenkastog koda
+      generatedVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+      
+      pendingBookingData = { name, email, phone };
+
+      try {
+        let codeEmailBody = `Poštovani/a ${name},\n\nVaš verifikacijski kod za potvrdu rezervacije izleta kod Aureus Lux je: ${generatedVerificationCode}\n\nUnesite ovaj kod na web stranici kako biste uspješno zaključili rezervaciju.\n\nSrdačan pozdrav,\nAureus Lux`;
+        
+        const templateParams = {
+          to_email: email,
+          to_name: name,
+          tour_name: "Verifikacija e-mail adrese",
+          booking_date: targetDateStr,
+          pax_count: 0,
+          phone: phone,
+          message: codeEmailBody
+        };
+
+        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
+
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+
+        document.getElementById('contactModal').style.display = 'none';
+        document.getElementById('verificationCodeInput').value = '';
+        document.getElementById('verifyModal').style.display = 'flex';
+
+      } catch (error) {
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+        console.error("Greška pri slanju verifikacijskog koda:", error);
+        alert("Greška pri slanju verifikacijskog koda na e-mail. Molimo provjerite ispravnost e-mail adrese i pokušajte ponovno.");
+      }
+    }
+
+    // PROVJERA KODA I SPREMANJE REZERVACIJE U BAZU
+    async function verifyCodeAndConfirmBooking() {
+      const enteredCode = document.getElementById('verificationCodeInput').value.trim();
+
+      if (enteredCode !== generatedVerificationCode) {
+        alert("Neispravan verifikacijski kod. Molimo provjerite primljeni e-mail i unesite točan kod.");
+        return;
+      }
+
+      const verifyBtn = document.getElementById('verifyBtn');
+      const originalVerifyText = verifyBtn.innerText;
+      verifyBtn.innerText = "Spremanje rezervacije...";
+      verifyBtn.disabled = true;
+
+      const { name, email, phone } = pendingBookingData;
       const t = translations[currentLang] || translations['hr'];
       let tourTitle = '';
       let paxVal = 1;
@@ -1731,17 +1800,17 @@
           data.bookedPax = 10; 
           data.dayTours.push(tourTitle); 
           data.totalRevenue += 450;
-          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 10, price: 450, terms: "Prihvaćeni uvjeti" });
+          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 10, price: 450, terms: "Verificiran mail i prihvaćeni uvjeti" });
         } else if (selectedTourMode === 'shared') {
           data.bookedPax += selectedPaxCount; 
           let priceCalc = selectedPaxCount * 65;
           data.dayTours.push(`${tourTitle} (${selectedPaxCount} ${selectedPaxCount===1?t.paxWord:t.paxWordPlural})`); 
           data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: selectedPaxCount, price: priceCalc, terms: "Prihvaćeni uvjeti" });
+          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: selectedPaxCount, price: priceCalc, terms: "Verificiran mail i prihvaćeni uvjeti" });
         } else if (selectedTourMode === 'sunset') {
           data.hasSunset = true; 
           data.totalRevenue += 150;
-          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 2, price: 150, terms: "Prihvaćeni uvjeti" });
+          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 2, price: 150, terms: "Verificiran mail i prihvaćeni uvjeti" });
         }
         
         bookingsDB[targetDateStr] = data;
@@ -1751,14 +1820,14 @@
         renderAdminCalendar();
         closeModals();
         
-        submitBtn.innerText = originalBtnText;
-        submitBtn.disabled = false;
+        verifyBtn.innerText = originalVerifyText;
+        verifyBtn.disabled = false;
 
-        alert("Uspješno ste rezervirali termin! Podaci su spremljeni u bazu.");
+        alert("E-mail uspješno verificiran! Rezervacija je potvrđena i spremljena.");
 
-        // Pokušaj slanja maila u pozadini (ne utječe na rezervaciju ako EmailJS izbaci grešku)
+        // Slanje potvrde gostu i adminu
         try {
-          let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
+          let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno verificirana i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
 
           const templateParams = { to_email: email, to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, message: bodyText };
           const adminTemplateParams = { to_email: "aureus.lux.travel@gmail.com", to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, email: email };
@@ -1770,8 +1839,8 @@
         }
 
       } catch (error) {
-        submitBtn.innerText = originalBtnText;
-        submitBtn.disabled = false;
+        verifyBtn.innerText = originalVerifyText;
+        verifyBtn.disabled = false;
         console.error("Greška pri spremanju u bazu:", error);
         alert("Došlo je do greške prilikom spremanja rezervacije u bazu. Molimo pokušajte ponovno.");
       }
@@ -1942,7 +2011,7 @@
         const el = document.getElementById(modalId);
         if(el) el.style.display = 'none';
       } else {
-        const modals = ['tourModal', 'calendarModal', 'contactModal', 'termsModal'];
+        const modals = ['tourModal', 'calendarModal', 'contactModal', 'verifyModal', 'termsModal'];
         modals.forEach(m => {
           const el = document.getElementById(m);
           if(el) el.style.display = 'none';
