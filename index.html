@@ -28,14 +28,15 @@
       letter-spacing: 1.2px;
     }
 
+    /* VRAĆEN LUKSUZNI ZLATNI TEKST S DODANIM EFEKTOM SJAJA SUNCA */
     .gold-text-luxury {
       font-family: 'Cinzel Decorative', serif;
       font-weight: 900;
       text-transform: uppercase;
-      background: linear-gradient(135deg, #b38728 0%, #fbf5b7 25%, #bf953f 50%, #fcf6ba 75%, #aa771c 100%);
+      background: linear-gradient(135deg, #bf953f 0%, #fc6f3 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 2px 8px rgba(179, 135, 40, 0.4));
+      filter: drop-shadow(0 2px 10px rgba(212, 175, 55, 0.4));
     }
 
     .section-title-decent {
@@ -85,7 +86,7 @@
     .header-mini-compass {
       width: 38px;
       height: 38px;
-      filter: drop-shadow(0 0 10px rgba(252, 246, 186, 0.8));
+      filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.7));
       flex-shrink: 0;
     }
 
@@ -93,7 +94,7 @@
       font-family: 'Cinzel Decorative', serif;
       font-size: 1.15rem;
       letter-spacing: 2px;
-      background: linear-gradient(135deg, #b38728 0%, #fbf5b7 30%, #d4af37 60%, #aa771c 100%);
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       white-space: nowrap;
@@ -116,7 +117,7 @@
 
     .lang-selector { margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(212, 175, 55, 0.25); }
     .lang-selector label { font-size: 0.72rem; color: #d4af37; text-transform: uppercase; display: block; margin-bottom: 6px; font-weight: 400; letter-spacing: 1px; }
-    .lang-select { width: 100%; background: #050b14; color: #fcf6ba; border: 1px solid rgba(212, 175, 55, 0.5); padding: 8px; border-radius: 6px; font-weight: 300; outline: none; font-size: 0.85rem; }
+    .lang-select { width: 100%; background: #050b14; color: #fcf6ba; border: 1px solid rgba(212, 175, 55, 0.5); padding: 8px; border-radius: 6px; font-weight: 300; outline: none; font-size: 0.85rem; font-family: 'Montserrat', sans-serif; }
 
     .top-floating-hamburger {
       position: absolute;
@@ -159,25 +160,57 @@
       justify-content: center;
       gap: 18px;
       margin-bottom: 12px;
+      position: relative;
     }
 
+    /* POZADINSKI SUNČANI SJAJ (ANIMIRANA SVJETLOST IZA NASLOVA) */
+    .hero-title-container::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 280px;
+      height: 120px;
+      background: radial-gradient(ellipse, rgba(255, 215, 0, 0.35) 0%, rgba(212, 175, 55, 0.15) 50%, transparent 70%);
+      z-index: -1;
+      filter: blur(15px);
+      animation: sunRayPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes sunRayPulse {
+      0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
+      100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    }
+
+    /* ORIGINALNI IZGLEDI NASLOVA S DODANIM PULSIRAJUĆIM SJAJEM SUNCA */
     .hero-title { 
       font-family: 'Cinzel Decorative', serif;
       font-size: clamp(2.2rem, 5vw, 4.2rem); 
       line-height: 1.1;
       letter-spacing: 4px;
-      background: linear-gradient(135deg, #b38728 0%, #fbf5b7 20%, #d4af37 40%, #fff 60%, #fbf5b7 80%, #aa771c 100%);
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+      animation: titleGoldShine 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGoldShine {
+      0% { filter: drop-shadow(0 2px 12px rgba(212, 175, 55, 0.5)); }
+      100% { filter: drop-shadow(0 0 25px rgba(255, 230, 120, 0.85)) drop-shadow(0 0 5px rgba(255, 255, 255, 0.6)); }
     }
 
     .title-compass {
       width: clamp(50px, 7vw, 75px);
       height: clamp(50px, 7vw, 75px);
-      filter: drop-shadow(0px 8px 18px rgba(0, 0, 0, 0.8))
-              drop-shadow(0px 0px 14px rgba(252, 246, 186, 0.7));
+      filter: drop-shadow(0px 4px 15px rgba(212, 175, 55, 0.7));
       flex-shrink: 0;
+      animation: sunGlowPulse 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes sunGlowPulse {
+      0% { filter: drop-shadow(0px 3px 12px rgba(212, 175, 55, 0.6)); }
+      100% { filter: drop-shadow(0px 5px 22px rgba(255, 235, 140, 0.95)) drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.7)); }
     }
 
     .hero-subtitle { 
@@ -259,8 +292,12 @@
 
     .form-group { margin-bottom: 14px; text-align: left; position: relative; }
     .form-group label { display: block; font-size: 0.78rem; color: #d4af37; margin-bottom: 6px; font-weight: 400; letter-spacing: 0.5px; }
-    .form-input { width: 100%; background: #050b14; border: 1px solid rgba(212, 175, 55, 0.35); padding: 9px 12px; border-radius: 6px; color: #fcf6ba; font-size: 0.9rem; font-weight: 300; transition: border-color 0.3s; outline: none; }
+    .form-input { width: 100%; background: #050b14; border: 1px solid rgba(212, 175, 55, 0.35); padding: 9px 12px; border-radius: 6px; color: #fcf6ba; font-size: 0.9rem; font-weight: 300; font-family: 'Montserrat', sans-serif; transition: border-color 0.3s; outline: none; }
     .form-input:focus { border-color: #fcf6ba; box-shadow: 0 0 10px rgba(212,175,55,0.25); }
+
+    .phone-input-group { display: flex; gap: 8px; }
+    .country-code-select { width: 130px; background: #050b14; color: #fcf6ba; border: 1px solid rgba(212, 175, 55, 0.35); padding: 9px 8px; border-radius: 6px; font-weight: 300; font-size: 0.9rem; font-family: 'Montserrat', sans-serif; outline: none; }
+    .country-code-select option { background: #050b14; color: #fcf6ba; font-size: 0.9rem; padding: 6px; }
 
     .terms-box { display: flex; align-items: flex-start; gap: 10px; margin: 16px 0; font-size: 0.76rem; color: #94a3b8; text-align: left; font-weight: 300; }
     .terms-box input { margin-top: 3px; accent-color: #cbd5e1; width: 15px; height: 15px; pointer-events: none; }
@@ -337,36 +374,33 @@
       <svg class="header-mini-compass" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <linearGradient id="gold-light-h" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="35%" stop-color="#ffea9f" />
-            <stop offset="70%" stop-color="#d4af37" />
-            <stop offset="100%" stop-color="#9a7516" />
+            <stop offset="0%" stop-color="#bf953f" />
+            <stop offset="25%" stop-color="#fcf6ba" />
+            <stop offset="50%" stop-color="#b38728" />
+            <stop offset="75%" stop-color="#fbf5b7" />
+            <stop offset="100%" stop-color="#aa771c" />
           </linearGradient>
           <linearGradient id="gold-dark-h" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#c59b27" />
-            <stop offset="50%" stop-color="#8c6511" />
-            <stop offset="100%" stop-color="#3b2a03" />
+            <stop offset="0%" stop-color="#b38728" />
+            <stop offset="50%" stop-color="#7a5510" />
+            <stop offset="100%" stop-color="#3a2303" />
           </linearGradient>
           <linearGradient id="ring-gradient-h" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffea9f" />
-            <stop offset="50%" stop-color="#d4af37" />
-            <stop offset="100%" stop-color="#6b4f09" />
-          </linearGradient>
-          <linearGradient id="highlight-h" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" />
-            <stop offset="100%" stop-color="#ffea9f" stop-opacity="0.6" />
+            <stop offset="0%" stop-color="#fcf6ba" />
+            <stop offset="50%" stop-color="#bf953f" />
+            <stop offset="100%" stop-color="#7a5510" />
           </linearGradient>
         </defs>
-        <circle cx="0" cy="0" r="148" stroke="url(#ring-gradient-h)" stroke-width="2.5" fill="none" />
-        <g transform="rotate(45)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light-h)" stroke-width="2" stroke-linecap="round" /></g>
-        <g transform="rotate(135)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light-h)" stroke-width="2" stroke-linecap="round" /></g>
-        <g transform="rotate(225)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light-h)" stroke-width="2" stroke-linecap="round" /></g>
-        <g transform="rotate(315)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light-h)" stroke-width="2" stroke-linecap="round" /></g>
+        <circle cx="0" cy="0" r="148" stroke="url(#ring-gradient-h)" stroke-width="3" fill="none" />
+        <g transform="rotate(45)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /></g>
+        <g transform="rotate(135)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /></g>
+        <g transform="rotate(225)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /></g>
+        <g transform="rotate(315)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light-h)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark-h)" /></g>
         <g>
-          <polygon points="0,0 0,-182 -25,-25" fill="url(#gold-light-h)" /><polygon points="0,0 0,-182 25,-25" fill="url(#gold-dark-h)" /><line x1="0" y1="0" x2="0" y2="-182" stroke="url(#highlight-h)" stroke-width="1.5" />
-          <polygon points="0,0 182,0 25,-25" fill="url(#gold-light-h)" /><polygon points="0,0 182,0 25,25" fill="url(#gold-dark-h)" /><line x1="0" y1="0" x2="182" y2="0" stroke="url(#highlight-h)" stroke-width="1.5" />
-          <polygon points="0,0 0,182 25,25" fill="url(#gold-light-h)" /><polygon points="0,0 0,182 -25,25" fill="url(#gold-dark-h)" /><line x1="0" y1="0" x2="0" y2="182" stroke="url(#highlight-h)" stroke-width="1.5" />
-          <polygon points="0,0 -182,0 -25,25" fill="url(#gold-light-h)" /><polygon points="0,0 -182,0 -25,-25" fill="url(#gold-dark-h)" /><line x1="0" y1="0" x2="-182" y2="0" stroke="url(#highlight-h)" stroke-width="1.5" />
+          <polygon points="0,0 0,-182 -25,-25" fill="url(#gold-light-h)" /><polygon points="0,0 0,-182 25,-25" fill="url(#gold-dark-h)" />
+          <polygon points="0,0 182,0 25,-25" fill="url(#gold-light-h)" /><polygon points="0,0 182,0 25,25" fill="url(#gold-dark-h)" />
+          <polygon points="0,0 0,182 25,25" fill="url(#gold-light-h)" /><polygon points="0,0 0,182 -25,25" fill="url(#gold-dark-h)" />
+          <polygon points="0,0 -182,0 -25,25" fill="url(#gold-light-h)" /><polygon points="0,0 -182,0 -25,-25" fill="url(#gold-dark-h)" />
         </g>
       </svg>
       <span class="header-mini-title">AUREUS LUX</span>
@@ -408,37 +442,34 @@
         <svg class="title-compass" viewBox="-200 -200 400 400" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="gold-light" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="35%" stop-color="#ffea9f" />
-              <stop offset="70%" stop-color="#d4af37" />
-              <stop offset="100%" stop-color="#9a7516" />
+              <stop offset="0%" stop-color="#bf953f" />
+              <stop offset="25%" stop-color="#fcf6ba" />
+              <stop offset="50%" stop-color="#b38728" />
+              <stop offset="75%" stop-color="#fbf5b7" />
+              <stop offset="100%" stop-color="#aa771c" />
             </linearGradient>
             <linearGradient id="gold-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#c59b27" />
-              <stop offset="50%" stop-color="#8c6511" />
-              <stop offset="100%" stop-color="#3b2a03" />
+              <stop offset="0%" stop-color="#b38728" />
+              <stop offset="50%" stop-color="#7a5510" />
+              <stop offset="100%" stop-color="#3a2303" />
             </linearGradient>
             <linearGradient id="ring-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffea9f" />
-              <stop offset="50%" stop-color="#d4af37" />
-              <stop offset="100%" stop-color="#6b4f09" />
-            </linearGradient>
-            <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="100%" stop-color="#ffea9f" stop-opacity="0.6" />
+              <stop offset="0%" stop-color="#fcf6ba" />
+              <stop offset="50%" stop-color="#bf953f" />
+              <stop offset="100%" stop-color="#7a5510" />
             </linearGradient>
           </defs>
 
-          <circle cx="0" cy="0" r="148" stroke="url(#ring-gradient)" stroke-width="2.5" fill="none" />
-          <g transform="rotate(45)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light)" stroke-width="2" stroke-linecap="round" /></g>
-          <g transform="rotate(135)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light)" stroke-width="2" stroke-linecap="round" /></g>
-          <g transform="rotate(225)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light)" stroke-width="2" stroke-linecap="round" /></g>
-          <g transform="rotate(315)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /><line x1="0" y1="-32" x2="-26" y2="-52" stroke="url(#gold-light)" stroke-width="2" stroke-linecap="round" /></g>
+          <circle cx="0" cy="0" r="148" stroke="url(#ring-gradient)" stroke-width="3" fill="none" />
+          <g transform="rotate(45)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /></g>
+          <g transform="rotate(135)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /></g>
+          <g transform="rotate(225)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /></g>
+          <g transform="rotate(315)"><polygon points="0,-32 0,-132 -20,-48" fill="url(#gold-light)" /><polygon points="0,-32 0,-132 5,-48" fill="url(#gold-dark)" /></g>
           <g>
-            <polygon points="0,0 0,-182 -25,-25" fill="url(#gold-light)" /><polygon points="0,0 0,-182 25,-25" fill="url(#gold-dark)" /><line x1="0" y1="0" x2="0" y2="-182" stroke="url(#highlight)" stroke-width="1.5" />
-            <polygon points="0,0 182,0 25,-25" fill="url(#gold-light)" /><polygon points="0,0 182,0 25,25" fill="url(#gold-dark)" /><line x1="0" y1="0" x2="182" y2="0" stroke="url(#highlight)" stroke-width="1.5" />
-            <polygon points="0,0 0,182 25,25" fill="url(#gold-light)" /><polygon points="0,0 0,182 -25,25" fill="url(#gold-dark)" /><line x1="0" y1="0" x2="0" y2="182" stroke="url(#highlight)" stroke-width="1.5" />
-            <polygon points="0,0 -182,0 -25,25" fill="url(#gold-light)" /><polygon points="0,0 -182,0 -25,-25" fill="url(#gold-dark)" /><line x1="0" y1="0" x2="-182" y2="0" stroke="url(#highlight)" stroke-width="1.5" />
+            <polygon points="0,0 0,-182 -25,-25" fill="url(#gold-light)" /><polygon points="0,0 0,-182 25,-25" fill="url(#gold-dark)" />
+            <polygon points="0,0 182,0 25,-25" fill="url(#gold-light)" /><polygon points="0,0 182,0 25,25" fill="url(#gold-dark)" />
+            <polygon points="0,0 0,182 25,25" fill="url(#gold-light)" /><polygon points="0,0 0,182 -25,25" fill="url(#gold-dark)" />
+            <polygon points="0,0 -182,0 -25,25" fill="url(#gold-light)" /><polygon points="0,0 -182,0 -25,-25" fill="url(#gold-dark)" />
           </g>
         </svg>
 
@@ -481,7 +512,7 @@
           </ul>
           <div class="tour-card-footer">
             <div class="tour-price-tag">450 € <span style="font-size: 0.7rem; font-family:'Montserrat'; font-weight:300; color:#94a3b8;" id="t1Per">/ dan</span></div>
-            <button class="btn-card-book" id="t1Btn" onclick="selectTourType('private')">Odaberi Termin</button>
+            <button class="btn-card-book" id="t1Btn" onclick="openTourSelectModal()">Odaberi Termin</button>
           </div>
         </div>
       </div>
@@ -518,7 +549,7 @@
         </div>
         <div class="tour-content">
           <div class="tour-header-box">
-            <h3 class="tour-card-title" id="t3CardTitle">Romantična Sunset Karta</h3>
+            <h3 class="tour-card-title" id="t3CardTitle">Romantična Sunset Tura</h3>
             <div class="tour-time" id="t3CardTime"><i class="fa-regular fa-clock"></i> <span id="t3TimeLabel">Trajanje izleta: 1.5 sati</span></div>
           </div>
           <p class="tour-card-desc" id="t3CardDesc">
@@ -641,35 +672,73 @@
       <h3 class="gold-text-luxury" style="text-align: center; font-size: 1.2rem;" id="tourModalTitle">Odaberite Vrsta Ture</h3>
       <p class="minimal-sub" style="text-align: center; margin-bottom: 15px;" id="tourModalSub">Odaberite opciju kako bismo prikazali slobodne datume</p>
 
-      <div class="tour-option" onclick="selectTourType('private')">
+      <!-- PRIVATNA TURA OPCIJA -->
+      <div class="tour-option" onclick="togglePrivatePaxSelector()">
         <span class="tour-price" style="float:right; font-weight:700; color:#fcf6ba; font-family:'Cinzel Decorative'; font-size:1rem;">450 €</span>
         <div class="tour-title" style="color:#fcf6ba; font-weight:400; font-size:0.9rem;" id="mOpt1Title">Privatna Cjelodnevna Tura</div>
         <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 3px; font-weight: 300;" id="mOpt1Desc">Cijeli brod ekskluzivno za vašu grupu (max 10 osoba)</div>
       </div>
 
+      <div id="privatePaxSelectorBox" class="pax-select-box">
+        <label style="color: #fcf6ba; font-weight: 500; display: block; margin-bottom: 4px; font-size: 0.82rem;">Sastav grupe za privatnu turu (Maksimalno 10 osoba):</label>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; text-align: left;">
+          <div>
+            <label style="font-size: 0.7rem; color: #d4af37;">Odrasli (18+)</label>
+            <select id="privAdults" class="lang-select" style="padding: 6px;">
+              <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.7rem; color: #d4af37;">Djeca (3-17)</label>
+            <select id="privKids" class="lang-select" style="padding: 6px;">
+              <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.7rem; color: #d4af37;">Bebe (0-3)</label>
+            <select id="privBabies" class="lang-select" style="padding: 6px;">
+              <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-gold" style="padding: 8px 16px; font-size: 0.75rem; margin-top: 12px;" onclick="confirmPrivateTourSelection()">Prikaži Slobodne Datume</button>
+      </div>
+
+      <!-- POLUDNEVNA TURA OPCIJA -->
       <div class="tour-option" onclick="togglePaxSelector()">
         <span class="tour-price" style="float:right; font-weight:700; color:#fcf6ba; font-family:'Cinzel Decorative'; font-size:1rem;">65 € / os</span>
         <div class="tour-title" style="color:#fcf6ba; font-weight:400; font-size:0.9rem;" id="mOpt2Title">Poludnevni izlet: Three Island Tour</div>
-        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 3px; font-weight: 300;" id="mOpt2Desc">Dijeljena vožnja - odaberite broj ulaznica</div>
+        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 3px; font-weight: 300;" id="mOpt2Desc">Dijeljena vožnja - odaberite sastav putnika</div>
       </div>
 
       <div id="paxSelectorBox" class="pax-select-box">
-        <label style="color: #fcf6ba; font-weight: 400; display: block; margin-bottom: 8px; font-size: 0.82rem;" id="lblPaxCount">Koliko karata želite rezervirati (1-10)?</label>
-        <select id="paxSelectCount" class="lang-select" style="max-width: 180px; margin: 0 auto 12px auto; display: block; text-align: center;">
-          <option value="1">1 osoba (65 €)</option>
-          <option value="2">2 osobe (130 €)</option>
-          <option value="3">3 osobe (195 €)</option>
-          <option value="4">4 osobe (260 €)</option>
-          <option value="5">5 osoba (325 €)</option>
-          <option value="6">6 osoba (390 €)</option>
-          <option value="7">7 osoba (455 €)</option>
-          <option value="8">8 osoba (520 €)</option>
-          <option value="9">9 osoba (585 €)</option>
-          <option value="10">10 osoba (650 €)</option>
-        </select>
-        <button class="btn-gold" style="padding: 8px 16px; font-size: 0.75rem;" onclick="selectTourType('shared')" id="btnConfirmPax">Prikaži Slobodne Datume</button>
+        <label style="color: #fcf6ba; font-weight: 500; display: block; margin-bottom: 4px; font-size: 0.82rem;" id="lblPaxCount">Odaberite sastav putnika (ukupno max 10):</label>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 10px; text-align: left;">
+          <div>
+            <label style="font-size: 0.7rem; color: #d4af37;">Odrasli (18+)</label>
+            <select id="sharedAdults" class="lang-select" style="padding: 6px;">
+              <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.7rem; color: #d4af37;">Djeca (3-17)</label>
+            <select id="sharedKids" class="lang-select" style="padding: 6px;">
+              <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 0.7rem; color: #d4af37;">Bebe (0-3)</label>
+            <select id="sharedBabies" class="lang-select" style="padding: 6px;">
+              <option value="0" selected>0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn-gold" style="padding: 8px 16px; font-size: 0.75rem; margin-top: 12px;" onclick="confirmSharedTourSelection()" id="btnConfirmPax">Prikaži Slobodne Datume</button>
       </div>
 
+      <!-- SUNSET TURA OPCIJA -->
       <div class="tour-option" onclick="selectTourType('sunset')">
         <span class="tour-price" style="float:right; font-weight:700; color:#fcf6ba; font-family:'Cinzel Decorative'; font-size:1rem;">150 €</span>
         <div class="tour-title" style="color:#fcf6ba; font-weight:400; font-size:0.9rem;" id="mOpt3Title">Romantična Sunset Tura</div>
@@ -712,7 +781,27 @@
       </div>
       <div class="form-group">
         <label id="lblGuestPhone">Broj mobitela:</label>
-        <input type="tel" id="guestPhone" class="form-input">
+        <div class="phone-input-group">
+          <select id="countryCodeSelect" class="country-code-select">
+            <option value="+385" selected>🇭🇷 +385 (HR)</option>
+            <option value="+49">🇩🇪 +49 (DE)</option>
+            <option value="+39">🇮🇹 +39 (IT)</option>
+            <option value="+43">🇦🇹 +43 (AT)</option>
+            <option value="+386">🇸🇮 +386 (SI)</option>
+            <option value="+381">🇷🇸 +381 (RS)</option>
+            <option value="+387">🇧🇦 +387 (BA)</option>
+            <option value="+44">🇬🇧 +44 (UK)</option>
+            <option value="+1">🇺🇸 +1 (US/CA)</option>
+            <option value="+33">🇫🇷 +33 (FR)</option>
+            <option value="+34">🇪🇸 +34 (ES)</option>
+            <option value="+41">🇨🇭 +41 (CH)</option>
+            <option value="+31">🇳🇱 +31 (NL)</option>
+            <option value="+46">🇸🇪 +46 (SE)</option>
+            <option value="+48">🇵🇱 +48 (PL)</option>
+            <option value="+420">🇨🇿 +420 (CZ)</option>
+          </select>
+          <input type="tel" id="guestPhone" class="form-input">
+        </div>
       </div>
 
       <div class="terms-box" id="termsBoxWrapper">
@@ -749,7 +838,7 @@
       
       <div id="termsScrollContainer" style="font-size: 0.81rem; color: #cbd5e1; font-weight: 300; line-height: 1.7; height: 50vh; overflow-y: auto; padding-right: 8px; text-align: left; border: 1px solid rgba(212,175,55,0.3); padding: 12px; border-radius: 8px; background: #050b14;" onscroll="checkTermsScroll()">
         <div id="termsContentDiv">
-          <p style="margin-bottom: 12px;"><strong style="color:#fcf6ba;">1. Opće odredbe i predmet poslovanja</strong><br>Ovaj dokument definira opće uvjete poslovanja, prava, obveze i pravila otkazivanja usluga između obrta Aureus Lux, vl. Stipe Majstorović (u daljnjem tekstu: pružatelj usluge) i krajnjeg korisnika/gosta (u daljnjem tekstu: gost) koji rezervira privatne ili grupne izlete plovilom.</p>
+          <p style="margin-bottom: 12px;"><strong style="color:#fcf6ba;">1. Opće odredbe i predmet poslovanja</strong><br>Ovaj dokument definira opće uvjete poslovanja, prava, obveze i pravila otkazivanja usluga između obrta Aureus Lux, vl. Stipe Majstorović (u daljnjem tekstu: pružatelj usluge) i krajnjeg korisnika/gosta (u dalinjoj tekstu: gost) koji rezervira privatne ili grupne izlete plovilom.</p>
           
           <p style="margin-bottom: 12px;"><strong style="color:#fcf6ba;">2. Jednostrani raskid i otkazivanje od strane pružatelja usluge (Aureus Lux)</strong><br>Pružatelj usluge zadržava puno, diskrecijsko i jednostrano pravo otkazivanja bilo koje rezervirane ture ili izleta u bilo kojem trenutku prije ili tijekom izvođenja iste, a iz sljedećih razloga:<br>
           • <strong style="color:#e63946;">Tehnička neispravnost plovila ili opreme:</strong> U slučaju bilo kakvog kvara na pogonskom motoru, trupu, upravljačkom sustavu, navigacijskoj opremi ili sigurnosnim elementima plovila.<br>
@@ -782,7 +871,6 @@
     let activeModalBeforeTerms = null;
     let termsReadAndAccepted = false;
     
-    // Varijable za verifikaciju koda
     let generatedVerificationCode = "";
     let pendingBookingData = null;
 
@@ -916,6 +1004,7 @@
 
     let selectedTourMode = '';
     let selectedPaxCount = 1;
+    let passengerDetails = { adults: 0, kids: 0, babies: 0 };
     let targetDateStr = '';
 
     const translations = {
@@ -946,7 +1035,7 @@
         t2Per: "/ osobi", t2Btn: "Odaberi Mjesta",
 
         b3: "<i class='fa-solid fa-heart'></i> Romantični Bijeg",
-        t3Title: "Romantična Sunset Karta",
+        t3Title: "Romantična Sunset Tura",
         t3Time: "Trajanje izleta: 1.5 sati",
         t3Desc: "Ekskluzivan izlet na otvorenu morsku pučinu namijenjen za dvije osobe. Romantično gledanje zalaska za parove uz šampanjac ili vino te dalmatinsku platu (domaći pršut i sir).",
         t3f1: "Romantično gledanje zalaska za parove",
@@ -982,9 +1071,8 @@
         tourModalTitle: "Odaberite Vrsta Ture",
         tourModalSub: "Odaberite opciju kako bismo prikazali slobodne datume",
         mOpt1Title: "Privatna Cjelodnevna Tura", mOpt1Desc: "Cijeli brod ekskluzivno za vašu grupu (max 10 osoba)",
-        mOpt2Title: "Poludnevni izlet: Three Island Tour", mOpt2Desc: "Dijeljena vožnja - odaberite broj ulaznica",
+        mOpt2Title: "Poludnevni izlet: Three Island Tour", mOpt2Desc: "Dijeljena vožnja - odaberite sastav putnika",
         mOpt3Title: "Romantična Sunset Tura", mOpt3Desc: "Privatni zalazak sunca za dvoje (1,5 sat)",
-        lblPaxCount: "Koliko karata želite rezervirati (1-10)?", btnConfirmPax: "Prikaži Slobodne Datume",
         calTitle: "Slobodni Datumi Za Vaš Izbor", btnPrev: "< Prethodni", btnNext: "Sljedeći >",
         days: ["Pon", "Uto", "Sri", "Čet", "Pet", "Sub", "Ned"],
         months: ["Siječanj", "Veljača", "Ožujak", "Travanj", "Svibanj", "Lipanj", "Srpanj", "Kolovoz", "Rujan", "Listopad", "Studeni", "Prosinac"],
@@ -1029,7 +1117,7 @@
         t2Per: "/ person", t2Btn: "Select Tickets",
 
         b3: "<i class='fa-solid fa-heart'></i> Romantic Escape",
-        t3Title: "Romantic Sunset Ticket",
+        t3Title: "Romantic Sunset Tour",
         t3Time: "Duration: 1.5 hours",
         t3Desc: "An exclusive trip to the open sea designed for two persons. Romantic sunset viewing for couples with chilled wine or champagne and a local platter (prosciutto and cheese).",
         t3f1: "Romantic sunset viewing for couples",
@@ -1065,9 +1153,8 @@
         tourModalTitle: "Select Ticket Type",
         tourModalSub: "Choose an option to view available calendar dates",
         mOpt1Title: "Private Full-Day Ticket", mOpt1Desc: "Whole boat exclusively for your group (max 10 guests)",
-        mOpt2Title: "Half-Day Tour: Three Island Tour", mOpt2Desc: "Shared trip - select your ticket count",
-        mOpt3Title: "Romantic Sunset Ticket", mOpt3Desc: "Private sunset trip for two (1.5 hours)",
-        lblPaxCount: "How many tickets do you need (1-10)?", btnConfirmPax: "Show Available Dates",
+        mOpt2Title: "Half-Day Tour: Three Island Tour", mOpt2Desc: "Shared trip - select your passenger details",
+        mOpt3Title: "Romantic Sunset Tour", mOpt3Desc: "Private sunset trip for two (1.5 hours)",
         calTitle: "Available Dates", btnPrev: "< Previous", btnNext: "Next >",
         days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
@@ -1112,7 +1199,7 @@
         t2Per: "/ Person", t2Btn: "Plätze Wählen",
 
         b3: "<i class='fa-solid fa-heart'></i> Romantik",
-        t3Title: "Romantische Sunset-Karte",
+        t3Title: "Romantische Sunset Tour",
         t3Time: "Dauer: 1.5 Stunden",
         t3Desc: "Exklusiver Ausflug für 2 Personen auf das offene Meer. Romantischer Sonnenuntergang für Paare mit Champagner/Wein und dalmatinischer Platte.",
         t3f1: "Romantischer Sonnenuntergang für Paare",
@@ -1148,9 +1235,8 @@
         tourModalTitle: "Ticket-Typ Auswählen",
         tourModalSub: "Wählen Sie eine Option, um verfügbare Termine anzuzeigen",
         mOpt1Title: "Private Ganztageskarte", mOpt1Desc: "Ganzes Boot exklusiv für Ihre Gruppe (max 10 Pers.)",
-        mOpt2Title: "Halbtagestour: Three Island Tour", mOpt2Desc: "Geteilte Fahrt - Ticketanzahl wählen",
-        mOpt3Title: "Romantische Sunset-Karte", mOpt3Desc: "Privater Sonnenuntergang für zwei Personen (1,5 Std.)",
-        lblPaxCount: "Wie viele Tickets möchten Sie buchen (1-10)?", btnConfirmPax: "Freie Termine Anzeigen",
+        mOpt2Title: "Halbtagestour: Three Island Tour", mOpt2Desc: "Geteilte Fahrt - Personenzusammensetzung wählen",
+        mOpt3Title: "Romantische Sunset Tour", mOpt3Desc: "Privater Sonnenuntergang für zwei Personen (1,5 Std.)",
         calTitle: "Verfügbare Termine", btnPrev: "< Vorheriger", btnNext: "Nächster >",
         days: ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"],
         months: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"],
@@ -1195,7 +1281,7 @@
         t2Per: "/ persona", t2Btn: "Seleziona Biglietti",
 
         b3: "<i class='fa-solid fa-heart'></i> Fuga Romantica",
-        t3Title: "Biglietto Sunset Romantico",
+        t3Title: "Romantic Sunset Tour",
         t3Time: "Durata: 1.5 ore",
         t3Desc: "Un'escursione esclusiva in mare aperto pensata per due persone. Vista romantica del tramonto per coppie con vino o champagne e tagliere locale.",
         t3f1: "Vista romantica del tramonto per coppie",
@@ -1231,9 +1317,8 @@
         tourModalTitle: "Seleziona Tipo di Biglietto",
         tourModalSub: "Scegli un'opzione per visualizzare le date disponibili nel calendario",
         mOpt1Title: "Biglietto Privato Intera Giornata", mOpt1Desc: "Intera barca esclusivamente per il tuo gruppo (max 10 persone)",
-        mOpt2Title: "Tour di Mezza Giornata: Three Island Tour", mOpt2Desc: "Viaggio condiviso - seleziona i biglietti",
-        mOpt3Title: "Biglietto Sunset Romantico", mOpt3Desc: "Tramonto privato per due persone (1,5 ore)",
-        lblPaxCount: "Quanti biglietti desideri (1-10)?", btnConfirmPax: "Mostra Date Disponibili",
+        mOpt2Title: "Tour di Mezza Giornata: Three Island Tour", mOpt2Desc: "Viaggio condiviso - seleziona i passeggeri",
+        mOpt3Title: "Romantic Sunset Tour", mOpt3Desc: "Tramonto privato per due persone (1,5 ore)",
         calTitle: "Date Disponibili", btnPrev: "< Precedente", btnNext: "Successivo >",
         days: ["Lun", "Mar", "Mer", "Gio", "Ven", "Sab", "Dom"],
         months: ["Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre"],
@@ -1278,7 +1363,7 @@
         t2Per: "/ persona", t2Btn: "Seleccionar Entradas",
 
         b3: "<i class='fa-solid fa-heart'></i> Escapada Romántica",
-        t3Title: "Boleto Sunset Romántico",
+        t3Title: "Romantic Sunset Tour",
         t3Time: "Duración: 1.5 horas",
         t3Desc: "Una excursión exclusiva en alta mar diseñada para dos personas. Vista romántica del atardecer para parejas con vino o champán y plato dálmata.",
         t3f1: "Vista romántica del atardecer para parejas",
@@ -1314,9 +1399,8 @@
         tourModalTitle: "Seleccionar Tipo de Boleto",
         tourModalSub: "Elige una opción para ver las fechas disponibles en el calendario",
         mOpt1Title: "Boleto Privado Día Completo", mOpt1Desc: "Todo el barco exclusivamente para tu grupo (máx. 10 personas)",
-        mOpt2Title: "Tour de Medio Día: Three Island Tour", mOpt2Desc: "Viaje compartido - selecciona entradas",
-        mOpt3Title: "Boleto Sunset Romántico", mOpt3Desc: "Atardecer privado para dos personas (1,5 horas)",
-        lblPaxCount: "¿Cuántas entradas necesitas (1-10)?", btnConfirmPax: "Mostrar Fechas Disponibles",
+        mOpt2Title: "Tour de Medio Día: Three Island Tour", mOpt2Desc: "Viaje compartido - selecciona los pasajeros",
+        mOpt3Title: "Romantic Sunset Tour", mOpt3Desc: "Atardecer privado para dos personas (1,5 horas)",
         calTitle: "Fechas Disponibles", btnPrev: "< Anterior", btnNext: "Siguiente >",
         days: ["Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
         months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
@@ -1361,7 +1445,7 @@
         t2Per: "/ personne", t2Btn: "Sélectionner Billets",
 
         b3: "<i class='fa-solid fa-heart'></i> Échappée Romantique",
-        t3Title: "Billet Sunset Romantique",
+        t3Title: "Romantic Sunset Tour",
         t3Time: "Durée : 1.5 heures",
         t3Desc: "Une excursion exclusive en haute mer conçue pour deux personnes. Vue romantique du coucher de soleil pour les couples avec vin ou champagne et plateau dalmate.",
         t3f1: "Vue romantique du coucher de soleil pour les couples",
@@ -1397,9 +1481,8 @@
         tourModalTitle: "Sélectionner le Type de Billet",
         tourModalSub: "Choisissez une option pour afficher les dates disponibles dans le calendrier",
         mOpt1Title: "Billet Privé Journée", mOpt1Desc: "Tout le bateau exclusivement pour votre groupe (max 10 personnes)",
-        mOpt2Title: "Visite Demi-Journée : Three Island Tour", mOpt2Desc: "Voyage partagé - sélectionnez vos billets",
-        mOpt3Title: "Billet Sunset Romantique", mOpt3Desc: "Coucher de soleil privé pour deux (1,5 heure)",
-        lblPaxCount: "Combien de billets souhaitez-vous (1-10) ?", btnConfirmPax: "Afficher les Dates Disponibles",
+        mOpt2Title: "Visite Demi-Journée : Three Island Tour", mOpt2Desc: "Voyage partagé - sélectionnez les passagers",
+        mOpt3Title: "Romantic Sunset Tour", mOpt3Desc: "Coucher de soleil privé pour deux (1,5 heure)",
         calTitle: "Dates Disponibles", btnPrev: "< Précédent", btnNext: "Suivant >",
         days: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
         months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
@@ -1520,8 +1603,6 @@
       document.getElementById('mOpt1Title').innerText = t.mOpt1Title; document.getElementById('mOpt1Desc').innerText = t.mOpt1Desc;
       document.getElementById('mOpt2Title').innerText = t.mOpt2Title; document.getElementById('mOpt2Desc').innerText = t.mOpt2Desc;
       document.getElementById('mOpt3Title').innerText = t.mOpt3Title; document.getElementById('mOpt3Desc').innerText = t.mOpt3Desc;
-      document.getElementById('lblPaxCount').innerText = t.lblPaxCount;
-      document.getElementById('btnConfirmPax').innerText = t.btnConfirmPax;
       document.getElementById('calTitle').innerText = t.calTitle;
       document.getElementById('btnPrev').innerText = t.btnPrev;
       document.getElementById('btnNext').innerText = t.btnNext;
@@ -1536,13 +1617,6 @@
       document.getElementById('acceptTermsBtn').innerText = t.acceptTermsBtnText;
       document.getElementById('scrollPromptText').innerText = t.scrollPromptText;
       document.getElementById('footerText').innerHTML = t.footerText;
-
-      const paxSelect = document.getElementById('paxSelectCount');
-      paxSelect.innerHTML = '';
-      for(let i=1; i<=10; i++) {
-        let labelPax = i === 1 ? t.paxWord : t.paxWordPlural;
-        paxSelect.innerHTML += `<option value="${i}">${i} ${labelPax} (${i * 65} €)</option>`;
-      }
 
       renderCalendarHeaders();
       if(document.getElementById('calendarModal').style.display === 'flex') {
@@ -1562,14 +1636,84 @@
       loadCloudBookings();
       const menu = document.getElementById('dropdownMenu');
       if (menu) menu.classList.remove('active');
-      const paxBox = document.getElementById('paxSelectorBox');
-      if (paxBox) paxBox.style.display = 'none';
+      
+      document.getElementById('privatePaxSelectorBox').style.display = 'none';
+      document.getElementById('paxSelectorBox').style.display = 'none';
+      
       document.getElementById('tourModal').style.display = 'flex';
     }
 
+    function togglePrivatePaxSelector() {
+      const privBox = document.getElementById('privatePaxSelectorBox');
+      const sharedBox = document.getElementById('paxSelectorBox');
+      sharedBox.style.display = 'none';
+      privBox.style.display = privBox.style.display === 'block' ? 'none' : 'block';
+    }
+
     function togglePaxSelector() {
-      const box = document.getElementById('paxSelectorBox');
-      box.style.display = box.style.display === 'block' ? 'none' : 'block';
+      const privBox = document.getElementById('privatePaxSelectorBox');
+      const sharedBox = document.getElementById('paxSelectorBox');
+      privBox.style.display = 'none';
+      sharedBox.style.display = sharedBox.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function confirmPrivateTourSelection() {
+      const adults = parseInt(document.getElementById('privAdults').value);
+      const kids = parseInt(document.getElementById('privKids').value);
+      const babies = parseInt(document.getElementById('privBabies').value);
+      const total = adults + kids + babies;
+
+      if (total < 1) {
+        alert("Molimo odaberite barem jednog putnika.");
+        return;
+      }
+      if (total > MAX_PAX) {
+        alert("Ukupan broj osoba na privatnoj turi ne može biti veći od 10 (maksimalni kapacitet broda).");
+        return;
+      }
+
+      selectedTourMode = 'private';
+      selectedPaxCount = total;
+      passengerDetails = { adults, kids, babies };
+
+      document.getElementById('tourModal').style.display = 'none';
+      document.getElementById('calendarModal').style.display = 'flex';
+      renderFilteredCalendar();
+    }
+
+    function confirmSharedTourSelection() {
+      const adults = parseInt(document.getElementById('sharedAdults').value);
+      const kids = parseInt(document.getElementById('sharedKids').value);
+      const babies = parseInt(document.getElementById('sharedBabies').value);
+      const total = adults + kids + babies;
+
+      if (total < 1) {
+        alert("Molimo odaberite barem jednog putnika.");
+        return;
+      }
+      if (total > MAX_PAX) {
+        alert("Ukupan broj osoba ne može biti veći od 10.");
+        return;
+      }
+
+      selectedTourMode = 'shared';
+      selectedPaxCount = total;
+      passengerDetails = { adults, kids, babies };
+
+      document.getElementById('tourModal').style.display = 'none';
+      document.getElementById('calendarModal').style.display = 'flex';
+      renderFilteredCalendar();
+    }
+
+    function selectTourType(mode) {
+      selectedTourMode = mode;
+      if (mode === 'sunset') {
+        selectedPaxCount = 2;
+        passengerDetails = { adults: 2, kids: 0, babies: 0 };
+        document.getElementById('tourModal').style.display = 'none';
+        document.getElementById('calendarModal').style.display = 'flex';
+        renderFilteredCalendar();
+      }
     }
 
     function openTermsModal() {
@@ -1620,16 +1764,6 @@
       if (activeModalBeforeTerms) {
         document.getElementById(activeModalBeforeTerms).style.display = 'flex';
       }
-    }
-
-    function selectTourType(mode) {
-      selectedTourMode = mode;
-      if (mode === 'shared') {
-        selectedPaxCount = parseInt(document.getElementById('paxSelectCount').value);
-      }
-      document.getElementById('tourModal').style.display = 'none';
-      document.getElementById('calendarModal').style.display = 'flex';
-      renderFilteredCalendar();
     }
 
     function getFirstDayIndex(year, month) {
@@ -1690,6 +1824,7 @@
       document.getElementById('selectedDateDisplay').innerText = `Odabrani datum: ${dateStr}`;
       document.getElementById('guestName').value = '';
       document.getElementById('guestEmail').value = '';
+      document.getElementById('countryCodeSelect').value = '+385';
       document.getElementById('guestPhone').value = '';
       
       const acceptCheckbox = document.getElementById('acceptTerms');
@@ -1703,14 +1838,15 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // INICIJACIJA SLANJA VERIFIKACIJSKOG KODA NA E-MAIL
     async function initiateEmailVerification() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
-      const phone = document.getElementById('guestPhone').value.trim();
+      const countryCode = document.getElementById('countryCodeSelect').value;
+      const rawPhone = document.getElementById('guestPhone').value.trim();
+      const fullPhone = countryCode + " " + rawPhone;
       const termsAccepted = document.getElementById('acceptTerms').checked;
 
-      if (!name || !email || !phone) {
+      if (!name || !email || !rawPhone) {
         alert("Molimo unesite sve kontakt podatke (ime, e-mail i broj mobitela).");
         return;
       }
@@ -1725,10 +1861,8 @@
       submitBtn.innerText = "Slanje verifikacijskog koda...";
       submitBtn.disabled = true;
 
-      // Generiranje slučajnog 6-znamenkastog koda
       generatedVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-      
-      pendingBookingData = { name, email, phone };
+      pendingBookingData = { name, email, phone: fullPhone };
 
       try {
         let codeEmailBody = `Poštovani/a ${name},\n\nVaš verifikacijski kod za potvrdu rezervacije izleta kod Aureus Lux je: ${generatedVerificationCode}\n\nUnesite ovaj kod na web stranici kako biste uspješno zaključili rezervaciju.\n\nSrdačan pozdrav,\nAureus Lux`;
@@ -1739,7 +1873,7 @@
           tour_name: "Verifikacija e-mail adrese",
           booking_date: targetDateStr,
           pax_count: 0,
-          phone: phone,
+          phone: fullPhone,
           message: codeEmailBody
         };
 
@@ -1760,7 +1894,6 @@
       }
     }
 
-    // PROVJERA KODA I SPREMANJE REZERVACIJE U BAZU
     async function verifyCodeAndConfirmBooking() {
       const enteredCode = document.getElementById('verificationCodeInput').value.trim();
 
@@ -1777,17 +1910,22 @@
       const { name, email, phone } = pendingBookingData;
       const t = translations[currentLang] || translations['hr'];
       let tourTitle = '';
-      let paxVal = 1;
+      let paxVal = selectedPaxCount;
+      let priceCalc = 0;
+
+      let paxDescription = `${passengerDetails.adults} odraslih`;
+      if (passengerDetails.kids > 0) paxDescription += `, ${passengerDetails.kids} djece`;
+      if (passengerDetails.babies > 0) paxDescription += `, ${passengerDetails.babies} beba`;
 
       if (selectedTourMode === 'private') {
         tourTitle = t.mOpt1Title;
-        paxVal = 10;
+        priceCalc = 450;
       } else if (selectedTourMode === 'shared') {
         tourTitle = t.mOpt2Title;
-        paxVal = selectedPaxCount;
+        priceCalc = selectedPaxCount * 65;
       } else if (selectedTourMode === 'sunset') {
         tourTitle = t.mOpt3Title;
-        paxVal = 2;
+        priceCalc = 150;
       }
 
       try {
@@ -1799,18 +1937,17 @@
           data.isPrivateDay = true; 
           data.bookedPax = 10; 
           data.dayTours.push(tourTitle); 
-          data.totalRevenue += 450;
-          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 10, price: 450, terms: "Verificiran mail i prihvaćeni uvjeti" });
+          data.totalRevenue += priceCalc;
+          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 10, paxDetails: paxDescription, price: priceCalc, terms: "Verificiran mail i uvjeti" });
         } else if (selectedTourMode === 'shared') {
           data.bookedPax += selectedPaxCount; 
-          let priceCalc = selectedPaxCount * 65;
-          data.dayTours.push(`${tourTitle} (${selectedPaxCount} ${selectedPaxCount===1?t.paxWord:t.paxWordPlural})`); 
+          data.dayTours.push(`${tourTitle} (${paxDescription})`); 
           data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: selectedPaxCount, price: priceCalc, terms: "Verificiran mail i prihvaćeni uvjeti" });
+          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: selectedPaxCount, paxDetails: paxDescription, price: priceCalc, terms: "Verificiran mail i uvjeti" });
         } else if (selectedTourMode === 'sunset') {
           data.hasSunset = true; 
-          data.totalRevenue += 150;
-          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 2, price: 150, terms: "Verificiran mail i prihvaćeni uvjeti" });
+          data.totalRevenue += priceCalc;
+          data.guests.push({ id: Date.now(), name, email, phone, tour: tourTitle, pax: 2, paxDetails: "2 odraslih", price: priceCalc, terms: "Verificiran mail i uvjeti" });
         }
         
         bookingsDB[targetDateStr] = data;
@@ -1825,9 +1962,8 @@
 
         alert("E-mail uspješno verificiran! Rezervacija je potvrđena i spremljena.");
 
-        // Slanje potvrde gostu i adminu
         try {
-          let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno verificirana i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
+          let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno verificirana i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Sastav putnika: ${paxDescription}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
 
           const templateParams = { to_email: email, to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, message: bodyText };
           const adminTemplateParams = { to_email: "aureus.lux.travel@gmail.com", to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, email: email };
@@ -1935,6 +2071,7 @@
       entries.sort((a, b) => b.id - a.id);
 
       entries.forEach(item => {
+        let detailsText = item.paxDetails ? `<br><span style="font-size:0.7rem; color:#d4af37;">👥 ${item.paxDetails}</span>` : '';
         tbody.innerHTML += `
           <tr>
             <td style="font-weight:400; color:#fcf6ba;">${item.date}</td>
@@ -1945,7 +2082,8 @@
             </td>
             <td>
               <span style="color:#2ec4b6; font-weight:400;">${item.tour}</span><br>
-              <span style="font-size:0.75rem; color:#cbd5e1;">Putnika/Gostiju: ${item.pax}</span>
+              <span style="font-size:0.75rem; color:#cbd5e1;">Ukupno putnika: ${item.pax}</span>
+              ${detailsText}
             </td>
             <td>
               <span style="color:#fcf6ba; font-family:'Cinzel Decorative'; font-weight:700;">${item.price} €</span><br>
