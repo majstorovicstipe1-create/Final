@@ -756,6 +756,9 @@
     const SUPABASE_URL = "https://bjecmjlmkcniytokdlgv.supabase.co";
     const SUPABASE_ANON_KEY = "sb_publishable_r2D5CWvTW5hgdTjEtyExFg_Dat2-pRs"; 
 
+    // Ovdje možeš staviti svoj besplatni API ključ za provjeru maila (npr. s AbstractAPI) ili ostaviti prazno za osnovnu validaciju
+    const EMAIL_CHECK_API_KEY = ""; 
+
     let bookingsDB = {};
     let activeModalBeforeTerms = null;
     let termsReadAndAccepted = false;
@@ -1660,7 +1663,7 @@
       document.getElementById('contactModal').style.display = 'flex';
     }
 
-    // POVRATNA PETLJA (FEEDBACK LOOP): Provjera isporuke maila prije zapisivanja rezervacije
+    // FEEDBACK LOOP: Provjera ispravnosti e-maila prije slanja i zapisivanja rezervacije
     async function confirmFinalBooking() {
       const name = document.getElementById('guestName').value.trim();
       const email = document.getElementById('guestEmail').value.trim();
@@ -1672,7 +1675,7 @@
         return;
       }
 
-      // Stroga provjera formata e-mail adrese
+      // Osnovna provjera formata
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
         alert("Greška: Unesena e-mail adresa nije u valjanom formatu. Rezervacija je poništena.");
@@ -1686,62 +1689,71 @@
 
       const submitBtn = document.getElementById('submitBtn');
       const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Provjera i slanje maila...";
+      submitBtn.innerText = "Provjera ispravnosti maila...";
       submitBtn.disabled = true;
 
-      const t = translations[currentLang] || translations['hr'];
-      let tourTitle = '';
-      let paxVal = 1;
-      let departureTimeStr = '';
-
-      if (selectedTourMode === 'private') {
-        tourTitle = t.mOpt1Title;
-        paxVal = 10;
-        departureTimeStr = '08:30-19:00';
-      } else if (selectedTourMode === 'shared') {
-        tourTitle = t.mOpt2Title;
-        paxVal = selectedPaxCount;
-        departureTimeStr = '08:30-15:30';
-      } else if (selectedTourMode === 'sunset') {
-        tourTitle = t.mOpt3Title;
-        paxVal = 2;
-        departureTimeStr = '1.5 sati';
-      }
-
-      let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Vrijeme/Trajanje: ${departureTimeStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
-
-      const templateParams = {
-        to_email: email,
-        to_name: name,
-        tour_name: tourTitle,
-        booking_date: targetDateStr,
-        pax_count: paxVal,
-        phone: phone,
-        message: bodyText
-      };
-
-      const adminTemplateParams = {
-        to_email: "aureus.lux.travel@gmail.com",
-        to_name: name,
-        tour_name: tourTitle,
-        booking_date: targetDateStr,
-        pax_count: paxVal,
-        phone: phone,
-        email: email
-      };
-
       try {
-        // FEEDBACK LOOP: Pokušaj slanja maila klijentu. Ako EmailJS vrati grešku (neispravan/nepostojeći mail), ulazimo u catch blok!
-        const emailResponse = await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
-        
-        if (emailResponse.status !== 200 && emailResponse.status !== undefined && typeof emailResponse.status === 'number' && emailResponse.status >= 400) {
-          throw new Error("Email server odbio isporuku.");
+        // Ako je unesen API ključ za provjeru maila, provjeravamo postoji li mail u stvarnosti
+        if (EMAIL_CHECK_API_KEY) {
+          const checkResp = await fetch(`https://emailvalidation.abstractapi.com/v1/?api_key=${EMAIL_CHECK_API_KEY}&email=${encodeURIComponent(email)}`);
+          if (checkResp.ok) {
+            const checkData = await checkResp.json();
+            // Provjeradeliverabilnosti (deliverability status: DELIVERABLE)
+            if (checkData.deliverability && checkData.deliverability !== "DELIVERABLE") {
+              throw new Error("E-mail adresa nije isporukjiva.");
+            }
+          }
         }
 
-        // Ako je mail klijentu uspješno poslan, šaljemo obavijest i adminu
+        submitBtn.innerText = "Slanje potvrde i spremanje...";
+
+        const t = translations[currentLang] || translations['hr'];
+        let tourTitle = '';
+        let paxVal = 1;
+        let departureTimeStr = '';
+
+        if (selectedTourMode === 'private') {
+          tourTitle = t.mOpt1Title;
+          paxVal = 10;
+          departureTimeStr = '08:30-19:00';
+        } else if (selectedTourMode === 'shared') {
+          tourTitle = t.mOpt2Title;
+          paxVal = selectedPaxCount;
+          departureTimeStr = '08:30-15:30';
+        } else if (selectedTourMode === 'sunset') {
+          tourTitle = t.mOpt3Title;
+          paxVal = 2;
+          departureTimeStr = '1.5 sati';
+        }
+
+        let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno zaprimljena i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Vrijeme/Trajanje: ${departureTimeStr}\n- Broj putnika: ${paxVal}\n- Kontakt mobitel: ${phone}\n\nRadujemo se vašem dolasku na brod!\n\nSrdačan pozdrav,\nAureus Lux`;
+
+        const templateParams = {
+          to_email: email,
+          to_name: name,
+          tour_name: tourTitle,
+          booking_date: targetDateStr,
+          pax_count: paxVal,
+          phone: phone,
+          message: bodyText
+        };
+
+        const adminTemplateParams = {
+          to_email: "aureus.lux.travel@gmail.com",
+          to_name: name,
+          tour_name: tourTitle,
+          booking_date: targetDateStr,
+          pax_count: paxVal,
+          phone: phone,
+          email: email
+        };
+
+        // Slanje maila klijentu preko EmailJS-a
+        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
+        // Slanje maila adminu
         await emailjs.send('service_99kir8m', 'Template_3eo6s99', adminTemplateParams);
 
-        // TEK NAKON USPJEŠNO PROŠLOG MAIL-A: Spremanje rezervacije u Supabase bazu
+        // TEK NAKON USPJEŠNO POSLANOG MAIL-A: Spremanje rezervacije u Supabase bazu
         await loadCloudBookings();
         const data = bookingsDB[targetDateStr] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
         if (!data.guests) data.guests = [];
@@ -1779,10 +1791,10 @@
       } catch (error) {
         submitBtn.innerText = originalBtnText;
         submitBtn.disabled = false;
-        console.error("Feedback Loop - Greška pri isporuci maila:", error);
+        console.error("Feedback Loop - Greška:", error);
         
         // Onemogućavanje rezervacije i obavijest korisniku
-        alert("Greška: EmailJS nije uspio potvrditi isporuku e-maila. Unesena adresa je neispravna ili nepostojeća. Rezervacija je poništena i termin ostaje slobodan.");
+        alert("Greška: Unesena e-mail adresa je nevažeća, neispravna ili ne može primiti poruku. Rezervacija je poništena i termin ostaje slobodan.");
       }
     }
 
