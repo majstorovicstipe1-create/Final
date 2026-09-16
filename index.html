@@ -3,7 +3,7 @@
   ==========================================================================
   AUREUS LUX - SYSTEM INSTRUCTION FOR FUTURE AI EDITS:
   Every time you modify this HTML/JS code, automatically increase the version
-  number below and in the footer (.version-tag) by +0.1 (e.g., 6.2 -> 6.3).
+  number below and in the footer (.version-tag) by +0.1 (e.g., 6.9 -> 7.0).
   ==========================================================================
 -->
 <html lang="hr">
@@ -65,12 +65,12 @@
       font-size: 1.5rem;
       letter-spacing: 2px;
       text-transform: uppercase;
-      background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 50%, #aa771c 100%);
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* PAMETNI HEADER - SAKRIVEN DOK SE GLAVNI NASLOV VIDI, KLIZI DOLJE/GORE */
+    /* PAMETNI HEADER - SAKRIVEN DOK SE GLAVNI NASLOV VIDI */
     .sticky-header {
       position: fixed;
       top: -90px;
@@ -100,9 +100,9 @@
     }
 
     .header-mini-compass {
-      width: 38px;
-      height: 38px;
-      filter: drop-shadow(0 0 6px rgba(255, 215, 0, 0.6));
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
       flex-shrink: 0;
     }
 
@@ -110,7 +110,7 @@
       font-family: 'Cinzel Decorative', serif;
       font-size: 1.15rem;
       letter-spacing: 2px;
-      background: linear-gradient(135deg, #9b7826 0%, #ffe680 25%, #d4af37 50%, #fff8cc 75%, #8f6815 100%);
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       filter: drop-shadow(0 2px 6px rgba(212, 175, 55, 0.6));
@@ -146,7 +146,6 @@
       position: relative; overflow: hidden;
     }
 
-    /* LUKSUZNA VIGNETA I ZRAČENJE POZADINE HERO SEKCIJE */
     .hero::before {
       content: '';
       position: absolute;
@@ -160,7 +159,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.08) 0%, rgba(3, 7, 14, 0.75) 70%, rgba(1, 3, 7, 0.95) 100%);
+      background: radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.14) 0%, rgba(3, 7, 14, 0.82) 70%, rgba(1, 3, 7, 0.98) 100%);
       z-index: 0;
       pointer-events: none;
     }
@@ -168,81 +167,234 @@
     .hero-content-wrapper {
       position: relative;
       z-index: 1;
-      max-width: 1100px;
+      max-width: 1150px;
       display: flex;
       flex-direction: column;
       align-items: center;
       width: 100%;
     }
 
-    /* MOCAN LUKSUZNI NASLOV: RUŽA VJETROVA POVISE TEKSTA + ULTRA ZLATNI EFEKTI */
+    /* KONTEJNER ZA EKSKLUZIVNI BRAND & RUŽU VJETROVA */
     .hero-title-container { 
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       width: 100%;
-      max-width: 950px;
-      margin-bottom: 20px;
+      max-width: 1100px;
+      margin-bottom: 22px;
       position: relative;
       padding: 0 10px;
     }
 
-    .brand-svg {
-      width: 100%;
-      height: auto;
-      max-height: 380px;
-      filter: drop-shadow(0px 15px 30px rgba(0, 0, 0, 0.98)) drop-shadow(0px 0px 35px rgba(212, 175, 55, 0.35));
+    /* Vrhunska 3D Ruža Vjetrova sa Svjetlosnim Pulsirom */
+    .brand-compass-wrapper {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    /* SPORI ANIMIRANI EFEKT SUNČEVOG SJAJA LJEVO-DESNO NA TEKSTU I ELEMENTIMA */
-    @keyframes sunGlaze {
+    .compass-halo {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 235, 170, 0.35) 0%, rgba(212, 175, 55, 0.12) 50%, transparent 75%);
+      animation: haloPulse 4s ease-in-out infinite alternate;
+      z-index: 0;
+    }
+
+    @keyframes haloPulse {
+      0% { transform: scale(0.9); opacity: 0.4; }
+      100% { transform: scale(1.18); opacity: 0.95; }
+    }
+
+    .brand-compass-icon {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0px 12px 30px rgba(0, 0, 0, 0.98)) drop-shadow(0px 0px 35px rgba(255, 215, 0, 0.6));
+      animation: compassGlow 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes compassGlow {
+      0% { filter: drop-shadow(0px 10px 25px rgba(0,0,0,0.95)) drop-shadow(0px 0px 25px rgba(212, 175, 55, 0.4)); }
+      100% { filter: drop-shadow(0px 14px 35px rgba(0,0,0,0.98)) drop-shadow(0px 0px 50px rgba(255, 235, 150, 0.85)); }
+    }
+
+    /* MOĆNA MODERNA NEBULA POZADINSKA ANIMACIJA IZA NASLOVA */
+    .gold-headline-wrapper {
+      position: relative;
+      display: inline-block;
+      text-align: center;
+      padding: 20px 40px;
+    }
+
+    /* Sloj 1: Pulsirajući zlatno-tirkizni auralni valovi (Aurora Flare) */
+    .gold-headline-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 130%;
+      height: 200%;
+      background: radial-gradient(
+        ellipse at center, 
+        rgba(255, 215, 0, 0.35) 0%, 
+        rgba(212, 175, 55, 0.2) 25%, 
+        rgba(0, 212, 255, 0.12) 50%, 
+        transparent 75%
+      );
+      filter: blur(35px);
+      z-index: 0;
+      pointer-events: none;
+      animation: auroraPulse 5s ease-in-out infinite alternate;
+    }
+
+    /* Sloj 2: Rotirajuće svjetlosne laserske zrake pod kutom */
+    .gold-headline-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 140%;
+      height: 280px;
+      margin-top: -140px;
+      margin-left: -70%;
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        transparent 0deg,
+        rgba(255, 240, 180, 0.25) 45deg,
+        transparent 90deg,
+        rgba(212, 175, 55, 0.3) 180deg,
+        transparent 240deg,
+        rgba(255, 220, 130, 0.25) 300deg,
+        transparent 360deg
+      );
+      filter: blur(25px);
+      z-index: 0;
+      pointer-events: none;
+      animation: laserRotate 14s linear infinite;
+    }
+
+    @keyframes auroraPulse {
       0% {
-        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.98)) drop-shadow(0 0 25px rgba(212,175,55,0.25));
-        transform: scale(1);
+        transform: translate(-50%, -50%) scale(0.85);
+        opacity: 0.5;
       }
       50% {
-        filter: drop-shadow(0 18px 35px rgba(0,0,0,0.98)) drop-shadow(0 0 50px rgba(255,230,128,0.6));
-        transform: scale(1.008);
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 0.95;
       }
       100% {
-        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.98)) drop-shadow(0 0 25px rgba(212,175,55,0.25));
-        transform: scale(1);
+        transform: translate(-50%, -50%) scale(1.0);
+        opacity: 0.7;
       }
     }
 
-    .animated-gold-title {
-      animation: sunGlaze 8s infinite ease-in-out;
+    @keyframes laserRotate {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* EFEKT OSUNČANOSTI I SPOROG KRETANJA SUNČEVIH ZRAKA PREKO NASLOVA */
+    .main-hero-title {
+      position: relative;
+      z-index: 1;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: clamp(3.5rem, 10.5vw, 7.8rem);
+      line-height: 1.1;
+      letter-spacing: 0.12em;
+      font-weight: 900;
+      text-transform: uppercase;
+      word-break: keep-all;
+      overflow-wrap: break-word;
+      text-align: center;
+      margin-right: -0.12em;
+
+      /* Topli, osunčani gradijent s integriranim višeslojnim bljeskom sunčevih zraka */
+      background: linear-gradient(
+        115deg, 
+        #b37d14 0%, 
+        #d4af37 18%, 
+        #ffe885 32%, 
+        #ffffff 48%, 
+        #fff7d4 52%, 
+        #ffe885 68%, 
+        #d4af37 82%, 
+        #b37d14 100%
+      );
+      background-size: 250% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      
+      /* Izrazito usporeno i fluidno kretanje sunčanih zraka (12s ease-in-out) */
+      animation: sunGlaze 12s ease-in-out infinite alternate;
+      
+      /* Napredna 3D Emboss Shadows struktura s toplim sunčanim sjajem */
+      text-shadow: 
+        0px 1px 0px #ffe58f,
+        0px 2px 0px #d4af37,
+        0px 3px 0px #aa771c,
+        0px 4px 0px #5e3f00,
+        0px 12px 25px rgba(0,0,0,0.9);
+      
+      filter: drop-shadow(0px 0px 25px rgba(255, 200, 50, 0.55));
+    }
+
+    @keyframes sunGlaze {
+      0% {
+        background-position: 0% center;
+        filter: drop-shadow(0px 0px 18px rgba(212, 160, 23, 0.45));
+      }
+      50% {
+        background-position: 125% center;
+        filter: drop-shadow(0px 0px 38px rgba(255, 235, 150, 0.9));
+      }
+      100% {
+        background-position: 250% center;
+        filter: drop-shadow(0px 0px 22px rgba(255, 190, 40, 0.55));
+      }
     }
 
     .hero-subtitle { 
-      font-size: clamp(0.82rem, 2.4vw, 0.98rem); 
-      letter-spacing: 5.5px; 
+      font-size: clamp(0.85rem, 2.5vw, 1.05rem); 
+      letter-spacing: 6px; 
       color: #fcf6ba; 
       text-transform: uppercase; 
-      margin-top: 14px;
-      margin-bottom: 24px; 
+      margin-top: 20px;
+      margin-bottom: 26px; 
       font-weight: 600;
-      border-top: 2px solid rgba(212, 175, 55, 0.9);
-      border-bottom: 2px solid rgba(212, 175, 55, 0.9);
-      padding: 14px 10px;
+      border-top: 2px solid rgba(212, 175, 55, 0.95);
+      border-bottom: 2px solid rgba(212, 175, 55, 0.95);
+      padding: 14px 12px;
       width: 95%;
-      max-width: 780px;
+      max-width: 820px;
       display: block;
       margin-left: auto;
       margin-right: auto;
       opacity: 0.98;
-      background: rgba(8, 18, 32, 0.9);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(212, 175, 55, 0.3);
+      background: rgba(8, 18, 32, 0.92);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.85), inset 0 0 35px rgba(212, 175, 55, 0.35);
       text-align: center;
     }
 
     .hero p { 
-      font-size: 1rem; 
+      font-size: 1.02rem; 
       color: rgba(203, 213, 225, 0.95); 
-      max-width: 720px; 
-      margin: 0 auto 32px auto; 
+      max-width: 740px; 
+      margin: 0 auto 34px auto; 
       font-weight: 300; 
       line-height: 1.85; 
       padding: 0 10px;
@@ -648,49 +800,33 @@
     <a href="#" class="header-brand-group" aria-label="Aureus Lux Naslovnica">
       <svg class="header-mini-compass" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="gold-lh" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" /><stop offset="50%" stop-color="#d4af37" /><stop offset="100%" stop-color="#8b6210" />
+          <linearGradient id="gold-mini-1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#ffffff" /><stop offset="45%" stop-color="#ffd700" /><stop offset="100%" stop-color="#8b6210" />
           </linearGradient>
-          <linearGradient id="gold-dh" x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient id="gold-mini-2" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#d4af37" /><stop offset="100%" stop-color="#3b2602" />
           </linearGradient>
         </defs>
         <g transform="translate(100, 100)">
-          <circle cx="0" cy="0" r="75" stroke="url(#gold-lh)" stroke-width="2.5" fill="none" />
-          <circle cx="0" cy="0" r="62" stroke="url(#gold-dh)" stroke-width="1.5" fill="none" />
+          <circle cx="0" cy="0" r="75" stroke="url(#gold-mini-1)" stroke-width="3" fill="none" />
+          <circle cx="0" cy="0" r="62" stroke="url(#gold-mini-2)" stroke-width="1.5" fill="none" />
           <g transform="rotate(0)">
-            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-dh)" />
+            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-mini-1)" />
+            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-mini-2)" />
           </g>
           <g transform="rotate(90)">
-            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-dh)" />
+            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-mini-1)" />
+            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-mini-2)" />
           </g>
           <g transform="rotate(180)">
-            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-dh)" />
+            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-mini-1)" />
+            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-mini-2)" />
           </g>
           <g transform="rotate(270)">
-            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-dh)" />
+            <polygon points="0,0 0,-92 -15,-15" fill="url(#gold-mini-1)" />
+            <polygon points="0,0 0,-92 15,-15" fill="url(#gold-mini-2)" />
           </g>
-          <g transform="rotate(45)">
-            <polygon points="0,0 0,-68 -10,-12" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-68 10,-12" fill="url(#gold-dh)" />
-          </g>
-          <g transform="rotate(135)">
-            <polygon points="0,0 0,-68 -10,-12" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-68 10,-12" fill="url(#gold-dh)" />
-          </g>
-          <g transform="rotate(225)">
-            <polygon points="0,0 0,-68 -10,-12" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-68 10,-12" fill="url(#gold-dh)" />
-          </g>
-          <g transform="rotate(315)">
-            <polygon points="0,0 0,-68 -10,-12" fill="url(#gold-lh)" />
-            <polygon points="0,0 0,-68 10,-12" fill="url(#gold-dh)" />
-          </g>
-          <circle cx="0" cy="0" r="10" fill="url(#gold-lh)" stroke="#3b2602" stroke-width="1.5" />
+          <circle cx="0" cy="0" r="10" fill="url(#gold-mini-1)" stroke="#3b2602" stroke-width="1.5" />
         </g>
       </svg>
       <span class="header-mini-title">AUREUS LUX</span>
@@ -726,86 +862,95 @@
   <section class="hero" id="heroHeader">
     <div class="hero-content-wrapper">
       
-      <!-- MOĆNI LUKSUZNI LOGOTIP: RUŽA VJETROVA POVISE TEKSTA S ANIMIRANIM SUNČEVIM SJAJEM -->
-      <div class="hero-title-container animated-gold-title" id="heroTitleContainer">
-        <svg class="brand-svg" viewBox="0 0 1000 480" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="AUREUS LUX Logo">
-          <defs>
-            <!-- Vrhunski reljefni gradijenti zlata sa sunčevim sjajem i dubokim kontrastom -->
-            <linearGradient id="gold-light" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#ffffff" />
-              <stop offset="20%" stop-color="#fff4b8" />
-              <stop offset="50%" stop-color="#e6ca65" />
-              <stop offset="80%" stop-color="#fcf6ba" />
-              <stop offset="100%" stop-color="#9a7218" />
-            </linearGradient>
+      <!-- HERO ELEMENAT: EKSKLUZIVNA 3D RUŽA VJETROVA I DŽINOVSKI NASLOV -->
+      <div class="hero-title-container" id="heroTitleContainer">
+        
+        <div class="brand-compass-wrapper">
+          <div class="compass-halo"></div>
+          
+          <svg class="brand-compass-icon" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-label="Ekskluzivna Ruža Vjetrova">
+            <defs>
+              <!-- Luksuzni gradijenti sa 3D efektom sjena -->
+              <linearGradient id="gold-light" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="30%" stop-color="#ffe58f" />
+                <stop offset="70%" stop-color="#d4af37" />
+                <stop offset="100%" stop-color="#9a7218" />
+              </linearGradient>
+              
+              <linearGradient id="gold-dark" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#c49526" />
+                <stop offset="60%" stop-color="#694807" />
+                <stop offset="100%" stop-color="#241600" />
+              </linearGradient>
+              
+              <radialGradient id="center-glow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="#ffffff" />
+                <stop offset="40%" stop-color="#ffe680" />
+                <stop offset="100%" stop-color="#b8860b" />
+              </radialGradient>
+            </defs>
             
-            <linearGradient id="gold-dark" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#e6ca65" />
-              <stop offset="40%" stop-color="#b8860b" />
-              <stop offset="80%" stop-color="#654508" />
-              <stop offset="100%" stop-color="#231501" />
-            </linearGradient>
+            <g transform="translate(120, 120)">
+              <!-- Vanjski prsten kompas stila -->
+              <circle cx="0" cy="0" r="108" stroke="url(#gold-light)" stroke-width="3" fill="none" opacity="0.9" />
+              <circle cx="0" cy="0" r="96" stroke="url(#gold-dark)" stroke-width="1.5" fill="none" stroke-dasharray="3, 5" opacity="0.75" />
+              <circle cx="0" cy="0" r="88" stroke="url(#gold-light)" stroke-width="1.8" fill="none" opacity="0.85" />
 
-            <!-- Snažni 3D reljefni sjaj za maksimalnu moć i raskoš -->
-            <filter id="emboss-shadow" x="-30%" y="-30%" width="160%" height="160%">
-              <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000000" flood-opacity="0.98" />
-              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#ffea80" flood-opacity="0.35" />
-            </filter>
-          </defs>
+              <!-- Oznake kardinalnih strana (N, E, S, W) -->
+              <text x="0" y="-98" font-family="Cinzel, serif" font-size="11" font-weight="700" fill="#ffe58f" text-anchor="middle">N</text>
+              <text x="104" y="4" font-family="Cinzel, serif" font-size="11" font-weight="700" fill="#ffe58f" text-anchor="middle">E</text>
+              <text x="0" y="106" font-family="Cinzel, serif" font-size="11" font-weight="700" fill="#ffe58f" text-anchor="middle">S</text>
+              <text x="-104" y="4" font-family="Cinzel, serif" font-size="11" font-weight="700" fill="#ffe58f" text-anchor="middle">W</text>
 
-          <!-- 1. RUŽA VJETROVA / KOMPAS (SREDIŠTE POVISE TEKSTA) -->
-          <g transform="translate(500, 135)" filter="url(#emboss-shadow)">
-            <!-- Vanjski i unutarnji dekorativni prsteni -->
-            <circle cx="0" cy="0" r="105" stroke="url(#gold-light)" stroke-width="3" fill="none" opacity="0.95" />
-            <circle cx="0" cy="0" r="92" stroke="url(#gold-dark)" stroke-width="1" fill="none" opacity="0.6" />
-            <circle cx="0" cy="0" r="82" stroke="url(#gold-light)" stroke-width="2" fill="none" opacity="0.8" />
-            
-            <!-- Glavni kraci (Sjever, Istok, Jug, Zapad) -->
-            <g transform="rotate(0)">
-              <polygon points="0,0 0,-125 -20,-18" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-125 20,-18" fill="url(#gold-dark)" />
-            </g>
-            <g transform="rotate(90)">
-              <polygon points="0,0 0,-125 -20,-18" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-125 20,-18" fill="url(#gold-dark)" />
-            </g>
-            <g transform="rotate(180)">
-              <polygon points="0,0 0,-125 -20,-18" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-125 20,-18" fill="url(#gold-dark)" />
-            </g>
-            <g transform="rotate(270)">
-              <polygon points="0,0 0,-125 -20,-18" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-125 20,-18" fill="url(#gold-dark)" />
-            </g>
+              <!-- Manji sporedni krakovi (NE, SE, SW, NW) -->
+              <g transform="rotate(45)">
+                <polygon points="0,0 0,-80 -11,-14" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-80 11,-14" fill="url(#gold-dark)" />
+              </g>
+              <g transform="rotate(135)">
+                <polygon points="0,0 0,-80 -11,-14" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-80 11,-14" fill="url(#gold-dark)" />
+              </g>
+              <g transform="rotate(225)">
+                <polygon points="0,0 0,-80 -11,-14" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-80 11,-14" fill="url(#gold-dark)" />
+              </g>
+              <g transform="rotate(315)">
+                <polygon points="0,0 0,-80 -11,-14" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-80 11,-14" fill="url(#gold-dark)" />
+              </g>
 
-            <!-- Sporedni kraci -->
-            <g transform="rotate(45)">
-              <polygon points="0,0 0,-85 -12,-12" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-85 12,-12" fill="url(#gold-dark)" />
-            </g>
-            <g transform="rotate(135)">
-              <polygon points="0,0 0,-85 -12,-12" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-85 12,-12" fill="url(#gold-dark)" />
-            </g>
-            <g transform="rotate(225)">
-              <polygon points="0,0 0,-85 -12,-12" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-85 12,-12" fill="url(#gold-dark)" />
-            </g>
-            <g transform="rotate(315)">
-              <polygon points="0,0 0,-85 -12,-12" fill="url(#gold-light)" />
-              <polygon points="0,0 0,-85 12,-12" fill="url(#gold-dark)" />
-            </g>
+              <!-- Glavni moćni krakovi (N, E, S, W) -->
+              <g transform="rotate(0)">
+                <polygon points="0,0 0,-115 -18,-18" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-115 18,-18" fill="url(#gold-dark)" />
+              </g>
+              <g transform="rotate(90)">
+                <polygon points="0,0 0,-115 -18,-18" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-115 18,-18" fill="url(#gold-dark)" />
+              </g>
+              <g transform="rotate(180)">
+                <polygon points="0,0 0,-115 -18,-18" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-115 18,-18" fill="url(#gold-dark)" />
+              </g>
+              <g transform="rotate(270)">
+                <polygon points="0,0 0,-115 -18,-18" fill="url(#gold-light)" />
+                <polygon points="0,0 0,-115 18,-18" fill="url(#gold-dark)" />
+              </g>
 
-            <!-- Središnji dragulj/prsten kompa -->
-            <circle cx="0" cy="0" r="14" fill="url(#gold-light)" stroke="#3b2602" stroke-width="2" />
-          </g>
+              <!-- Centralna luksuzna kruna kompasa -->
+              <circle cx="0" cy="0" r="16" fill="#03070e" stroke="url(#gold-light)" stroke-width="2" />
+              <circle cx="0" cy="0" r="11" fill="url(#center-glow)" stroke="#241600" stroke-width="1.2" />
+              <circle cx="0" cy="0" r="4" fill="#ffffff" />
+            </g>
+          </svg>
+        </div>
 
-          <!-- 2. TEKST "AUREUS LUX" (CENTRIRANO ISPOD RUŽE VJETROVA, DVOETAŽNO) -->
-          <g filter="url(#emboss-shadow)">
-            <text x="500" y="305" text-anchor="middle" font-family="'Cinzel Decorative', 'Cinzel', serif" font-size="95px" font-weight="900" fill="url(#gold-light)" letter-spacing="6px">AUREUS</text>
-            <text x="500" y="415" text-anchor="middle" font-family="'Cinzel Decorative', 'Cinzel', serif" font-size="95px" font-weight="900" fill="url(#gold-light)" letter-spacing="12px">LUX</text>
-          </g>
-        </svg>
+        <!-- ULTRA ZLATNI NASLOV AUREUS LUX S NOVIM ANIMIRANIM EFEKTOM OSUNČANOSTI -->
+        <div class="gold-headline-wrapper">
+          <h1 class="main-hero-title">AUREUS LUX</h1>
+        </div>
       </div>
 
       <!-- PODNASLOV -->
@@ -1383,7 +1528,7 @@
 
   <footer>
     <p id="footerText">&copy; 2027 AUREUS LUX - Obrt za najam broda i turističke usluge, vl. Stipe Majstorović, Klis. Sva prava pridržana.</p>
-    <div class="version-tag">v6.3</div>
+    <div class="version-tag">v7.0</div>
   </footer>
 
   <script>
@@ -1867,43 +2012,43 @@
         sharedNoteText: "Nota: Este tour es un viaje compartido, ofreciendo un gran ambiente relajado a bordo con otros amantes del mar.",
         t2f1: "Tour: Šolta, Drvenik Veli y Drvenik Mali",
         t2f2: "Natación y snorkel en aguas cristalinas",
-        t2f3: "Equipo de snorkel a bordo",
-        t2Per: "/ persona", t2Btn: "Seleccionar Entradas",
+        t2f3: "Equipo de snorkel a bordo incluido",
+        t2Per: "/ persona", t2Btn: "Seleccionar Tickets",
 
         b3: "<i class='fa-solid fa-heart'></i> Escapada Romántica",
         t3Title: "Romantic Sunset Tour",
         t3Time: "Duración: 1.5 horas",
-        t3Desc: "Una excursión exclusiva en alta mar diseñada para dos personas. Vista romántica del atardecer para parejas con vino o champán y plato dálmata.",
-        t3f1: "Vista romántica del atardecer para parejas",
-        t3f2: "Champán premium o vino frío incluido",
-        t3f3: "Plato de delicias dálmatas (jamón serrano y queso)",
-        t3f4: "Vista inolvidable de la puesta de sol y ambiente romántico",
+        t3Desc: "Excursión exclusiva en alta mar pensada para dos personas. Puesta de sol romántica para parejas con vino/champán y tabla de productos locales.",
+        t3f1: "Puesta de sol romántica para parejas",
+        t3f2: "Champán de alta calidad o vino frío incluido",
+        t3f3: "Tabla de delicias dálmatas (jamón y queso)",
+        t3f4: "Vistas inolvidables de la puesta de sol y ambiente romántico",
         t3Per: "/ pareja", t3Btn: "Reservar Sunset",
 
-        featTitle: "Equipamiento Premium a Bordo",
-        f1T: "Jeanneau Cap Camarat 6.5 CC Series 3", f1D: "Embarcación de primer nivel equipada con Hard T-Top y toldos dobles para una protección y comodidad óptimas.",
-        f2T: "Sistema de Audio JL Audio", f2D: "Disfruta de tu música favorita con un sonido cristalino de alta gama en el mar.",
-        f3T: "Equipo de Snorkel", f3D: "Para explorar los hermosos fondos marinos mediterráneos y calas escondidas.",
-        f4T: "Patrón Local Experimentado", f4D: "Navegación segura a bahías secretas conocidas solo por capitanes locales.",
+        featTitle: "Equipamiento de Primera Clase",
+        f1T: "Jeanneau Cap Camarat 6.5 CC Series 3", f1D: "Embarcación de primer nivel equipada con Hard T-Top y toldos para el sol para máximo confort y protección.",
+        f2T: "Sistema de Sonido JL Audio", f2D: "Disfruta de tu música favorita con sonido de alta fidelidad en el mar.",
+        f3T: "Equipo de Snorkel", f3D: "Para explorar los maravillosos fondos marinos del Mediterráneo y bahías ocultas.",
+        f4T: "Patrón Local Experimentado", f4D: "Navegación segura hacia bahías secretas conocidas solo por capitanes locales.",
 
-        aboutTitle: "Acerca de Aureus Lux",
-        aboutDesc: "Ofrecemos excursiones en barco privadas y grupales de alta gama. Nuestro objetivo es brindarte una experiencia auténtica y lujosa en el Adriático con la máxima comodidad y seguridad.",
+        aboutTitle: "Sobre Aureus Lux",
+        aboutDesc: "Ofrecemos excursiones exclusivas en barco privadas y en grupo. Nuestro objetivo es brindar una experiencia auténtica y de lujo en el Adriático con máximo confort y seguridad.",
 
-        contactBoxTitle: "<i class='fa-solid fa-address-card'></i> Contacto e Información Comercial",
-        compName: "Nombre de la empresa:",
+        contactBoxTitle: "<i class='fa-solid fa-address-card'></i> Contacto e Información de la Empresa",
+        compName: "Nombre Comercial:",
         ownerName: "Propietario:",
         addrText: "Dirección:",
-        phoneText: "Móvil:",
+        phoneText: "Teléfono Móvil:",
         btnPhoneCallText: "Reservar por Teléfono",
 
         menuHome: "<i class='fa-solid fa-house'></i> Inicio",
         menuTours: "<i class='fa-solid fa-ship'></i> Nuestros Tours",
         menuFeatures: "<i class='fa-solid fa-anchor'></i> Equipamiento",
-        menuAbout: "<i class='fa-solid fa-circle-info'></i> Sobre nosotros & Contacto",
+        menuAbout: "<i class='fa-solid fa-circle-info'></i> Sobre Nosotros & Contacto",
         menuTermsLink: "<i class='fa-solid fa-file-contract'></i> Términos y Política de Cancelación",
         menuBook: "<i class='fa-solid fa-calendar-check'></i> Reservar Ahora",
         menuPartner: "<i class='fa-solid fa-handshake'></i> Partner Login",
-        menuAdmin: "<i class='fa-solid fa-user-lock'></i> Panel Admin",
+        menuAdmin: "<i class='fa-solid fa-user-lock'></i> Portal Admin",
         lblLang: "Seleccionar Idioma",
 
         calTitle: "Fechas Disponibles", btnPrev: "< Anterior", btnNext: "Siguiente >",
@@ -1911,158 +2056,111 @@
         months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
         freePax: "libres", full: "COMPLETO", paxWord: "persona", paxWordPlural: "personas",
 
-        contactModalTitle: "Detalles de Reserva",
-        lblGuestName: "Nombre y apellido:",
-        lblGuestEmail: "Dirección de e-mail:",
-        lblGuestPhone: "Número de móvil:",
-        spamWarningNote: "Nota: Si el código de verificación no llega su bandeja de entrada, verifique su carpeta SPAM.",
+        contactModalTitle: "Detalles de la Reserva",
+        lblGuestName: "Nombre completo:",
+        lblGuestEmail: "Correo electrónico:",
+        lblGuestPhone: "Número de teléfono:",
+        spamWarningNote: "Nota: Si el código de verificación no llega a su bandeja de entrada, revise su carpeta de SPAM.",
         termsLinkText: "He leído y acepto los Términos de Uso y la Política de Cancelación (debe desplazarse hasta el final y hacer clic en Aceptar).",
         submitBtnText: "Enviar Código de Verificación",
         termsModalTitleHeader: "Términos de Uso y Política de Cancelación",
         acceptTermsBtnText: "Aceptar Términos",
-        scrollPromptText: "↓ Por favor, desplácese hasta el final del texto para aceptar los términos ↓",
-        footerText: "&copy; 2027 AUREUS LUX - Alquiler de barcos y servicios turísticos, Propietario Stipe Majstorović, Klis. Todos los derechos reservados."
+        scrollPromptText: "↓ Por favor desplace hasta el final del texto para aceptar los términos ↓",
+        footerText: "&copy; 2027 AUREUS LUX - Alquiler de Barcos & Servicios Turísticos, Propietario Stipe Majstorović, Klis. Todos los derechos reservados."
       },
 
       fr: {
         subtitle: "Excursions Exclusives en Bateau",
-        heroDesc: "Aventures privées et guidées le long des plus belles baies de la mer Adriatique. Repos, élégance sans compromis et expériences inoubliables.",
+        heroDesc: "Aventures privées et guidées le long des plus belles baies de la mer Adriatique. Repos haut de gamme, élégance sans compromis et expériences inoubliables.",
         btnBooking: "Réservez Votre Expérience",
-        txtExploreBtn: "Explorer l'Offre",
-        toursSecTitle: "Excursions et Expériences Exclusives",
-        toursSecSub: "Choisissez un voyage sur mesure adapté à vos envies",
+        txtExploreBtn: "Découvrir l'Offre",
+        toursSecTitle: "Tours et Excursions Exclusifs",
+        toursSecSub: "Choisissez un voyage sur mesure adapté à vos désirs",
         
         b1: "<i class='fa-solid fa-crown'></i> VIP Exclusif",
-        t1Title: "Billet Privé Journée VIP",
-        t1Time: "<i class='fa-regular fa-clock'></i> Durée : 08:30-19:00",
-        t1Desc: "Prenez le contrôle total de votre journée en mer. Louez tout le bateau exclusivement pour votre famille ou votre groupe et créez votre itinéraire avec un skipper local expérimenté.",
+        t1Title: "Billet Journée Privé VIP",
+        t1Time: "<i class='fa-regular fa-clock'></i> Durée: 08:30-19:00",
+        t1Desc: "Prenez le contrôle total de votre journée en mer. Louez le bateau entier exclusivement pour votre famille ou groupe et créez votre itinéraire avec un skipper local expérimenté.",
         t1f1: "Bateau privé pour votre groupe (jusqu'à 10 personnes)",
-        t1f2: "Skipper local agréé et professionnel inclus",
+        t1f2: "Skipper local diplômé et professionnel inclus",
         t1f3: "Lieux de votre choix en accord avec le skipper",
-        t1f4: "Carburant exclu (payé selon consommation en fin de tour)",
+        t1f4: "Carburant non inclus (payé selon consommation à la fin du tour)",
         t1Per: "/ jour", t1Btn: "Sélectionner Dates",
 
-        b2: "<i class='fa-solid fa-compass'></i> Le Plus Populaire",
-        t2Title: "Visite de Demi-Journée : Three Island Tour",
-        t2Time: "<i class='fa-regular fa-clock'></i> Durée : 08:30-15:30",
-        t2Desc: "Visite exclusive et baignade dans les baies turquoises (Šolta, Drvenik Veli et Mali).",
-        sharedNoteText: "Remarque : Cette excursion est partagée, offrant une ambiance conviviale à bord avec d'autres passionnés de la mer.",
-        t2f1: "Tour : Šolta, Drvenik Veli et Drvenik Mali",
-        t2f2: "Baignade et plongée en apnée dans des eaux cristallines",
-        t2f3: "Équipement de plongée en apnée à bord",
+        b2: "<i class='fa-solid fa-compass'></i> Plus Populaire",
+        t2Title: "Tour Demi-Journée: Three Island Tour",
+        t2Time: "<i class='fa-regular fa-clock'></i> Durée: 08:30-15:30",
+        t2Desc: "Tour exclusif et baignade dans des baies turquoises (Šolta, Drvenik Veliki et Mali).",
+        sharedNoteText: "Remarque: Ce tour est une excursion partagée, idéale pour profiter de la mer en bonne compagnie.",
+        t2f1: "Tour: Šolta, Drvenik Veli et Drvenik Mali",
+        t2f2: "Baignade et snorkeling dans des eaux cristallines",
+        t2f3: "Équipement de snorkeling à bord inclus",
         t2Per: "/ personne", t2Btn: "Sélectionner Billets",
 
         b3: "<i class='fa-solid fa-heart'></i> Échappée Romantique",
         t3Title: "Romantic Sunset Tour",
-        t3Time: "Durée : 1.5 heures",
-        t3Desc: "Une excursion exclusive en haute mer conçue pour deux personnes. Vue romantique du coucher de soleil pour les couples avec vin ou champagne et plateau dalmate.",
-        t3f1: "Vue romantique du coucher de soleil pour les couples",
-        t3f2: "Champagne de qualité ou vin frais inclus",
-        t3f3: "Plateau de spécialités dalmates (jambon cru et fromage)",
+        t3Time: "Durée: 1.5 heures",
+        t3Desc: "Une excursion exclusive en haute mer conçue pour deux personnes. Coucher de soleil romantique pour couples avec champagne/vin frais et plateau local.",
+        t3f1: "Coucher de soleil romantique pour couples",
+        t3f2: "Champagne haut de gamme ou vin frais inclus",
+        t3f3: "Plateau de spécialités dalmates (jambon & fromage)",
         t3f4: "Vue inoubliable sur le coucher de soleil et ambiance romantique",
         t3Per: "/ couple", t3Btn: "Réserver Sunset",
 
-        featTitle: "Équipements de Bord Premium",
-        f1T: "Jeanneau Cap Camarat 6.5 CC Series 3", f1D: "Bateau haut de gamme équipé d'un Hard T-Top et de doubles tauds de soleil pour une protection et un confort optimaux.",
-        f2T: "Système Audio JL Audio", f2D: "Profitez de votre musique préférée avec un son cristallin haut de gamme en mer.",
-        f3T: "Équipement de Plongée", f3D: "Pour explorer les magnifiques fonds marins méditerranéens et les criques cachées.",
-        f4T: "Skipper Local Expérimenté", f4D: "Navigation sûre vers des baies secrètes connues seulement des capitaines locaux.",
+        featTitle: "Équipements Haut de Gamme",
+        f1T: "Jeanneau Cap Camarat 6.5 CC Series 3", f1D: "Navire de premier ordre équipé d'un Hard T-Top et de tauds de soleil pour votre confort et protection.",
+        f2T: "Système Audio JL Audio", f2D: "Profitez de votre musique préférée avec un son marin haute fidélité cristallin.",
+        f3T: "Équipement de Snorkeling", f3D: "Pour explorer les magnifiques fonds marins méditerranéens et les baies cachées.",
+        f4T: "Skipper Local Expérimenté", f4D: "Navigation en toute sécurité vers des baies secrètes connues seulement des capitaines locaux.",
 
         aboutTitle: "À Propos d'Aureus Lux",
-        aboutDesc: "Nous proposons des excursions en bateau privées et de groupe haut de gamme. Notre objectif est de vous offrir une expérience authentique et luxueuse en Adriatique avec un confort et une sécurité maximaux.",
+        aboutDesc: "Nous proposons des excursions en bateau privées et en groupe haut de gamme. Notre objectif est d'offrir une expérience authentique et luxueuse en Adriatique.",
 
-        contactBoxTitle: "<i class='fa-solid fa-address-card'></i> Contact et Informations Commerciales",
-        compName: "Nom de l'entreprise :",
-        ownerName: "Propriétaire :",
-        addrText: "Adresse :",
-        phoneText: "Mobile :",
+        contactBoxTitle: "<i class='fa-solid fa-address-card'></i> Contact & Informations Entreprise",
+        compName: "Nom de l'entreprise:",
+        ownerName: "Propriétaire:",
+        addrText: "Adresse:",
+        phoneText: "Mobile:",
         btnPhoneCallText: "Réserver par Téléphone",
 
         menuHome: "<i class='fa-solid fa-house'></i> Accueil",
-        menuTours: "<i class='fa-solid fa-ship'></i> Nos Circuits",
+        menuTours: "<i class='fa-solid fa-ship'></i> Nos Tours",
         menuFeatures: "<i class='fa-solid fa-anchor'></i> Équipements",
-        menuAbout: "<i class='fa-solid fa-circle-info'></i> À propos & Contact",
-        menuTermsLink: "<i class='fa-solid fa-file-contract'></i> Conditions et Politique d'Annulation",
+        menuAbout: "<i class='fa-solid fa-circle-info'></i> À Propos & Contact",
+        menuTermsLink: "<i class='fa-solid fa-file-contract'></i> Conditions & Politique d'Annulation",
         menuBook: "<i class='fa-solid fa-calendar-check'></i> Réserver Maintenant",
-        menuPartner: "<i class='fa-solid fa-handshake'></i> Partner Login",
+        menuPartner: "<i class='fa-solid fa-handshake'></i> Espace Partenaire",
         menuAdmin: "<i class='fa-solid fa-user-lock'></i> Espace Admin",
-        lblLang: "Sélectionner la Langue",
+        lblLang: "Choisir la Langue",
 
         calTitle: "Dates Disponibles", btnPrev: "< Précédent", btnNext: "Suivant >",
         days: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"],
         months: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
-        freePax: "libres", full: "COMPLET", paxWord: "persona", paxWordPlural: "personnes",
+        freePax: "libres", full: "COMPLET", paxWord: "personne", paxWordPlural: "personnes",
 
         contactModalTitle: "Détails de la Réservation",
-        lblGuestName: "Nom et prénom :",
-        lblGuestEmail: "Adresse e-mail :",
-        lblGuestPhone: "Numéro de mobile :",
-        spamWarningNote: "Remarque : Si le code de vérification n'arrive pas dans votre boîte de réception, veuillez vérifier votre dossier SPAM.",
+        lblGuestName: "Nom complet:",
+        lblGuestEmail: "Adresse e-mail:",
+        lblGuestPhone: "Numéro de téléphone:",
+        spamWarningNote: "Remarque: Si le code de vérification n'arrive pas dans votre boîte de réception, veuillez vérifier votre dossier SPAM.",
         termsLinkText: "J'ai lu et j'accepte les Conditions d'Utilisation et la Politique d'Annulation (faites défiler jusqu'en bas et cliquez sur Accepter).",
         submitBtnText: "Envoyer le Code de Vérification",
         termsModalTitleHeader: "Conditions d'Utilisation et Politique d'Annulation",
         acceptTermsBtnText: "Accepter les Conditions",
-        scrollPromptText: "↓ Veuillez faire défiler tout en bas du texte pour accepter les conditions ↓",
-        footerText: "&copy; 2027 AUREUS LUX - Location de bateaux et services touristiques, Propriétaire Stipe Majstorović, Klis. Tous droits réservés."
+        scrollPromptText: "↓ Veuillez faire défiler jusqu'au bas du texte pour accepter les conditions ↓",
+        footerText: "&copy; 2027 AUREUS LUX - Location de Bateaux & Services Touristiques, Prop. Stipe Majstorović, Klis. Tous droits réservés."
       }
     };
 
-    function toggleDropdown(event) {
-      if (event) event.stopPropagation();
-      document.getElementById('dropdownMenu').classList.toggle('active');
-    }
-
-    function closeMenuAndNavigate(targetId) {
-      document.getElementById('dropdownMenu').classList.remove('active');
-      if (targetId && targetId !== '#') {
-        const el = document.querySelector(targetId);
-        if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
-        }
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-
-    document.addEventListener('click', function(event) {
-      const menu = document.getElementById('dropdownMenu');
-      const icons = document.querySelectorAll('.hamburger-icon');
-      let clickedInsideIcon = false;
-      icons.forEach(ic => { if(ic.contains(event.target)) clickedInsideIcon = true; });
-
-      if (menu && menu.classList.contains('active') && !menu.contains(event.target) && !clickedInsideIcon) {
-        menu.classList.remove('active');
-      }
-    });
-
-    // DINAMIČKO UPRAVLJANJE PRIKAZOM HEADERA NA SKROL
-    window.addEventListener('scroll', function() {
-      const header = document.getElementById('stickyHeader');
-      const titleContainer = document.getElementById('heroTitleContainer');
-      
-      if (titleContainer && header) {
-        const rect = titleContainer.getBoundingClientRect();
-        if (rect.bottom < 0) {
-          header.classList.add('visible');
-        } else {
-          header.classList.remove('visible');
-          const menu = document.getElementById('dropdownMenu');
-          if (menu) menu.classList.remove('active');
-        }
-      }
-    });
-
-    function changeLanguage(lang) {
-      currentLang = lang;
-      const t = translations[lang] || translations['hr'];
-      
-      document.getElementById('mainLangSelect').value = lang;
+    function changeLanguage(langKey) {
+      if (!translations[langKey]) return;
+      currentLang = langKey;
+      const t = translations[langKey];
 
       document.getElementById('txtSubtitle').innerText = t.subtitle;
       document.getElementById('txtHeroDesc').innerText = t.heroDesc;
       document.getElementById('btnBooking').innerText = t.btnBooking;
       document.getElementById('txtExploreBtn').innerText = t.txtExploreBtn;
-
       document.getElementById('txtToursSectionTitle').innerText = t.toursSecTitle;
       document.getElementById('txtToursSectionSub').innerText = t.toursSecSub;
 
@@ -2079,8 +2177,9 @@
 
       document.getElementById('b2').innerHTML = t.b2;
       document.getElementById('t2CardTitle').innerText = t.t2Title;
-      document.getElementById('t2CardTime').innerText = t.t2Time;
-      document.getElementById('t2CardDesc').innerHTML = t.t2Desc + `<br><span style="font-size: 0.82rem; color: #d4af37; font-style: italic; display: inline-block; margin-top: 6px;" id="sharedNoteText">${t.sharedNoteText}</span>`;
+      document.getElementById('t2CardTime').innerHTML = t.t2Time;
+      document.getElementById('t2CardDesc').childNodes[0].nodeValue = t.t2Desc + " ";
+      document.getElementById('sharedNoteText').innerText = t.sharedNoteText;
       document.getElementById('t2f1').innerText = t.t2f1;
       document.getElementById('t2f2').innerText = t.t2f2;
       document.getElementById('t2f3').innerText = t.t2f3;
@@ -2106,7 +2205,7 @@
 
       document.getElementById('txtAboutTitle').innerText = t.aboutTitle;
       document.getElementById('txtAboutDesc').innerText = t.aboutDesc;
-      
+
       document.getElementById('contactBoxTitle').innerHTML = t.contactBoxTitle;
       document.getElementById('compName').innerText = t.compName;
       document.getElementById('ownerName').innerText = t.ownerName;
@@ -2138,142 +2237,90 @@
       document.getElementById('termsModalTitleHeader').innerText = t.termsModalTitleHeader;
       document.getElementById('acceptTermsBtn').innerText = t.acceptTermsBtnText;
       document.getElementById('scrollPromptText').innerText = t.scrollPromptText;
+
       document.getElementById('footerText').innerHTML = t.footerText;
 
+      document.getElementById('mainLangSelect').value = langKey;
       renderCalendarHeaders();
-      if(document.getElementById('calendarModal').style.display === 'flex') {
-        renderFilteredCalendar();
-      }
+      renderUserCalendar();
     }
 
-    function renderCalendarHeaders() {
-      const t = translations[currentLang] || translations['hr'];
-      let headerHTML = '';
-      t.days.forEach(d => { headerHTML += `<div class="day-name">${d}</div>`; });
-      document.getElementById('userHeaderGrid').innerHTML = headerHTML;
-      document.getElementById('adminHeaderGrid').innerHTML = headerHTML;
-      document.getElementById('partnerHeaderGrid').innerHTML = headerHTML;
-    }
-
-    function openTourSelectionModal() {
-      const menu = document.getElementById('dropdownMenu');
-      if (menu) menu.classList.remove('active');
-      document.getElementById('tourSelectionModal').style.display = 'flex';
-    }
-
-    function selectTourFromMainModal(mode) {
-      document.getElementById('tourSelectionModal').style.display = 'none';
-      openDirectTourModal(mode);
-    }
-
-    function openDirectTourModal(mode) {
-      document.getElementById('guestName').value = '';
-      document.getElementById('guestEmail').value = '';
-      document.getElementById('guestPhone').value = '';
+    // PAMETNI HEADER SAKRIVANJE/PRIKAZIVANJE OVISNO O SCROLLU
+    window.addEventListener('scroll', () => {
+      const heroTitleContainer = document.getElementById('heroTitleContainer');
+      const stickyHeader = document.getElementById('stickyHeader');
       
-      const acceptCheckbox = document.getElementById('acceptTerms');
-      if(acceptCheckbox) acceptCheckbox.checked = false;
-      termsReadAndAccepted = false;
-      
-      const termsWrapper = document.getElementById('termsBoxWrapper');
-      if(termsWrapper) termsWrapper.classList.remove('accepted');
-
-      loadCloudBookings();
-      const menu = document.getElementById('dropdownMenu');
-      if (menu) menu.classList.remove('active');
-
-      selectedTourMode = mode;
-
-      if (mode === 'shared') {
-        document.getElementById('directPaxModal').style.display = 'flex';
-      } else if (mode === 'private') {
-        selectedPaxCount = 10;
-        passengerDetails = { adults: 10, kids: 0, babies: 0 };
-        document.getElementById('calendarModal').style.display = 'flex';
-        renderFilteredCalendar();
-      } else if (mode === 'sunset') {
-        selectedPaxCount = 2;
-        passengerDetails = { adults: 2, kids: 0, babies: 0 };
-        document.getElementById('calendarModal').style.display = 'flex';
-        renderFilteredCalendar();
+      if (heroTitleContainer && stickyHeader) {
+        const titleRect = heroTitleContainer.getBoundingClientRect();
+        if (titleRect.bottom < 0) {
+          stickyHeader.classList.add('visible');
+        } else {
+          stickyHeader.classList.remove('visible');
+        }
       }
+    });
+
+    function toggleDropdown(e) {
+      if(e) e.stopPropagation();
+      document.getElementById("dropdownMenu").classList.toggle("active");
     }
 
-    function confirmDirectSharedSelection() {
-      const adults = parseInt(document.getElementById('directAdults').value, 10);
-      const kids = parseInt(document.getElementById('directKids').value, 10);
-      const babies = parseInt(document.getElementById('directBabies').value, 10);
-      const total = adults + kids + babies;
-
-      if (total < 1) {
-        alert("Molimo odaberite barem jednog putnika.");
-        return;
+    document.addEventListener("click", function(e) {
+      const menu = document.getElementById("dropdownMenu");
+      const icon = document.querySelector(".hamburger-icon");
+      if (menu && menu.classList.contains("active") && !menu.contains(e.target) && !icon.contains(e.target)) {
+        menu.classList.remove("active");
       }
-      if (total > MAX_PAX) {
-        alert("Ukupan broj osoba ne može biti veći od 10.");
-        return;
-      }
+    });
 
-      selectedPaxCount = total;
-      passengerDetails = { adults, kids, babies };
-
-      document.getElementById('directPaxModal').style.display = 'none';
-      document.getElementById('calendarModal').style.display = 'flex';
-      renderFilteredCalendar();
-    }
-
-    function stepBack(currentModal, previousModal) {
-      document.getElementById(currentModal).style.display = 'none';
-      if (previousModal) {
-        document.getElementById(previousModal).style.display = 'flex';
-      } else {
-        closeModals();
+    function closeMenuAndNavigate(hash) {
+      document.getElementById("dropdownMenu").classList.remove("active");
+      if (hash && hash !== '#') {
+        window.location.hash = hash;
       }
     }
 
     function openTermsModal() {
-      const menu = document.getElementById('dropdownMenu');
-      if (menu) menu.classList.remove('active');
-      
-      activeModalBeforeTerms = null;
-      if (document.getElementById('tourSelectionModal').style.display === 'flex') activeModalBeforeTerms = 'tourSelectionModal';
-      else if (document.getElementById('directPaxModal').style.display === 'flex') activeModalBeforeTerms = 'directPaxModal';
-      else if (document.getElementById('calendarModal').style.display === 'flex') activeModalBeforeTerms = 'calendarModal';
-      else if (document.getElementById('contactModal').style.display === 'flex') activeModalBeforeTerms = 'contactModal';
-
-      document.getElementById('tourSelectionModal').style.display = 'none';
-      document.getElementById('directPaxModal').style.display = 'none';
-      document.getElementById('calendarModal').style.display = 'none';
-      document.getElementById('contactModal').style.display = 'none';
-      
+      const activeModal = document.querySelector('.modal-overlay[style*="display: flex"]');
+      if (activeModal && activeModal.id !== 'termsModal') {
+        activeModalBeforeTerms = activeModal.id;
+        activeModal.style.display = 'none';
+      } else {
+        activeModalBeforeTerms = null;
+      }
       document.getElementById('termsModal').style.display = 'flex';
       
-      const container = document.getElementById('termsScrollContainer');
-      container.scrollTop = 0;
+      const scrollDiv = document.getElementById('termsScrollContainer');
+      const acceptBtn = document.getElementById('acceptTermsBtn');
       if (!termsReadAndAccepted) {
-        document.getElementById('acceptTermsBtn').style.opacity = '0.5';
-        document.getElementById('acceptTermsBtn').style.cursor = 'not-allowed';
-        document.getElementById('acceptTermsBtn').disabled = true;
+        scrollDiv.scrollTop = 0;
+        acceptBtn.disabled = true;
+        acceptBtn.style.opacity = '0.5';
+        acceptBtn.style.cursor = 'not-allowed';
       }
     }
 
     function checkTermsScroll() {
-      const container = document.getElementById('termsScrollContainer');
-      if (container.scrollTop + container.clientHeight >= container.scrollHeight - 15) {
-        const btn = document.getElementById('acceptTermsBtn');
-        btn.style.opacity = '1';
-        btn.style.cursor = 'pointer';
-        btn.disabled = false;
-        document.getElementById('scrollPromptText').style.display = 'none';
+      const scrollDiv = document.getElementById('termsScrollContainer');
+      const acceptBtn = document.getElementById('acceptTermsBtn');
+      if (scrollDiv.scrollHeight - scrollDiv.scrollTop <= scrollDiv.clientHeight + 15) {
+        acceptBtn.disabled = false;
+        acceptBtn.style.opacity = '1';
+        acceptBtn.style.cursor = 'pointer';
       }
     }
 
     function acceptTermsAndClose() {
       termsReadAndAccepted = true;
+      const termsBox = document.getElementById('termsBoxWrapper');
       const checkbox = document.getElementById('acceptTerms');
-      if(checkbox) checkbox.checked = true;
-      document.getElementById('termsBoxWrapper').classList.add('accepted');
-      closeTermsModal();
+      if (checkbox) checkbox.checked = true;
+      if (termsBox) termsBox.classList.add('accepted');
+      
+      document.getElementById('termsModal').style.display = 'none';
+      if (activeModalBeforeTerms) {
+        document.getElementById(activeModalBeforeTerms).style.display = 'flex';
+      }
     }
 
     function closeTermsModal() {
@@ -2283,611 +2330,650 @@
       }
     }
 
+    function openTourSelectionModal() {
+      document.getElementById('dropdownMenu').classList.remove('active');
+      document.getElementById('tourSelectionModal').style.display = 'flex';
+    }
+
+    function selectTourFromMainModal(mode) {
+      closeModals('tourSelectionModal');
+      openDirectTourModal(mode);
+    }
+
+    function openDirectTourModal(mode) {
+      selectedTourMode = mode;
+      if (mode === 'shared') {
+        document.getElementById('directAdults').value = "0";
+        document.getElementById('directKids').value = "0";
+        document.getElementById('directBabies').value = "0";
+        document.getElementById('directPaxModal').style.display = 'flex';
+      } else {
+        selectedPaxCount = (mode === 'sunset') ? 2 : MAX_PAX;
+        passengerDetails = { adults: selectedPaxCount, kids: 0, babies: 0 };
+        openUserCalendar();
+      }
+    }
+
+    function confirmDirectSharedSelection() {
+      const adults = parseInt(document.getElementById('directAdults').value) || 0;
+      const kids = parseInt(document.getElementById('directKids').value) || 0;
+      const babies = parseInt(document.getElementById('directBabies').value) || 0;
+      const total = adults + kids + babies;
+
+      if (total <= 0) {
+        alert("Molimo odaberite barem jednog putnika.");
+        return;
+      }
+      if (total > MAX_PAX) {
+        alert("Ukupan broj putnika ne može biti veći od 10.");
+        return;
+      }
+      selectedPaxCount = total;
+      passengerDetails = { adults, kids, babies };
+      closeModals('directPaxModal');
+      openUserCalendar();
+    }
+
+    function openUserCalendar() {
+      document.getElementById('calendarModal').style.display = 'flex';
+      renderUserCalendar();
+    }
+
+    function closeModals(modalId) {
+      document.getElementById(modalId).style.display = 'none';
+    }
+
+    function stepBack(currentModalId, targetModalId) {
+      document.getElementById(currentModalId).style.display = 'none';
+      document.getElementById(targetModalId).style.display = 'flex';
+    }
+
+    function renderCalendarHeaders() {
+      const t = translations[currentLang];
+      let html = '';
+      t.days.forEach(d => {
+        html += `<div class="day-name">${d}</div>`;
+      });
+      document.getElementById('userHeaderGrid').innerHTML = html;
+      document.getElementById('adminHeaderGrid').innerHTML = html;
+      document.getElementById('partnerHeaderGrid').innerHTML = html;
+    }
+
+    function renderUserCalendar() {
+      const t = translations[currentLang];
+      document.getElementById('currentMonthYear').innerText = `${t.months[currentMonth]} ${currentYear}.`;
+      const grid = document.getElementById('calendarDaysGrid');
+      grid.innerHTML = '';
+
+      const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+      let startingDay = (firstDay === 0) ? 6 : firstDay - 1;
+      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+
+      for (let i = 0; i < startingDay; i++) {
+        grid.innerHTML += `<div class="date-btn out-season"></div>`;
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const dayDate = new Date(currentYear, currentMonth, d);
+        const isPast = dayDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+        let btnClass = 'date-btn';
+        let disabled = false;
+        let subText = '';
+
+        const existing = bookingsDB[dateStr];
+
+        if (isPast) {
+          btnClass += ' disabled-past';
+          disabled = true;
+          subText = `<span class="pax-tag">-</span>`;
+        } else if (existing) {
+          if (existing.type === 'private') {
+            btnClass += ' booked';
+            disabled = true;
+            subText = `<span class="pax-tag" style="color:#e63946">${t.full}</span>`;
+          } else if (existing.type === 'shared') {
+            const taken = existing.paxCount || 0;
+            const free = MAX_PAX - taken;
+            
+            if (selectedTourMode === 'private') {
+              btnClass += ' booked';
+              disabled = true;
+              subText = `<span class="pax-tag" style="color:#e63946">${t.full}</span>`;
+            } else if (selectedTourMode === 'sunset') {
+              if (existing.sunsetBooked) {
+                btnClass += ' booked';
+                disabled = true;
+                subText = `<span class="pax-tag" style="color:#e63946">${t.full}</span>`;
+              } else {
+                subText = `<span class="pax-tag" style="color:#ff9f43">🌅 Sunset free</span>`;
+              }
+            } else {
+              if (free >= selectedPaxCount) {
+                subText = `<span class="pax-tag" style="color:#2ec4b6">${free} ${t.freePax}</span>`;
+              } else {
+                btnClass += ' booked';
+                disabled = true;
+                subText = `<span class="pax-tag" style="color:#e63946">${t.full}</span>`;
+              }
+            }
+          } else if (existing.type === 'sunset') {
+            if (selectedTourMode === 'sunset' || selectedTourMode === 'private') {
+              btnClass += ' booked';
+              disabled = true;
+              subText = `<span class="pax-tag" style="color:#e63946">${t.full}</span>`;
+            } else {
+              subText = `<span class="pax-tag" style="color:#2ec4b6">10 ${t.freePax}</span>`;
+            }
+          }
+        } else {
+          let freeCount = (selectedTourMode === 'sunset') ? '🌅 Sunset' : `${MAX_PAX} ${t.freePax}`;
+          subText = `<span class="pax-tag" style="color:#2ec4b6">${freeCount}</span>`;
+        }
+
+        const clickAttr = disabled ? '' : `onclick="selectDate('${dateStr}')"`;
+        grid.innerHTML += `<button class="${btnClass}" ${clickAttr}><span>${d}</span>${subText}</button>`;
+      }
+    }
+
+    function changeMonth(dir) {
+      currentMonth += dir;
+      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+      renderUserCalendar();
+    }
+
+    function selectDate(dateStr) {
+      targetDateStr = dateStr;
+      closeModals('calendarModal');
+
+      const parts = dateStr.split('-');
+      const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}.`;
+      
+      let paxStringText = "";
+      if (selectedTourMode === 'shared') {
+        const p = passengerDetails;
+        let pArr = [];
+        if (p.adults > 0) pArr.push(`${p.adults} odraslih`);
+        if (p.kids > 0) pArr.push(`${p.kids} djece`);
+        if (p.babies > 0) pArr.push(`${p.babies} beba`);
+        paxStringText = ` (${pArr.join(', ')})`;
+      } else if (selectedTourMode === 'sunset') {
+        paxStringText = " (2 osobe - par)";
+      } else {
+        paxStringText = " (Privatni brod - cjelodnevno)";
+      }
+
+      document.getElementById('selectedDateDisplay').innerText = `Odabrani datum: ${formattedDate}${paxStringText}`;
+      document.getElementById('contactModal').style.display = 'flex';
+    }
+
+    function initiateEmailVerification() {
+      const name = document.getElementById('guestName').value.trim();
+      const email = document.getElementById('guestEmail').value.trim();
+      const rawPhone = document.getElementById('guestPhone').value.trim();
+      const countryCode = document.getElementById('countryCodeSelect').value;
+      const termsAccepted = document.getElementById('acceptTerms').checked;
+
+      if (!name || !email || !rawPhone) {
+        alert("Molimo ispunite sva polja u obrascu.");
+        return;
+      }
+
+      if (!termsAccepted) {
+        alert("Morate pročitati i prihvatiti Uvjete korištenja i otkazivanja kako biste nastavili.");
+        return;
+      }
+
+      const fullPhone = `${countryCode} ${rawPhone}`;
+
+      generatedVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+      previousVerificationCode = generatedVerificationCode;
+
+      pendingBookingData = {
+        name,
+        email,
+        phone: fullPhone,
+        dateStr: targetDateStr,
+        mode: selectedTourMode,
+        paxCount: selectedPaxCount,
+        details: passengerDetails
+      };
+
+      const parts = targetDateStr.split('-');
+      const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}.`;
+
+      let tourNameText = "";
+      if (selectedTourMode === 'private') tourNameText = "Privatna Cjelodnevna Tura (450 €)";
+      else if (selectedTourMode === 'sunset') tourNameText = "Romantična Sunset Tura (150 €)";
+      else tourNameText = `Poludnevni izlet: Three Island Tour (${selectedPaxCount} osobre)`;
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.innerText = "Slanje koda u tijeku...";
+      submitBtn.disabled = true;
+
+      const templateParams = {
+        to_name: name,
+        to_email: email,
+        verification_code: generatedVerificationCode,
+        booking_date: formattedDate,
+        tour_type: tourNameText
+      };
+
+      emailjs.send('service_57q25vh', 'template_501zicj', templateParams)
+        .then(function(response) {
+          submitBtn.innerText = "Pošalji Verifikacijski Kod";
+          submitBtn.disabled = false;
+          
+          document.getElementById('contactModal').style.display = 'none';
+          document.getElementById('verificationCodeInput').value = '';
+          document.getElementById('verifyModal').style.display = 'flex';
+        }, function(error) {
+          submitBtn.innerText = "Pošalji Verifikacijski Kod";
+          submitBtn.disabled = false;
+          alert("Došlo je do pogreške pri slanju verifikacijskog koda na Vaš e-mail. Molimo provjerite e-mail adresu ili pokušajte ponovno.");
+        });
+    }
+
+    function resendVerificationCode() {
+      if (!pendingBookingData) return;
+
+      const resendBtn = document.getElementById('resendCodeBtn');
+      resendBtn.innerText = "Slanje u tijeku...";
+      resendBtn.disabled = true;
+
+      generatedVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+      previousVerificationCode = generatedVerificationCode;
+
+      const parts = pendingBookingData.dateStr.split('-');
+      const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}.`;
+
+      let tourNameText = "";
+      if (pendingBookingData.mode === 'private') tourNameText = "Privatna Cjelodnevna Tura (450 €)";
+      else if (pendingBookingData.mode === 'sunset') tourNameText = "Romantična Sunset Tura (150 €)";
+      else tourNameText = `Poludnevni izlet: Three Island Tour (${pendingBookingData.paxCount} osobe)`;
+
+      const templateParams = {
+        to_name: pendingBookingData.name,
+        to_email: pendingBookingData.email,
+        verification_code: generatedVerificationCode,
+        booking_date: formattedDate,
+        tour_type: tourNameText
+      };
+
+      emailjs.send('service_57q25vh', 'template_501zicj', templateParams)
+        .then(function(response) {
+          resendBtn.innerText = "Kodni šalje ponovno! Provjerite mail / spam.";
+          setTimeout(() => {
+            resendBtn.innerText = "Ponovno pošalji kod verifikacije";
+            resendBtn.disabled = false;
+          }, 4000);
+        }, function(error) {
+          resendBtn.innerText = "Ponovno pošalji kod verifikacije";
+          resendBtn.disabled = false;
+          alert("Pogreška pri ponovnom slanju koda.");
+        });
+    }
+
+    function verifyCodeAndConfirmBooking() {
+      const inputCode = document.getElementById('verificationCodeInput').value.trim();
+
+      if (!inputCode) {
+        alert("Molimo unesite verifikacijski kod.");
+        return;
+      }
+
+      if (inputCode !== generatedVerificationCode && inputCode !== previousVerificationCode) {
+        document.getElementById('phoneOrderBoxContainer').style.display = 'block';
+        alert("Uneseni verifikacijski kod nije ispravan. Molimo provjerite e-mail i unesite točan kod ili iskoristite opciju telefonske rezervacije.");
+        return;
+      }
+
+      const b = pendingBookingData;
+      const dateStr = b.dateStr;
+
+      if (!bookingsDB[dateStr]) {
+        if (b.mode === 'private') {
+          bookingsDB[dateStr] = {
+            type: 'private',
+            paxCount: 10,
+            sunsetBooked: false,
+            guests: [{ name: b.name, email: b.email, phone: b.phone, agency: 'Web Online', price: 450, isPaid: true }]
+          };
+        } else if (b.mode === 'sunset') {
+          bookingsDB[dateStr] = {
+            type: 'sunset',
+            paxCount: 2,
+            sunsetBooked: true,
+            guests: [{ name: b.name, email: b.email, phone: b.phone, agency: 'Web Online', tourType: 'sunset', price: 150, isPaid: true }]
+          };
+        } else {
+          bookingsDB[dateStr] = {
+            type: 'shared',
+            paxCount: b.paxCount,
+            sunsetBooked: false,
+            guests: [{ name: b.name, email: b.email, phone: b.phone, agency: 'Web Online', tourType: 'shared', pax: b.paxCount, details: b.details, price: b.paxCount * 65, isPaid: true }]
+          };
+        }
+      } else {
+        const existing = bookingsDB[dateStr];
+        if (b.mode === 'sunset') {
+          existing.sunsetBooked = true;
+          existing.guests.push({ name: b.name, email: b.email, phone: b.phone, agency: 'Web Online', tourType: 'sunset', price: 150, isPaid: true });
+        } else if (b.mode === 'shared') {
+          existing.paxCount = (existing.paxCount || 0) + b.paxCount;
+          existing.guests.push({ name: b.name, email: b.email, phone: b.phone, agency: 'Web Online', tourType: 'shared', pax: b.paxCount, details: b.details, price: b.paxCount * 65, isPaid: true });
+        }
+      }
+
+      saveCloudBookings(dateStr, bookingsDB[dateStr]);
+
+      document.getElementById('verifyModal').style.display = 'none';
+      document.getElementById('successThankYouModal').style.display = 'flex';
+      
+      renderUserCalendar();
+      updateAdminTable();
+      renderAdminCalendar();
+
+      document.getElementById('guestName').value = '';
+      document.getElementById('guestEmail').value = '';
+      document.getElementById('guestPhone').value = '';
+      pendingBookingData = null;
+    }
+
     function closeThankYouModal() {
       document.getElementById('successThankYouModal').style.display = 'none';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function getFirstDayIndex(year, month) {
-      let day = new Date(year, month, 1).getDay();
-      return day === 0 ? 6 : day - 1;
-    }
-
-    function renderFilteredCalendar() {
-      const t = translations[currentLang] || translations['hr'];
-      document.getElementById('currentMonthYear').innerText = t.months[currentMonth] + " " + currentYear + ".";
-      const grid = document.getElementById('calendarDaysGrid');
-      grid.innerHTML = '';
-      
-      const startingIndex = getFirstDayIndex(currentYear, currentMonth);
-      const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-
-      const now = new Date();
-      now.setHours(0,0,0,0);
-
-      for (let i = 0; i < startingIndex; i++) { 
-        grid.innerHTML += `<div class="date-btn out-season"></div>`; 
-      }
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const cellDate = new Date(currentYear, currentMonth, day);
-        cellDate.setHours(0,0,0,0);
-
-        const formattedDay = day < 10 ? '0' + day : day;
-        const formattedMonth = (currentMonth + 1) < 10 ? '0' + (currentMonth + 1) : (currentMonth + 1);
-        const dateStr = `${formattedDay}.${formattedMonth}.${currentYear}`;
-
-        if (cellDate < now) {
-          grid.innerHTML += `<div class="date-btn disabled-past">${day}</div>`;
-          continue;
-        }
-
-        const data = bookingsDB[dateStr] || { bookedPax: 0, isPrivateDay: false, hasSunset: false };
-        const freeSpots = MAX_PAX - data.bookedPax;
-        let isAvailable = false;
-
-        if (selectedTourMode === 'private' && !data.isPrivateDay && data.bookedPax === 0) isAvailable = true;
-        else if (selectedTourMode === 'shared' && !data.isPrivateDay && freeSpots >= selectedPaxCount) isAvailable = true;
-        else if (selectedTourMode === 'sunset' && !data.hasSunset) isAvailable = true;
-
-        if (!isAvailable) {
-          grid.innerHTML += `<div class="date-btn booked">${day}<span class="pax-tag">${t.full}</span></div>`;
-        } else {
-          let tagInfo = selectedTourMode === 'sunset' ? 'Sunset OK' : `${freeSpots} ${t.freePax}`;
-          grid.innerHTML += `<button class="date-btn" onclick="openContactForm('${dateStr}')">${day}<span class="pax-tag" style="color:#25d366">${tagInfo}</span></button>`;
-        }
-      }
-    }
-
-    function openContactForm(dateStr) {
-      targetDateStr = dateStr;
-      document.getElementById('calendarModal').style.display = 'none';
-      document.getElementById('selectedDateDisplay').innerText = `Odabrani datum: ${dateStr}`;
-      
-      const acceptCheckbox = document.getElementById('acceptTerms');
-      if(acceptCheckbox) acceptCheckbox.checked = termsReadAndAccepted;
-
-      if(termsReadAndAccepted) {
-        document.getElementById('termsBoxWrapper').classList.add('accepted');
-      } else {
-        document.getElementById('termsBoxWrapper').classList.remove('accepted');
-      }
-      document.getElementById('contactModal').style.display = 'flex';
-    }
-
-    async function initiateEmailVerification() {
-      const name = document.getElementById('guestName').value.trim();
-      const email = document.getElementById('guestEmail').value.trim().toLowerCase();
-      const countryCode = document.getElementById('countryCodeSelect').value;
-      const rawPhone = document.getElementById('guestPhone').value.trim();
-      const fullPhone = countryCode + " " + rawPhone;
-      const termsAccepted = document.getElementById('acceptTerms').checked;
-
-      if (!name || !email || !rawPhone) {
-        alert("Molimo unesite sve kontakt podatke (ime, e-mail i broj mobitela).");
-        return;
-      }
-
-      if (!termsAccepted || !termsReadAndAccepted) {
-        alert("Morate otvoriti Uvjete korištenja, pročitati ih do kraja i prihvatiti ih.");
-        openTermsModal();
-        return;
-      }
-
-      const submitBtn = document.getElementById('submitBtn');
-      const originalBtnText = submitBtn.innerText;
-      submitBtn.innerText = "Slanje verifikacijskog koda...";
-      submitBtn.disabled = true;
-
-      previousVerificationCode = ""; 
-      generatedVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-      pendingBookingData = { name, email, phone: fullPhone };
-
-      try {
-        let codeEmailBody = `Poštovani/a ${name},\n\nVaš verifikacijski kod za potvrdu rezervacije izleta kod Aureus Lux je: ${generatedVerificationCode}\n\nUnesite ovaj kod na web stranici kako biste uspješno zaključili rezervaciju.\n\nPosjetite našu web stranicu: https://majstorovicstipe1-create.github.io/Final/\n\nSrdačan pozdrav,\nAureus Lux`;
-        
-        const templateParams = {
-          to_email: email,
-          to_name: name,
-          tour_name: "Verifikacija e-mail adrese",
-          booking_date: targetDateStr,
-          pax_count: selectedPaxCount || 1,
-          phone: fullPhone,
-          message: codeEmailBody
-        };
-
-        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
-
-        submitBtn.innerText = originalBtnText;
-        submitBtn.disabled = false;
-
-        document.getElementById('contactModal').style.display = 'none';
-        document.getElementById('verificationCodeInput').value = '';
-        document.getElementById('phoneOrderBoxContainer').style.display = 'none';
-        document.getElementById('verifyModal').style.display = 'flex';
-
-      } catch (error) {
-        submitBtn.innerText = originalBtnText;
-        submitBtn.disabled = false;
-        console.error("Greška pri slanju verifikacijskog koda:", error);
-        alert("Greška pri slanju verifikacijskog koda na e-mail. Molimo provjerite ispravnost e-mail adrese i pokušajte ponovno.");
-      }
-    }
-
-    async function resendVerificationCode() {
-      if (!pendingBookingData) return;
-      const resendBtn = document.getElementById('resendCodeBtn');
-      const originalText = resendBtn.innerText;
-      resendBtn.innerText = "Slanje novog koda...";
-      resendBtn.disabled = true;
-
-      previousVerificationCode = generatedVerificationCode;
-      generatedVerificationCode = Math.floor(100000 + Math.random() * 900000).toString();
-
-      try {
-        let codeEmailBody = `Poštovani/a ${pendingBookingData.name},\n\nVaš novi verifikacijski kod za potvrdu rezervacije izleta kod Aureus Lux je: ${generatedVerificationCode}\n\nUnesite ovaj kod na web stranici: https://majstorovicstipe1-create.github.io/Final/\n\nSrdačan pozdrav,\nAureus Lux`;
-        
-        const templateParams = {
-          to_email: pendingBookingData.email,
-          to_name: pendingBookingData.name,
-          tour_name: "Ponovna verifikacija e-mail adrese",
-          booking_date: targetDateStr,
-          pax_count: selectedPaxCount || 1,
-          phone: pendingBookingData.phone,
-          message: codeEmailBody
-        };
-
-        await emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams);
-
-        resendBtn.innerText = "Novi kod je poslan!";
-        document.getElementById('phoneOrderBoxContainer').style.display = 'block';
-
-        setTimeout(() => {
-          resendBtn.innerText = originalText;
-          resendBtn.disabled = false;
-        }, 4000);
-
-      } catch (error) {
-        resendBtn.innerText = originalText;
-        resendBtn.disabled = false;
-        console.error("Greška pri ponovnom slanju koda:", error);
-        alert("Greška pri ponovnom slanju koda. Molimo pokušajte ponovno.");
-      }
-    }
-
-    async function verifyCodeAndConfirmBooking() {
-      const enteredCode = document.getElementById('verificationCodeInput').value.trim();
-
-      if (enteredCode !== generatedVerificationCode && enteredCode !== previousVerificationCode) {
-        alert("Neispravan verifikacijski kod. Molimo provjerite primljeni e-mail i unesite točan kod.");
-        return;
-      }
-
-      const verifyBtn = document.getElementById('verifyBtn');
-      const originalVerifyText = verifyBtn.innerText;
-      verifyBtn.innerText = "Spremanje rezervacije...";
-      verifyBtn.disabled = true;
-
-      const { name, email, phone } = pendingBookingData;
-      let tourTitle = '';
-      let paxVal = selectedPaxCount;
-      let priceCalc = 0;
-
-      let paxDescription = `${passengerDetails.adults} odraslih`;
-      if (passengerDetails.kids > 0) paxDescription += `, ${passengerDetails.kids} djece`;
-      if (passengerDetails.babies > 0) paxDescription += `, ${passengerDetails.babies} beba`;
-
-      if (selectedTourMode === 'private') {
-        tourTitle = "Privatna Cjelodnevna Tura";
-        priceCalc = 450;
-      } else if (selectedTourMode === 'shared') {
-        tourTitle = "Poludnevni izlet: Three Island Tour";
-        priceCalc = selectedPaxCount * 65;
-      } else if (selectedTourMode === 'sunset') {
-        tourTitle = "Romantična Sunset Tura";
-        priceCalc = 150;
-      }
-
-      try {
-        await loadCloudBookings();
-        const data = bookingsDB[targetDateStr] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
-        if (!data.guests) data.guests = [];
-
-        if (selectedTourMode === 'private') {
-          data.isPrivateDay = true; 
-          data.bookedPax = 10; 
-          data.dayTours.push(tourTitle); 
-          data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), agency: 'Web Online', name, email, phone, tour: tourTitle, pax: 10, paxDetails: paxDescription, price: priceCalc, payment: "Online / Predautorizacija", note: "Web rezervacija", terms: "Verificiran mail i uvjeti" });
-        } else if (selectedTourMode === 'shared') {
-          data.bookedPax += selectedPaxCount; 
-          data.dayTours.push(`${tourTitle} (${paxDescription})`); 
-          data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), agency: 'Web Online', name, email, phone, tour: tourTitle, pax: selectedPaxCount, paxDetails: paxDescription, price: priceCalc, payment: "Online / Predautorizacija", note: "Web rezervacija", terms: "Verificiran mail i uvjeti" });
-        } else if (selectedTourMode === 'sunset') {
-          data.hasSunset = true; 
-          data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), agency: 'Web Online', name, email, phone, tour: tourTitle, pax: 2, paxDetails: "2 odraslih", price: priceCalc, payment: "Online / Predautorizacija", note: "Web rezervacija", terms: "Verificiran mail i uvjeti" });
-        }
-        
-        bookingsDB[targetDateStr] = data;
-        await saveCloudBookings(targetDateStr, data);
-
-        updateAdminTable();
+    function adminLogin() {
+      document.getElementById('dropdownMenu').classList.remove('active');
+      const pin = prompt("Unesite Admin PIN:");
+      if (pin === "2706") {
+        document.getElementById('adminFullscreenPanel').style.display = 'block';
         renderAdminCalendar();
-        closeModals();
-        
-        verifyBtn.innerText = originalVerifyText;
-        verifyBtn.disabled = false;
-
-        document.getElementById('successThankYouModal').style.display = 'flex';
-
-        document.getElementById('guestName').value = '';
-        document.getElementById('guestEmail').value = '';
-        document.getElementById('guestPhone').value = '';
-        document.getElementById('acceptTerms').checked = false;
-        termsReadAndAccepted = false;
-        document.getElementById('termsBoxWrapper').classList.remove('accepted');
-
-        try {
-          let bodyText = `Poštovani/a ${name},\n\nHvala Vam na rezervaciji s obrtom Aureus Lux!\n\nVaša rezervacija je uspješno verificirana i potvrđena:\n- Karta: ${tourTitle}\n- Datum: ${targetDateStr}\n- Sastav putnika: ${paxDescription}\n- Kontakt mobitel: ${phone}\n\nPosjetite našu web stranicu za više informacija: https://majstorovicstipe1-create.github.io/Final/\n\nRadujemo se Vašem dolasku!\n\nSrdačan pozdrav,\nAureus Lux`;
-
-          const templateParams = { to_email: email, to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, message: bodyText };
-          const adminTemplateParams = { to_email: "aureus.lux.travel@gmail.com", to_name: name, tour_name: tourTitle, booking_date: targetDateStr, pax_count: paxVal, phone: phone, email: email };
-
-          emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams).catch(err => console.log('Email gostu pozadinska greška:', err));
-          emailjs.send('service_99kir8m', 'template_3eo6s99', adminTemplateParams).catch(err => console.log('Email adminu pozadinska greška:', err));
-        } catch (mailErr) {
-          console.log('Pozadinski mail servis nije aktivan:', mailErr);
-        }
-
-      } catch (error) {
-        verifyBtn.innerText = originalVerifyText;
-        verifyBtn.disabled = false;
-        console.error("Greška pri spremanju u bazu:", error);
-        alert("Došlo je do greške prilikom spremanja rezervacije u bazu. Molimo pokušajte ponovno.");
+        updateAdminTable();
+      } else if (pin !== null) {
+        alert("Netačan PIN!");
       }
     }
 
-    function sendCancellationEmail(guestName, guestEmail, dateStr, tourTitle, refundAmount) {
-      let cancelBodyText = `Poštovani/a ${guestName},\n\nIskreno nam je žao, no zbog nepredviđenih okolnosti primorani smo stornirati Vašu rezervaciju za termin: ${dateStr} (${tourTitle}).\n\nVaš uplaćeni iznos od ${refundAmount} € bit će u potpunosti vraćen na Vaš račun u najkraćem mogućem roku.\n\nPosjetite nas: https://majstorovicstipe1-create.github.io/Final/\n\nSrdačan pozdrav,\nAureus Lux`;
-
-      const templateParams = {
-        to_email: guestEmail,
-        to_name: guestName,
-        tour_name: tourTitle + " (OTKAZANO)",
-        booking_date: dateStr,
-        pax_count: 0,
-        phone: '',
-        message: cancelBodyText
-      };
-
-      emailjs.send('service_99kir8m', 'template_3rslkx8', templateParams).catch(err => console.log('Greška pri otkazivanju:', err));
-    }
-
-    function getAgencyIconHTML(agencyName) {
-      if (agencyName === 'GetYourGuide') {
-        return `<span class="admin-agency-icon" style="background: #ff5722;" title="GetYourGuide">G</span>`;
-      } else if (agencyName === 'Click&Boat') {
-        return `<span class="admin-agency-icon" style="background: #00bcd4;" title="Click&Boat">C</span>`;
-      } else if (agencyName === 'Furmar') {
-        return `<span class="admin-agency-icon" style="background: #8bc34a;" title="Furmar">F</span>`;
-      } else if (agencyName === 'Private Transfers') {
-        return `<span class="admin-agency-icon" style="background: #e91e63;" title="Private Transfers">P</span>`;
-      } else {
-        return ''; 
-      }
+    function closeAdminFullscreen() {
+      document.getElementById('adminFullscreenPanel').style.display = 'none';
     }
 
     function renderAdminCalendar() {
-      const t = translations[currentLang] || translations['hr'];
-      const monthYearElem = document.getElementById('adminMonthYear');
-      if(monthYearElem) monthYearElem.innerText = t.months[adminMonth] + " " + adminYear + ".";
+      const t = translations['hr'];
+      document.getElementById('adminMonthYear').innerText = `${t.months[adminMonth]} ${adminYear}.`;
       const grid = document.getElementById('adminCalendarDaysGrid');
-      if(!grid) return;
       grid.innerHTML = '';
 
-      const startingIndex = getFirstDayIndex(adminYear, adminMonth);
+      const firstDay = new Date(adminYear, adminMonth, 1).getDay();
+      let startingDay = (firstDay === 0) ? 6 : firstDay - 1;
       const daysInMonth = new Date(adminYear, adminMonth + 1, 0).getDate();
 
-      for (let i = 0; i < startingIndex; i++) { 
-        grid.innerHTML += `<div class="admin-day status-empty"></div>`; 
+      for (let i = 0; i < startingDay; i++) {
+        grid.innerHTML += `<div class="admin-day status-empty" style="visibility:hidden;"></div>`;
       }
 
-      for (let day = 1; day <= daysInMonth; day++) {
-        const formattedDay = day < 10 ? '0' + day : day;
-        const formattedMonth = (adminMonth + 1) < 10 ? '0' + (adminMonth + 1) : (adminMonth + 1);
-        const dateStr = `${formattedDay}.${formattedMonth}.${adminYear}`;
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${adminYear}-${String(adminMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const existing = bookingsDB[dateStr];
 
-        const data = bookingsDB[dateStr] || { bookedPax: 0, isPrivateDay: false, hasSunset: false, guests: [] };
-        
-        let statusClass = 'status-empty';
-        let paxLabel = '';
-        let sunsetBadge = data.hasSunset ? '<span class="sunset-indicator">🌅 Sunset</span>' : '';
-        let iconsHTML = '';
+        let dayClass = 'status-empty';
+        let statusText = 'Slobodno';
+        let sunsetIcon = '';
 
-        if (data.guests && data.guests.length > 0) {
-          let uniqueAgencies = [...new Set(data.guests.map(g => g.agency || 'Web Online'))];
-          let iconsList = uniqueAgencies.map(ag => getAgencyIconHTML(ag)).filter(html => html !== '').join('');
-          if (iconsList) {
-            iconsHTML = `<div style="display: flex; gap: 3px; justify-content: center; align-items: center; margin: 1px 0;">${iconsList}</div>`;
+        if (existing) {
+          if (existing.sunsetBooked) {
+            sunsetIcon = `<span class="sunset-indicator" title="Sunset tura rezervirana">🌅</span>`;
+          }
+
+          if (existing.type === 'private') {
+            dayClass = 'status-private';
+            statusText = 'PRIVATNO';
+          } else if (existing.type === 'shared' || existing.type === 'sunset') {
+            const count = existing.paxCount || 0;
+            if (count >= 6) {
+              dayClass = 'status-high-pax';
+            } else if (count >= 3) {
+              dayClass = 'status-mid-pax';
+            } else if (count > 0) {
+              dayClass = 'status-low-pax';
+            }
+            
+            if (existing.type === 'shared') {
+              statusText = `${count}/10 osobo`;
+            } else {
+              statusText = `Sunset izlet`;
+            }
           }
         }
 
-        if (data.isPrivateDay) {
-          statusClass = 'status-private';
-          paxLabel = 'Privatno';
-        } else if (data.bookedPax > 5) {
-          statusClass = 'status-high-pax';
-          paxLabel = `${data.bookedPax} pax`;
-        } else if (data.bookedPax >= 3) {
-          statusClass = 'status-mid-pax';
-          paxLabel = `${data.bookedPax} pax`;
-        } else if (data.bookedPax > 0) {
-          statusClass = 'status-low-pax';
-          paxLabel = `${data.bookedPax} pax`;
+        let agencyIconsHtml = '';
+        if (existing && existing.guests && existing.guests.length > 0) {
+          agencyIconsHtml = '<div style="display:flex; gap:2px; flex-wrap:wrap; justify-content:center;">';
+          existing.guests.forEach(g => {
+            const agName = g.agency || 'Web';
+            let initial = agName.charAt(0).toUpperCase();
+            let bgColor = '#d4af37';
+            if (agName === 'GetYourGuide') { bgColor = '#ff5a5f'; initial = 'G'; }
+            else if (agName === 'Click&Boat') { bgColor = '#00a699'; initial = 'C'; }
+            else if (agName === 'Furmar') { bgColor = '#9b59b6'; initial = 'F'; }
+            else if (agName === 'Private Transfers') { bgColor = '#34495e'; initial = 'P'; }
+
+            agencyIconsHtml += `<span class="admin-agency-icon" style="background:${bgColor};" title="${agName}: ${g.name}">${initial}</span>`;
+          });
+          agencyIconsHtml += '</div>';
         }
 
-        let hasBookingsAttr = (data.guests && data.guests.length > 0) ? `onclick="openAdminDayDetails('${dateStr}')"` : ``;
-
         grid.innerHTML += `
-          <div class="admin-day ${statusClass}" ${hasBookingsAttr}>
-            <span style="font-size:0.7rem; font-weight:500;">${day}</span>
-            ${iconsHTML}
-            <span style="font-size:0.6rem; line-height: 1;">${paxLabel}</span>
-            ${sunsetBadge}
+          <div class="admin-day ${dayClass}" onclick="openAdminDayDetails('${dateStr}')">
+            <div style="display:flex; justify-content:space-between; width:100%; padding:0 3px;">
+              <span>${d}</span>
+              ${sunsetIcon}
+            </div>
+            ${agencyIconsHtml}
+            <div style="font-size:0.62rem; text-align:center;">${statusText}</div>
           </div>
         `;
       }
     }
 
-    function parseDateToObj(dateStr) {
-      let parts = dateStr.split('.');
-      if(parts.length === 3) {
-        return new Date(parseInt(parts[2], 10), parseInt(parts[1], 10) - 1, parseInt(parts[0], 10));
-      }
-      return new Date();
+    function changeAdminMonth(dir) {
+      adminMonth += dir;
+      if (adminMonth < 0) { adminMonth = 11; adminYear--; }
+      if (adminMonth > 11) { adminMonth = 0; adminYear++; }
+      renderAdminCalendar();
     }
 
     function updateAdminTable() {
       const tbody = document.getElementById('adminTableBody');
-      if(!tbody) return;
+      const filterAgency = document.getElementById('agencyFilterSelect').value;
+      const viewMode = document.getElementById('viewModeSelect').value;
       tbody.innerHTML = '';
 
-      const selectedAgencyFilter = document.getElementById('agencyFilterSelect').value;
-      const viewMode = document.getElementById('viewModeSelect').value;
+      let allEntries = [];
 
-      let entries = [];
-      let now = new Date();
-      now.setHours(0,0,0,0);
-
-      for (let dateStr in bookingsDB) {
-        let dData = bookingsDB[dateStr];
-        if (dData.guests && dData.guests.length > 0) {
-          dData.guests.forEach(g => {
-            let itemDate = parseDateToObj(dateStr);
-            let isPast = itemDate < now;
-            entries.push({ date: dateStr, isPast, ...g });
+      Object.keys(bookingsDB).forEach(dateStr => {
+        const b = bookingsDB[dateStr];
+        if (b && b.guests) {
+          b.guests.forEach((g, index) => {
+            allEntries.push({ dateStr, b, g, index });
           });
         }
-      }
+      });
 
-      if (viewMode === 'active') {
-        entries = entries.filter(e => !e.isPast);
-      } else {
-        entries = entries.filter(e => e.isPast);
-      }
+      const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
-      if (selectedAgencyFilter !== 'ALL') {
-        entries = entries.filter(e => (e.agency || 'Web Online') === selectedAgencyFilter);
-      }
+      allEntries.sort((a, b) => a.dateStr.localeCompare(b.dateStr));
 
-      if (entries.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #94a3b8; padding: 15px;">Nema pronađenih rezervacija za odabrani filter.</td></tr>`;
-        return;
-      }
+      allEntries.forEach(item => {
+        const { dateStr, b, g, index } = item;
+        const agencyName = g.agency || 'Web Online';
 
-      entries.sort((a, b) => b.id - a.id);
+        if (filterAgency !== 'ALL' && agencyName !== filterAgency) return;
+        
+        const isPast = item.dateStr < todayStr;
+        if (viewMode === 'active' && isPast) return;
+        if (viewMode === 'archive' && !isPast) return;
 
-      entries.forEach(item => {
-        let paymentInfo = item.payment ? item.payment : 'Gotovina';
-        let agencyName = item.agency || 'Web Online';
+        const parts = dateStr.split('-');
+        const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}.`;
 
-        let badgeColor = '#64dfdf';
-        if(agencyName === 'GetYourGuide') badgeColor = '#ff5722';
-        else if(agencyName === 'Click&Boat') badgeColor = '#00bcd4';
-        else if(agencyName === 'Furmar') badgeColor = '#8bc34a';
-        else if(agencyName === 'Private Transfers') badgeColor = '#e91e63';
+        let tourTypeLabel = "";
+        if (g.tourType === 'sunset' || b.type === 'sunset') tourTypeLabel = "🌅 Sunset Tura";
+        else if (b.type === 'private') tourTypeLabel = "👑 Privatni brod";
+        else tourTypeLabel = `⛵ Poludnevna (osoba: ${g.pax || 1})`;
 
-        tbody.innerHTML += `
-          <tr onclick="openAdminDetailModal('${item.date}', ${item.id})">
-            <td style="font-weight:600; color:#fcf6ba; font-size:0.8rem; white-space:nowrap;">${item.date}</td>
-            <td style="white-space:nowrap;">
-              <span style="background: rgba(212,175,55,0.1); border: 1px solid rgba(212,175,55,0.3); color: ${badgeColor}; padding: 2px 5px; border-radius: 4px; font-size: 0.7rem; font-weight: 500; display: inline-block;">${agencyName}</span>
-            </td>
-            <td style="white-space: nowrap;">
-              <strong style="color:#ffffff; font-weight:600; font-size:0.8rem;">${item.name}</strong><br>
-              <span style="color:#64dfdf; font-size:0.7rem;">📧 ${item.email}</span><br>
-              <span style="color:#cbd5e1; font-size:0.7rem;">📞 ${item.phone}</span>
-            </td>
-            <td>
-              <span style="color:#2ec4b6; font-weight:600; font-size:0.8rem;">${item.tour}</span>
-            </td>
-            <td style="white-space:nowrap;">
-              <span style="color:#fcf6ba; font-size:0.85rem; font-weight:700;">${item.price} €</span><br>
-              <span style="font-size:0.68rem; color:#d4af37;">💳 ${paymentInfo}</span>
-            </td>
-          </tr>
+        const tr = document.createElement('tr');
+        tr.onclick = () => openAdminDetailModal(dateStr, index);
+        tr.innerHTML = `
+          <td><strong>${formattedDate}</strong></td>
+          <td><span style="color:#64dfdf; font-weight:500;">${agencyName}</span></td>
+          <td><strong style="color:#fcf6ba">${g.name}</strong><br><span style="color:#94a3b8; font-size:0.75rem;">${g.phone} | ${g.email}</span></td>
+          <td>${tourTypeLabel}</td>
+          <td>${g.price ? g.price + ' €' : '-'} ${g.isPaid ? '<span style="color:#2ec4b6; font-size:0.7rem;">(Plaćeno)</span>' : '<span style="color:#ff9f43; font-size:0.7rem;">(Nije plaćeno)</span>'}</td>
         `;
+        tbody.appendChild(tr);
       });
     }
 
-    function openAdminDetailModal(dateStr, guestId) {
-      const dData = bookingsDB[dateStr];
-      if (!dData || !dData.guests) return;
-      const guest = dData.guests.find(g => g.id === guestId);
-      if (!guest) return;
-
-      const contentBox = document.getElementById('adminDetailContentBody');
-      contentBox.innerHTML = `
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Datum ture:</strong> <span style="color: #fcf6ba; font-weight: 600;">${dateStr}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Izvor / Agencija:</strong> <span style="color: #64dfdf; font-weight: 500;">${guest.agency || 'Web Online'}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Ime i prezime:</strong> <span style="color: #ffffff; font-weight: 600;">${guest.name}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">E-mail adresa:</strong> <span style="color: #64dfdf;">${guest.email}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Broj mobitela:</strong> <span style="color: #cbd5e1;">${guest.phone}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Vrsta ture:</strong> <span style="color: #2ec4b6; font-weight: 600;">${guest.tour}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Sastav putnika:</strong> <span style="color: #e2e8f0;">${guest.paxDetails || (guest.pax + ' osoba')}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Cijena:</strong> <span style="color: #fcf6ba; font-weight: 700; font-size: 1.1rem;">${guest.price} €</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Način plaćanja:</strong> <span style="color: #cbd5e1;">${guest.payment || 'Gotovina'}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Napomena / Zahtjev:</strong> <span style="color: #94a3b8; font-style: italic;">${guest.note || 'Nema posebne napomene'}</span>
-        </div>
-        <div style="display: grid; grid-template-columns: 160px 1fr; gap: 12px; margin-bottom: 10px;">
-          <strong style="color: #d4af37;">Status verifikacije:</strong> <span style="color: #2ec4b6;">${guest.terms || 'Zabilježeno'}</span>
-        </div>
-      `;
-
-      document.getElementById('adminDetailDeleteBtn').setAttribute('onclick', `deleteBookingEntry('${dateStr}', ${guestId}); closeAdminDetail();`);
-      document.getElementById('adminDetailFullscreen').style.display = 'block';
+    function openAdminDayDetails(dateStr) {
+      const existing = bookingsDB[dateStr];
+      if (!existing || !existing.guests || existing.guests.length === 0) {
+        if (confirm(`Na dan ${dateStr} nema rezervacija. Želite li ručno dodati rezervaciju kao Admin?`)) {
+          adminAddManualBooking(dateStr);
+        }
+      } else {
+        openAdminDetailModal(dateStr, 0);
+      }
     }
 
-    function openAdminDayDetails(dateStr) {
-      const dData = bookingsDB[dateStr];
-      if (!dData || !dData.guests || dData.guests.length === 0) return;
-      openAdminDetailModal(dateStr, dData.guests[0].id);
+    function adminAddManualBooking(dateStr) {
+      const agency = prompt("Unesite izvor (npr. GetYourGuide, Click&Boat, Furmar, Private Transfers, Web Online):", "GetYourGuide");
+      if (!agency) return;
+      const name = prompt("Unesite ime i prezime gosta:", "Gost Admin");
+      if (!name) return;
+      const mode = prompt("Unesite vrstu ture (private / shared / sunset):", "shared");
+      if (!mode) return;
+      
+      let pax = 1;
+      if (mode === 'shared') {
+        pax = parseInt(prompt("Unesite broj osoba za dijeljenu turu:", "2")) || 1;
+      } else if (mode === 'private') {
+        pax = 10;
+      } else if (mode === 'sunset') {
+        pax = 2;
+      }
+
+      if (!bookingsDB[dateStr]) {
+        bookingsDB[dateStr] = {
+          type: (mode === 'private') ? 'private' : (mode === 'sunset' ? 'sunset' : 'shared'),
+          paxCount: pax,
+          sunsetBooked: (mode === 'sunset'),
+          guests: [{ name, email: "manual@admin.com", phone: "+385000000", agency, tourType: mode, pax, price: (mode==='private'?450:(mode==='sunset'?150:pax*65)), isPaid: true }]
+        };
+      } else {
+        const existing = bookingsDB[dateStr];
+        if (mode === 'sunset') existing.sunsetBooked = true;
+        existing.paxCount = (existing.paxCount || 0) + pax;
+        existing.guests.push({ name, email: "manual@admin.com", phone: "+385000000", agency, tourType: mode, pax, price: (mode==='private'?450:(mode==='sunset'?150:pax*65)), isPaid: true });
+      }
+
+      saveCloudBookings(dateStr, bookingsDB[dateStr]);
+      renderAdminCalendar();
+      updateAdminTable();
+    }
+
+    function openAdminDetailModal(dateStr, guestIndex) {
+      const b = bookingsDB[dateStr];
+      if (!b || !b.guests || !b.guests[guestIndex]) return;
+
+      const g = b.guests[guestIndex];
+      const parts = dateStr.split('-');
+      const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}.`;
+
+      let tourName = "";
+      if (g.tourType === 'sunset' || b.type === 'sunset') tourName = "Romantična Sunset Tura";
+      else if (b.type === 'private') tourName = "Privatna Cjelodnevna Tura";
+      else tourName = `Poludnevna Three Island Tour (Osoba: ${g.pax || 1})`;
+
+      let detailsHtml = "";
+      if (g.details) {
+        detailsHtml = `<p><strong>Sastav:</strong> Odrasli: ${g.details.adults}, Djeca: ${g.details.kids}, Bebe: ${g.details.babies}</p>`;
+      }
+
+      const body = document.getElementById('adminDetailContentBody');
+      body.innerHTML = `
+        <h4 style="color:#fcf6ba; font-size:1.1rem; margin-bottom:15px; border-bottom:1px solid rgba(212,175,55,0.2); padding-bottom:8px;">${tourName}</h4>
+        <p><strong>Datum:</strong> ${formattedDate}</p>
+        <p><strong>Izvor / Agencija:</strong> <span style="color:#64dfdf; font-weight:500;">${g.agency || 'Web Online'}</span></p>
+        <p><strong>Ime i prezime gosta:</strong> ${g.name}</p>
+        <p><strong>E-mail adresa:</strong> ${g.email}</p>
+        <p><strong>Broj mobitela:</strong> ${g.phone}</p>
+        ${detailsHtml}
+        <p><strong>Ukupna cijena:</strong> ${g.price ? g.price + ' €' : 'Nije definirano'}</p>
+        <p><strong>Status plaćanja:</strong> ${g.isPaid ? '<span style="color:#2ec4b6">Plaćeno</span>' : '<span style="color:#ff9f43">Nije plaćeno</span>'}</p>
+        ${g.note ? `<p style="margin-top:10px; background:#0d1b2a; padding:10px; border-radius:6px;"><strong>Napomena:</strong> ${g.note}</p>` : ''}
+      `;
+
+      const deleteBtn = document.getElementById('adminDetailDeleteBtn');
+      deleteBtn.onclick = function() {
+        if (confirm(`Jeste li sigurni da želite obrisati rezervaciju za ${g.name} dana ${formattedDate}?`)) {
+          b.guests.splice(guestIndex, 1);
+          if (b.guests.length === 0) {
+            delete bookingsDB[dateStr];
+            deleteCloudBooking(dateStr);
+          } else {
+            let newPax = 0;
+            let hasSunset = false;
+            b.guests.forEach(item => {
+              if (item.tourType === 'shared') newPax += (item.pax || 1);
+              if (item.tourType === 'sunset') hasSunset = true;
+            });
+            b.paxCount = newPax;
+            b.sunsetBooked = hasSunset;
+            saveCloudBookings(dateStr, b);
+          }
+          closeAdminDetail();
+          renderAdminCalendar();
+          updateAdminTable();
+          renderUserCalendar();
+        }
+      };
+
+      document.getElementById('adminDetailFullscreen').style.display = 'block';
     }
 
     function closeAdminDetail() {
       document.getElementById('adminDetailFullscreen').style.display = 'none';
     }
 
-    async function deleteBookingEntry(dateStr, guestId) {
-      if(!confirm("Jeste li sigurni da želite obrisati ovu rezervaciju i poslati gostu obavijest o otkazivanju i povratu novca?")) return;
-      
-      let dData = bookingsDB[dateStr];
-      if(dData && dData.guests) {
-        let targetGuest = dData.guests.find(g => g.id === guestId);
-        if (targetGuest && targetGuest.email && targetGuest.email !== 'N/A') {
-          sendCancellationEmail(targetGuest.name, targetGuest.email, dateStr, targetGuest.tour, targetGuest.price);
-        }
-
-        dData.guests = dData.guests.filter(g => g.id !== guestId);
-        
-        dData.bookedPax = dData.guests.reduce((sum, g) => g.tour.includes('Privatna') || g.tour.includes('Sunset') ? sum : sum + g.pax, 0);
-        dData.isPrivateDay = dData.guests.some(g => g.tour.includes('Privatna'));
-        dData.hasSunset = dData.guests.some(g => g.tour.includes('Sunset'));
-        dData.totalRevenue = dData.guests.reduce((sum, g) => sum + g.price, 0);
-
-        if(dData.guests.length === 0) {
-          delete bookingsDB[dateStr];
-        }
-      }
-
-      await deleteCloudBooking(dateStr);
-      await loadCloudBookings();
-      alert("Rezervacija je obrisana.");
-    }
-
-    async function resetAllBookings() {
-      if(!confirm("Jeste li sigurni da želite obrisati SVE rezervacije iz baze?")) return;
-      bookingsDB = {};
-      await resetAllCloudBookings();
-      await loadCloudBookings();
-      alert("Sve rezervacije su obrisane iz baze.");
-    }
-
-    function changeMonth(dir) {
-      currentMonth += dir;
-      if(currentMonth > 11) { currentMonth = 0; currentYear++; }
-      else if(currentMonth < 0) { currentMonth = 11; currentYear--; }
-      renderFilteredCalendar();
-    }
-
-    function changeAdminMonth(dir) {
-      adminMonth += dir;
-      if(adminMonth > 11) { adminMonth = 0; adminYear++; }
-      else if(adminMonth < 0) { adminMonth = 11; adminYear--; }
-      renderAdminCalendar();
-    }
-
-    function closeModals(modalId) {
-      if (modalId) {
-        const el = document.getElementById(modalId);
-        if(el) el.style.display = 'none';
-      } else {
-        const modals = ['tourSelectionModal', 'directPaxModal', 'calendarModal', 'contactModal', 'verifyModal', 'termsModal', 'successThankYouModal'];
-        modals.forEach(m => {
-          const el = document.getElementById(m);
-          if(el) el.style.display = 'none';
-        });
-      }
-    }
-
-    function adminLogin() {
-      const menu = document.getElementById('dropdownMenu');
-      if (menu) menu.classList.remove('active');
-      let pass = prompt("Unesite admin lozinku:");
-      if (pass === "a" || pass === "A") {
-        loadCloudBookings().then(() => {
-          const adminScreen = document.getElementById('adminFullscreenPanel');
-          if(adminScreen) {
-            adminScreen.style.display = 'block';
-          }
-        });
-      } else if(pass !== null) {
-        alert("Netočna lozinka!");
-      }
-    }
-
-    function closeAdminFullscreen() {
-      const adminScreen = document.getElementById('adminFullscreenPanel');
-      if(adminScreen) {
-        adminScreen.style.display = 'none';
+    function resetAllBookings() {
+      if (confirm("UPOZORENJE: Jeste li sigurni da želite obrisati SVE rezervacije iz sustava i baze podataka? Ova radnja je nepovratna!")) {
+        bookingsDB = {};
+        resetAllCloudBookings();
+        renderAdminCalendar();
+        updateAdminTable();
+        renderUserCalendar();
       }
     }
 
     function partnerLogin() {
-      const menu = document.getElementById('dropdownMenu');
-      if (menu) menu.classList.remove('active');
-      
-      let pass = prompt("Upisi lozinku");
-      
-      if (pass === "1") currentPartnerAgencyName = "GetYourGuide";
-      else if (pass === "2") currentPartnerAgencyName = "Click&Boat";
-      else if (pass === "3") currentPartnerAgencyName = "Furmar";
-      else if (pass === "4") currentPartnerAgencyName = "Private Transfers";
-      else if (pass === "a" || pass === "A") currentPartnerAgencyName = "Partner agencija";
+      document.getElementById('dropdownMenu').classList.remove('active');
+      const agencyName = prompt("Unesite naziv Agencije / Partnera (npr. GetYourGuide, Click&Boat, Furmar, Private Transfers):");
+      if (!agencyName) return;
 
-      if (currentPartnerAgencyName) {
-        loadCloudBookings().then(() => {
-          document.getElementById('activePartnerBadgeName').innerText = `Agencija: ${currentPartnerAgencyName}`;
-          document.getElementById('partnerStep1').style.display = 'block';
-          document.getElementById('partnerStep2').style.display = 'none';
-          document.getElementById('partnerStep3').style.display = 'none';
-          document.getElementById('partnerPaxBox').style.display = 'none';
-          document.getElementById('partnerBackBtn').style.display = 'none';
-          document.getElementById('partnerFullscreenPanel').style.display = 'block';
-        });
-      } else if(pass !== null) {
-        alert("Netočna lozinka partnera!");
+      const pin = prompt(`Unesite pristupni PIN za partnera ${agencyName}:`);
+      if (pin === "2027") {
+        currentPartnerAgencyName = agencyName;
+        document.getElementById('activePartnerBadgeName').innerText = `Agencija: ${agencyName}`;
+        document.getElementById('partnerFullscreenPanel').style.display = 'block';
+        partnerResetToStep1();
+      } else if (pin !== null) {
+        alert("Netačan PIN partnera!");
       }
     }
 
@@ -2895,201 +2981,222 @@
       document.getElementById('partnerFullscreenPanel').style.display = 'none';
     }
 
+    function partnerResetToStep1() {
+      document.getElementById('partnerStep1').style.display = 'block';
+      document.getElementById('partnerStep2').style.display = 'none';
+      document.getElementById('partnerStep3').style.display = 'none';
+      document.getElementById('partnerBackBtn').style.display = 'none';
+      document.getElementById('partnerPaxBox').style.display = 'none';
+    }
+
+    function partnerGoBack() {
+      if (document.getElementById('partnerStep3').style.display === 'block') {
+        document.getElementById('partnerStep3').style.display = 'none';
+        document.getElementById('partnerStep2').style.display = 'block';
+      } else if (document.getElementById('partnerStep2').style.display === 'block') {
+        document.getElementById('partnerStep2').style.display = 'none';
+        document.getElementById('partnerStep1').style.display = 'block';
+        document.getElementById('partnerBackBtn').style.display = 'none';
+      }
+    }
+
     function partnerSelectTourChoice(mode) {
       partnerSelectedMode = mode;
-      const paxBox = document.getElementById('partnerPaxBox');
-      
       if (mode === 'shared') {
-        paxBox.style.display = paxBox.style.display === 'block' ? 'none' : 'block';
-      } else if (mode === 'private') {
-        paxBox.style.display = 'none';
-        partnerPaxCount = 10;
-        partnerDetails = { adults: 10, kids: 0, babies: 0 };
-        document.getElementById('partnerStep1').style.display = 'none';
-        document.getElementById('partnerStep2').style.display = 'block';
-        document.getElementById('partnerBackBtn').style.display = 'inline-block';
-        renderPartnerCalendar();
-      } else if (mode === 'sunset') {
-        paxBox.style.display = 'none';
-        partnerPaxCount = 2;
-        partnerDetails = { adults: 2, kids: 0, babies: 0 };
-        document.getElementById('partnerStep1').style.display = 'none';
-        document.getElementById('partnerStep2').style.display = 'block';
-        document.getElementById('partnerBackBtn').style.display = 'inline-block';
-        renderPartnerCalendar();
+        document.getElementById('partnerPaxBox').style.display = 'block';
+      } else {
+        partnerPaxCount = (mode === 'sunset') ? 2 : MAX_PAX;
+        partnerDetails = { adults: partnerPaxCount, kids: 0, babies: 0 };
+        openPartnerCalendarStep();
       }
     }
 
     function confirmPartnerSharedSelection() {
-      const adults = parseInt(document.getElementById('partAdults').value, 10);
-      const kids = parseInt(document.getElementById('partKids').value, 10);
-      const babies = parseInt(document.getElementById('partBabies').value, 10);
+      const adults = parseInt(document.getElementById('partAdults').value) || 0;
+      const kids = parseInt(document.getElementById('partKids').value) || 0;
+      const babies = parseInt(document.getElementById('partBabies').value) || 0;
       const total = adults + kids + babies;
 
-      if (total < 1) { alert("Odaberite barem jednog putnika."); return; }
-      if (total > MAX_PAX) { alert("Maksimalno 10 osoba."); return; }
+      if (total <= 0) {
+        alert("Molimo odaberite barem jednog putnika.");
+        return;
+      }
+      if (total > MAX_PAX) {
+        alert("Ukupan broj putnika ne može biti veći od 10.");
+        return;
+      }
 
       partnerPaxCount = total;
       partnerDetails = { adults, kids, babies };
+      openPartnerCalendarStep();
+    }
 
+    function openPartnerCalendarStep() {
       document.getElementById('partnerStep1').style.display = 'none';
       document.getElementById('partnerStep2').style.display = 'block';
       document.getElementById('partnerBackBtn').style.display = 'inline-block';
       renderPartnerCalendar();
     }
 
-    function partnerGoBack() {
-      const step1 = document.getElementById('partnerStep1');
-      const step2 = document.getElementById('partnerStep2');
-      const step3 = document.getElementById('partnerStep3');
-      const backBtn = document.getElementById('partnerBackBtn');
+    function renderPartnerCalendar() {
+      const t = translations['hr'];
+      document.getElementById('partnerMonthYear').innerText = `${t.months[partnerMonth]} ${partnerYear}.`;
+      const grid = document.getElementById('partnerDaysGrid');
+      grid.innerHTML = '';
 
-      if (step3.style.display === 'block') {
-        step3.style.display = 'none';
-        step2.style.display = 'block';
-      } else if (step2.style.display === 'block') {
-        step2.style.display = 'none';
-        step1.style.display = 'block';
-        backBtn.style.display = 'none';
-        document.getElementById('partnerPaxBox').style.display = 'none';
+      const firstDay = new Date(partnerYear, partnerMonth, 1).getDay();
+      let startingDay = (firstDay === 0) ? 6 : firstDay - 1;
+      const daysInMonth = new Date(partnerYear, partnerMonth + 1, 0).getDate();
+
+      for (let i = 0; i < startingDay; i++) {
+        grid.innerHTML += `<div class="date-btn out-season"></div>`;
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = `${partnerYear}-${String(partnerMonth + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+        const dayDate = new Date(partnerYear, partnerMonth, d);
+        const isPast = dayDate < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+        let btnClass = 'date-btn';
+        let disabled = false;
+        let subText = '';
+
+        const existing = bookingsDB[dateStr];
+
+        if (isPast) {
+          btnClass += ' disabled-past';
+          disabled = true;
+          subText = `<span class="pax-tag">-</span>`;
+        } else if (existing) {
+          if (existing.type === 'private') {
+            btnClass += ' booked';
+            disabled = true;
+            subText = `<span class="pax-tag" style="color:#e63946">ZAUZETO</span>`;
+          } else if (existing.type === 'shared') {
+            const taken = existing.paxCount || 0;
+            const free = MAX_PAX - taken;
+
+            if (partnerSelectedMode === 'private') {
+              btnClass += ' booked';
+              disabled = true;
+              subText = `<span class="pax-tag" style="color:#e63946">ZAUZETO</span>`;
+            } else if (partnerSelectedMode === 'sunset') {
+              if (existing.sunsetBooked) {
+                btnClass += ' booked';
+                disabled = true;
+                subText = `<span class="pax-tag" style="color:#e63946">ZAUZETO</span>`;
+              } else {
+                subText = `<span class="pax-tag" style="color:#ff9f43">🌅 Sunset free</span>`;
+              }
+            } else {
+              if (free >= partnerPaxCount) {
+                subText = `<span class="pax-tag" style="color:#2ec4b6">${free} slob.</span>`;
+              } else {
+                btnClass += ' booked';
+                disabled = true;
+                subText = `<span class="pax-tag" style="color:#e63946">ZAUZETO</span>`;
+              }
+            }
+          } else if (existing.type === 'sunset') {
+            if (partnerSelectedMode === 'sunset' || partnerSelectedMode === 'private') {
+              btnClass += ' booked';
+              disabled = true;
+              subText = `<span class="pax-tag" style="color:#e63946">ZAUZETO</span>`;
+            } else {
+              subText = `<span class="pax-tag" style="color:#2ec4b6">10 slob.</span>`;
+            }
+          }
+        } else {
+          let freeCount = (partnerSelectedMode === 'sunset') ? '🌅 Sunset' : `${MAX_PAX} slob.`;
+          subText = `<span class="pax-tag" style="color:#2ec4b6">${freeCount}</span>`;
+        }
+
+        const clickAttr = disabled ? '' : `onclick="partnerSelectDate('${dateStr}')"`;
+        grid.innerHTML += `<button class="${btnClass}" ${clickAttr}><span>${d}</span>${subText}</button>`;
       }
     }
 
     function changePartnerMonth(dir) {
       partnerMonth += dir;
-      if(partnerMonth > 11) { partnerMonth = 0; partnerYear++; }
-      else if(partnerMonth < 0) { partnerMonth = 11; partnerYear--; }
+      if (partnerMonth < 0) { partnerMonth = 11; partnerYear--; }
+      if (partnerMonth > 11) { partnerMonth = 0; partnerYear++; }
       renderPartnerCalendar();
     }
 
-    function renderPartnerCalendar() {
-      const t = translations[currentLang] || translations['hr'];
-      document.getElementById('partnerMonthYear').innerText = t.months[partnerMonth] + " " + partnerYear + ".";
-      const grid = document.getElementById('partnerDaysGrid');
-      grid.innerHTML = '';
-      
-      const startingIndex = getFirstDayIndex(partnerYear, partnerMonth);
-      const daysInMonth = new Date(partnerYear, partnerMonth + 1, 0).getDate();
+    function partnerSelectDate(dateStr) {
+      partnerTargetDate = dateStr;
+      const parts = dateStr.split('-');
+      const formattedDate = `${parts[2]}.${parts[1]}.${parts[0]}.`;
 
-      const now = new Date();
-      now.setHours(0,0,0,0);
-
-      for (let i = 0; i < startingIndex; i++) { 
-        grid.innerHTML += `<div class="date-btn out-season" style="height: 48px;"></div>`; 
-      }
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const cellDate = new Date(partnerYear, partnerMonth, day);
-        cellDate.setHours(0,0,0,0);
-
-        const formattedDay = day < 10 ? '0' + day : day;
-        const formattedMonth = (partnerMonth + 1) < 10 ? '0' + (partnerMonth + 1) : (partnerMonth + 1);
-        const dateStr = `${formattedDay}.${formattedMonth}.${partnerYear}`;
-
-        if (cellDate < now) {
-          grid.innerHTML += `<div class="date-btn disabled-past" style="height: 48px; font-size: 0.78rem;">${day}</div>`;
-          continue;
-        }
-
-        const data = bookingsDB[dateStr] || { bookedPax: 0, isPrivateDay: false, hasSunset: false };
-        const freeSpots = MAX_PAX - data.bookedPax;
-        let isAvailable = false;
-
-        if (partnerSelectedMode === 'private' && !data.isPrivateDay && data.bookedPax === 0) isAvailable = true;
-        else if (partnerSelectedMode === 'shared' && !data.isPrivateDay && freeSpots >= partnerPaxCount) isAvailable = true;
-        else if (partnerSelectedMode === 'sunset' && !data.hasSunset) isAvailable = true;
-
-        if (!isAvailable) {
-          grid.innerHTML += `<div class="date-btn booked" style="height: 48px; font-size: 0.78rem;">${day}<span class="pax-tag" style="font-size: 0.55rem;">${t.full}</span></div>`;
-        } else {
-          let tagInfo = partnerSelectedMode === 'sunset' ? 'Sunset OK' : `${freeSpots} ${t.freePax}`;
-          grid.innerHTML += `<button class="date-btn" style="height: 48px; font-size: 0.78rem;" onclick="openPartnerContactForm('${dateStr}')">${day}<span class="pax-tag" style="color:#25d366; font-size: 0.55rem;">${tagInfo}</span></button>`;
-        }
-      }
+      document.getElementById('partnerSelectedDateTitle').innerText = `Unos rezervacije za datum: ${formattedDate}`;
+      document.getElementById('partnerStep2').style.display = 'none';
+      document.getElementById('partnerStep3').style.display = 'block';
     }
 
-    function openPartnerContactForm(dateStr) {
-      partnerTargetDate = dateStr;
-      document.getElementById('partnerStep2').style.display = 'none';
-      document.getElementById('partnerSelectedDateTitle').innerText = `Datum: ${dateStr}`;
+    function confirmPartnerBooking() {
+      const name = document.getElementById('partGuestName').value.trim();
+      const email = document.getElementById('partGuestEmail').value.trim();
+      const phone = document.getElementById('partGuestPhone').value.trim();
+      const note = document.getElementById('partNote').value.trim();
+
+      if (!name) {
+        alert("Molimo unesite ime i prezime gosta.");
+        return;
+      }
+
+      const dateStr = partnerTargetDate;
+      const priceVal = (partnerSelectedMode === 'private') ? 450 : (partnerSelectedMode === 'sunset' ? 150 : partnerPaxCount * 65);
+
+      if (!bookingsDB[dateStr]) {
+        if (partnerSelectedMode === 'private') {
+          bookingsDB[dateStr] = {
+            type: 'private',
+            paxCount: 10,
+            sunsetBooked: false,
+            guests: [{ name, email, phone, agency: currentPartnerAgencyName, tourType: 'private', price: priceVal, isPaid: true, note }]
+          };
+        } else if (partnerSelectedMode === 'sunset') {
+          bookingsDB[dateStr] = {
+            type: 'sunset',
+            paxCount: 2,
+            sunsetBooked: true,
+            guests: [{ name, email, phone, agency: currentPartnerAgencyName, tourType: 'sunset', price: priceVal, isPaid: true, note }]
+          };
+        } else {
+          bookingsDB[dateStr] = {
+            type: 'shared',
+            paxCount: partnerPaxCount,
+            sunsetBooked: false,
+            guests: [{ name, email, phone, agency: currentPartnerAgencyName, tourType: 'shared', pax: partnerPaxCount, details: partnerDetails, price: priceVal, isPaid: true, note }]
+          };
+        }
+      } else {
+        const existing = bookingsDB[dateStr];
+        if (partnerSelectedMode === 'sunset') {
+          existing.sunsetBooked = true;
+          existing.guests.push({ name, email, phone, agency: currentPartnerAgencyName, tourType: 'sunset', price: priceVal, isPaid: true, note });
+        } else if (partnerSelectedMode === 'shared') {
+          existing.paxCount = (existing.paxCount || 0) + partnerPaxCount;
+          existing.guests.push({ name, email, phone, agency: currentPartnerAgencyName, tourType: 'shared', pax: partnerPaxCount, details: partnerDetails, price: priceVal, isPaid: true, note });
+        }
+      }
+
+      saveCloudBookings(dateStr, bookingsDB[dateStr]);
+
+      alert(`Uspješno spremljena rezervacija za agenciju ${currentPartnerAgencyName}!`);
+
       document.getElementById('partGuestName').value = '';
       document.getElementById('partGuestEmail').value = '';
       document.getElementById('partGuestPhone').value = '';
       document.getElementById('partNote').value = '';
-      document.getElementById('partnerStep3').style.display = 'block';
-      document.getElementById('partnerBackBtn').style.display = 'inline-block';
+
+      partnerResetToStep1();
+      renderUserCalendar();
+      updateAdminTable();
+      renderAdminCalendar();
     }
 
-    async function confirmPartnerBooking() {
-      const name = document.getElementById('partGuestName').value.trim();
-      const email = document.getElementById('partGuestEmail').value.trim().toLowerCase();
-      const phone = document.getElementById('partGuestPhone').value.trim();
-      const noteText = document.getElementById('partNote').value.trim();
-
-      if (!name || !phone) {
-        alert("Unesite barem ime i broj mobitela gosta.");
-        return;
-      }
-
-      let tourTitle = '';
-      let priceCalc = 0;
-      let paymentMethod = `Naplata preko ${currentPartnerAgencyName}`;
-
-      let paxDescription = `${partnerDetails.adults} odraslih`;
-      if (partnerDetails.kids > 0) paxDescription += `, ${partnerDetails.kids} djece`;
-      if (partnerDetails.babies > 0) paxDescription += `, ${partnerDetails.babies} beba`;
-
-      if (partnerSelectedMode === 'private') {
-        tourTitle = "Privatna Cjelodnevna Tura";
-        priceCalc = 450;
-      } else if (partnerSelectedMode === 'shared') {
-        tourTitle = "Poludnevni izlet: Three Island Tour";
-        priceCalc = partnerPaxCount * 65;
-      } else if (partnerSelectedMode === 'sunset') {
-        tourTitle = "Romantična Sunset Tura";
-        priceCalc = 150;
-      }
-
-      try {
-        await loadCloudBookings();
-        const data = bookingsDB[partnerTargetDate] || { bookedPax: 0, dayTours: [], hasSunset: false, totalRevenue: 0, isPrivateDay: false, guests: [] };
-        if (!data.guests) data.guests = [];
-
-        if (partnerSelectedMode === 'private') {
-          data.isPrivateDay = true; 
-          data.bookedPax = 10; 
-          data.dayTours.push(tourTitle); 
-          data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), agency: currentPartnerAgencyName, name, email: email || 'N/A', phone, tour: tourTitle, pax: 10, paxDetails: paxDescription, price: priceCalc, payment: paymentMethod, note: noteText || 'Partner unos', terms: "Partner unos" });
-        } else if (partnerSelectedMode === 'shared') {
-          data.bookedPax += partnerPaxCount; 
-          data.dayTours.push(`${tourTitle} (${paxDescription})`); 
-          data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), agency: currentPartnerAgencyName, name, email: email || 'N/A', phone, tour: tourTitle, pax: partnerPaxCount, paxDetails: paxDescription, price: priceCalc, payment: paymentMethod, note: noteText || 'Partner unos', terms: "Partner unos" });
-        } else if (partnerSelectedMode === 'sunset') {
-          data.hasSunset = true; 
-          data.totalRevenue += priceCalc;
-          data.guests.push({ id: Date.now(), agency: currentPartnerAgencyName, name, email: email || 'N/A', phone, tour: tourTitle, pax: 2, paxDetails: "2 odraslih", price: priceCalc, payment: paymentMethod, note: noteText || 'Partner unos', terms: "Partner unos" });
-        }
-        
-        bookingsDB[partnerTargetDate] = data;
-        await saveCloudBookings(partnerTargetDate, data);
-
-        updateAdminTable();
-        renderAdminCalendar();
-        closePartnerFullscreen();
-        alert("Partner rezervacija je uspješno spremljena!");
-
-      } catch (err) {
-        console.error("Greška partner unosa:", err);
-        alert("Greška pri spremanju partner rezervacije.");
-      }
-    }
-
-    window.onload = function() {
-      loadCloudBookings();
-      setInterval(loadCloudBookings, 10000); 
-    };
+    loadCloudBookings();
   </script>
 </body>
 </html>
