@@ -3,7 +3,7 @@
   ==========================================================================
   AUREUS LUX - SYSTEM INSTRUCTION FOR FUTURE AI EDITS:
   Every time you modify this HTML/JS code, automatically increase the version
-  number below and in the footer (.version-tag) by +0.1 (e.g., 7.5 -> 7.6).
+  number below and in the footer (.version-tag) by +0.1 (e.g., 7.6 -> 7.7).
   ==========================================================================
 -->
 <html lang="hr">
@@ -100,9 +100,9 @@
     }
 
     .header-mini-compass {
-      width: 40px;
-      height: 40px;
-      filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+      width: 44px;
+      height: 44px;
+      filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
       flex-shrink: 0;
     }
 
@@ -763,34 +763,59 @@
   <!-- PAMETNI HEADER -->
   <header class="sticky-header" id="stickyHeader">
     <a href="#" class="header-brand-group" aria-label="Aureus Lux Naslovnica">
+      <!-- AŽURIRANO: RUŽA VJETROVA U HEADERU IDENTIČNA ONOJ U HERO SEKCIJI -->
       <svg class="header-mini-compass" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <linearGradient id="gold-mini-1" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#ffffff" /><stop offset="45%" stop-color="#ffd700" /><stop offset="100%" stop-color="#8b6210" />
+          <linearGradient id="gold-light-side-header" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fff5c0" />
+            <stop offset="40%" stop-color="#d4af37" />
+            <stop offset="100%" stop-color="#aa771c" />
           </linearGradient>
-          <linearGradient id="gold-mini-2" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#d4af37" /><stop offset="100%" stop-color="#3b2602" />
+          <linearGradient id="gold-dark-side-header" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#9a6e16" />
+            <stop offset="60%" stop-color="#5a3d00" />
+            <stop offset="100%" stop-color="#2a1a00" />
           </linearGradient>
         </defs>
         <g transform="translate(100, 100)">
-          <circle cx="0" cy="0" r="54" stroke="url(#gold-mini-1)" stroke-width="3" fill="none"/>
-          <circle cx="0" cy="0" r="46" stroke="url(#gold-mini-2)" stroke-width="2" fill="none"/>
+          <circle cx="0" cy="0" r="70" stroke="url(#gold-light-side-header)" stroke-width="1.5" fill="none" opacity="0.85"/>
+          <circle cx="0" cy="0" r="54" stroke="url(#gold-light-side-header)" stroke-width="3" fill="none" opacity="0.95"/>
+          <circle cx="0" cy="0" r="46" stroke="url(#gold-dark-side-header)" stroke-width="2" fill="none" opacity="0.85"/>
+
+          <g transform="rotate(45)">
+            <polygon points="0,0 0,-68 -10,-10" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-68 10,-10" fill="url(#gold-dark-side-header)" />
+          </g>
+          <g transform="rotate(135)">
+            <polygon points="0,0 0,-68 -10,-10" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-68 10,-10" fill="url(#gold-dark-side-header)" />
+          </g>
+          <g transform="rotate(225)">
+            <polygon points="0,0 0,-68 -10,-10" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-68 10,-10" fill="url(#gold-dark-side-header)" />
+          </g>
+          <g transform="rotate(315)">
+            <polygon points="0,0 0,-68 -10,-10" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-68 10,-10" fill="url(#gold-dark-side-header)" />
+          </g>
+
           <g transform="rotate(0)">
-            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-mini-1)" />
-            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-mini-2)" />
+            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-dark-side-header)" />
           </g>
           <g transform="rotate(90)">
-            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-mini-1)" />
-            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-mini-2)" />
+            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-dark-side-header)" />
           </g>
           <g transform="rotate(180)">
-            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-mini-1)" />
-            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-mini-2)" />
+            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-dark-side-header)" />
           </g>
           <g transform="rotate(270)">
-            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-mini-1)" />
-            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-mini-2)" />
+            <polygon points="0,0 0,-96 -14,-12" fill="url(#gold-light-side-header)" />
+            <polygon points="0,0 0,-96 14,-12" fill="url(#gold-dark-side-header)" />
           </g>
+
           <circle cx="0" cy="0" r="3" fill="#fff5c0" />
         </g>
       </svg>
@@ -1479,7 +1504,7 @@
 
   <footer>
     <p id="footerText">&copy; 2027 AUREUS LUX - Obrt za najam broda i turističke usluge, vl. Stipe Majstorović, Klis. Sva prava pridržana.</p>
-    <div class="version-tag">v7.6</div>
+    <div class="version-tag">v7.7</div>
   </footer>
 
   <script>
