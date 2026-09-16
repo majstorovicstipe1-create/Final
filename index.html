@@ -3,7 +3,7 @@
   ==========================================================================
   AUREUS LUX - SYSTEM INSTRUCTION FOR FUTURE AI EDITS:
   Every time you modify this HTML/JS code, automatically increase the version
-  number below and in the footer (.version-tag) by +0.1 (e.g., 7.4 -> 7.5).
+  number below and in the footer (.version-tag) by +0.1 (e.g., 7.5 -> 7.6).
   ==========================================================================
 -->
 <html lang="hr">
@@ -200,17 +200,19 @@
 
     .compass-halo {
       position: absolute;
-      width: 210px;
-      height: 210px;
+      width: 220px;
+      height: 220px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(255, 235, 170, 0.35) 0%, rgba(212, 175, 55, 0.12) 50%, transparent 75%);
-      animation: haloPulse 4s ease-in-out infinite alternate;
+      background: radial-gradient(circle, rgba(255, 235, 170, 0.45) 0%, rgba(212, 175, 55, 0.18) 45%, rgba(0, 180, 216, 0.08) 70%, transparent 85%);
+      filter: blur(12px);
+      animation: cloudHaloMorph 7s ease-in-out infinite alternate;
       z-index: 0;
     }
 
-    @keyframes haloPulse {
-      0% { transform: scale(0.9); opacity: 0.4; }
-      100% { transform: scale(1.18); opacity: 0.95; }
+    @keyframes cloudHaloMorph {
+      0% { transform: scale(0.88) rotate(0deg); opacity: 0.5; border-radius: 50% 45% 55% 50%; }
+      50% { transform: scale(1.15) rotate(15deg); opacity: 0.9; border-radius: 53% 50% 48% 52%; }
+      100% { transform: scale(1.02) rotate(-10deg); opacity: 0.7; border-radius: 48% 53% 52% 49%; }
     }
 
     .brand-compass-icon {
@@ -227,7 +229,7 @@
       100% { filter: drop-shadow(0px 14px 35px rgba(0,0,0,0.98)) drop-shadow(0px 0px 50px rgba(255, 235, 150, 0.85)); }
     }
 
-    /* POZADINSKA ANIMACIJA LIJEVO-DESNO (SPORIJA - 24s) */
+    /* ORGANSKA OBLAČNA POZADINSKA ANIMACIJA (MEKANA, VALOVITA I TRODIMENZIONALNA) */
     .gold-headline-wrapper {
       position: relative;
       display: inline-block;
@@ -241,25 +243,39 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 140%;
-      height: 220%;
+      width: 170%;
+      height: 260%;
       background: radial-gradient(
-        ellipse at center, 
-        rgba(255, 215, 0, 0.38) 0%, 
-        rgba(212, 175, 55, 0.22) 25%, 
-        rgba(0, 212, 255, 0.12) 50%, 
-        transparent 75%
+        circle at 50% 50%, 
+        rgba(255, 215, 0, 0.32) 0%, 
+        rgba(212, 175, 55, 0.20) 30%, 
+        rgba(0, 190, 240, 0.14) 55%, 
+        rgba(130, 80, 20, 0.08) 75%, 
+        transparent 90%
       );
-      filter: blur(35px);
+      filter: blur(48px);
       z-index: 0;
       pointer-events: none;
-      animation: auroraSway 24s ease-in-out infinite alternate;
+      animation: cloudDriftMorph 14s ease-in-out infinite alternate;
+      border-radius: 60% 40% 55% 45% / 50% 55% 45% 50%;
     }
 
-    @keyframes auroraSway {
-      0% { transform: translate(-65%, -50%) scale(0.9); opacity: 0.55; }
-      50% { transform: translate(-35%, -50%) scale(1.12); opacity: 0.95; }
-      100% { transform: translate(-55%, -50%) scale(1.0); opacity: 0.7; }
+    @keyframes cloudDriftMorph {
+      0% {
+        transform: translate(-58%, -52%) scale(0.9) rotate(-3deg);
+        opacity: 0.6;
+        border-radius: 55% 45% 60% 40% / 48% 58% 42% 52%;
+      }
+      50% {
+        transform: translate(-42%, -48%) scale(1.15) rotate(5deg);
+        opacity: 0.95;
+        border-radius: 45% 55% 48% 52% / 55% 45% 55% 45%;
+      }
+      100% {
+        transform: translate(-50%, -55%) scale(1.02) rotate(-1deg);
+        opacity: 0.75;
+        border-radius: 50% 50% 52% 48% / 50% 52% 48% 50%;
+      }
     }
 
     /* EFEKT OSUNČANOSTI, ODRAZA I PROSTRANIJEG NASLOVA (18s) */
@@ -879,7 +895,7 @@
           </svg>
         </div>
 
-        <!-- ULTRA ZLATNI NASLOV AUREUS LUX (SPORIJA POZADINSKA ANIMACIJA LIJEVO-DESNO) -->
+        <!-- ULTRA ZLATNI NASLOV AUREUS LUX (ORGANSKA OBLAČNA POZADINSKA ANIMACIJA) -->
         <div class="gold-headline-wrapper">
           <h1 class="main-hero-title">
             <span>AUREUS</span>
@@ -1463,7 +1479,7 @@
 
   <footer>
     <p id="footerText">&copy; 2027 AUREUS LUX - Obrt za najam broda i turističke usluge, vl. Stipe Majstorović, Klis. Sva prava pridržana.</p>
-    <div class="version-tag">v7.5</div>
+    <div class="version-tag">v7.6</div>
   </footer>
 
   <script>
