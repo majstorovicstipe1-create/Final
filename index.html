@@ -40,25 +40,28 @@
     body { background-color: #03070e; color: #e6f1ff; font-family: 'Montserrat', sans-serif; font-weight: 300; line-height: 1.6; overflow-x: hidden; scroll-behavior: smooth; }
     h1, h2, h3, h4 { font-family: 'Cinzel', serif; font-weight: 600; letter-spacing: 1.5px; }
 
-    /* UNIVERZALNA KLASA ZA ZLATNI GRADIENT TEKST (AUREUS LUX BRANDING) */
+    /* VRAĆEN MOĆNI ZLATNI GRADIENT S EFEKTIMA I ANIMACIJAMA */
     .brand-gold-text {
       font-family: 'Cinzel Decorative', 'Cinzel', serif;
       background: linear-gradient(
-        115deg, 
-        #5e4410 0%, 
-        #8f691b 20%, 
-        #b8943f 38%, 
-        #e2cc82 50%, 
-        #b8943f 62%, 
-        #8f691b 80%, 
-        #5e4410 100%
+        135deg, 
+        #d1b468 0%, 
+        #fff2b2 25%, 
+        #b8943f 50%, 
+        #e2cc82 75%, 
+        #8f691b 100%
       );
-      background-size: 240% auto;
+      background-size: 200% auto;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: inline-block;
       font-weight: 700;
-      filter: drop-shadow(0px 2px 6px rgba(143, 105, 27, 0.6));
+      animation: shineGoldText 6s linear infinite;
+      filter: drop-shadow(0px 2px 8px rgba(209, 180, 104, 0.5));
+    }
+
+    @keyframes shineGoldText {
+      to { background-position: 200% center; }
     }
 
     .minimal-sub {
@@ -306,28 +309,11 @@
       align-items: center;
       justify-content: center;
       gap: 12px;
-      animation: sunGlaze 18s ease-in-out infinite alternate;
-      filter: drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.95)) drop-shadow(0px 0px 20px rgba(143, 105, 27, 0.45));
     }
 
     .main-hero-title .lux-row {
       font-size: 1.05em;
       letter-spacing: 0.2em;
-    }
-
-    @keyframes sunGlaze {
-      0% {
-        background-position: 0% center;
-        filter: drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 16px rgba(143, 105, 27, 0.4));
-      }
-      50% {
-        background-position: 120% center;
-        filter: drop-shadow(0px 8px 20px rgba(0, 0, 0, 0.95)) drop-shadow(0px 0px 35px rgba(209, 180, 104, 0.85));
-      }
-      100% {
-        background-position: 240% center;
-        filter: drop-shadow(0px 8px 15px rgba(0, 0, 0, 0.9)) drop-shadow(0px 0px 18px rgba(160, 120, 30, 0.5));
-      }
     }
 
     .hero-subtitle { 
@@ -913,7 +899,7 @@
         </div>
 
         <div class="gold-headline-wrapper">
-          <h1 class="main-hero-title">
+          <h1 class="main-hero-title brand-gold-text">
             <span>AUREUS</span>
             <span class="lux-row">LUX</span>
           </h1>
@@ -1578,7 +1564,7 @@
 
   <footer>
     <p id="footerText">&copy; 2027 AUREUS LUX - Obrt za najam broda i turističke usluge, vl. Stipe Majstorović, Klis. Sva prava pridržana.</p>
-    <div class="version-tag">v1.3.7</div>
+    <div class="version-tag">v1.3.8</div>
   </footer>
 
   <script>
@@ -1840,7 +1826,7 @@ Iskreno nam je žao, no zbog nepredviđenih okolnosti primorani smo stornirati V
 Vaš uplaćeni iznos od ${price} € bit će u potpunosti vraćen na Vaš račun u najkraćem mogućem roku.
 
 Srdačan pozdrav,
-AUREUS LUX`
+<span class="brand-gold-text">AUREUS LUX</span>`
       },
       en: {
         subtitle: "Exclusive Boat Excursions",
@@ -1962,7 +1948,7 @@ We sincerely apologize, but due to unforeseen circumstances, we are forced to ca
 Your paid amount of ${price} € will be fully refunded to your account in the shortest possible time.
 
 Warm regards,
-AUREUS LUX`
+<span class="brand-gold-text">AUREUS LUX</span>`
       },
       de: {
         subtitle: "Exklusive Bootstouren",
@@ -2084,7 +2070,7 @@ es tut uns leid, aber aufgrund unvorhergesehener Umstände müssen wir Ihre Buch
 Ihr gezahlter Betrag von ${price} € wird in kürzester Zeit vollständig auf Ihr Konto zurückerstattet.
 
 Mit freundlichen Grüßen,
-AUREUS LUX`
+<span class="brand-gold-text">AUREUS LUX</span>`
       },
       it: {
         subtitle: "Escursioni Esclusive in Barca",
@@ -2206,7 +2192,7 @@ Ci scusiamo sinceramente, ma a causa di circostanze impreviste siamo costretti a
 L'importo pagato di ${price} € verrà interamente rimborsato sul vostro conto nel più breve tempo possibile.
 
 Cordiali saluti,
-AUREUS LUX`
+<span class="brand-gold-text">AUREUS LUX</span>`
       },
       es: {
         subtitle: "Excursiones Náuticas Exclusivas",
@@ -2328,7 +2314,7 @@ Le pedimos sinceras disculpas, pero debido a circunstancias imprevistas nos vemo
 Su importe pagado de ${price} € será devuelto íntegramente a su cuenta en el menor tiempo posible.
 
 Atentamente,
-AUREUS LUX`
+<span class="brand-gold-text">AUREUS LUX</span>`
       },
       fr: {
         subtitle: "Excursions Nautiques Exclusives",
@@ -2450,7 +2436,7 @@ Nous sommes sincèrement désolés, mais en raison de circonstances imprévues, 
 Le montant payé de ${price} € vous sera intégralement remboursé sur votre compte dans les plus brefs délais.
 
 Cordialement,
-AUREUS LUX`
+<span class="brand-gold-text">AUREUS LUX</span>`
       }
     };
 
