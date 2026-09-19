@@ -115,6 +115,12 @@
       top: 0;
     }
 
+    .header-left-group {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
     .header-brand-group {
       display: flex;
       align-items: center;
@@ -134,6 +140,18 @@
       font-size: 1.15rem;
       letter-spacing: 2px;
       white-space: nowrap;
+    }
+
+    .header-lang-select {
+      background: #050b14;
+      color: #edd999;
+      border: 1px solid rgba(209, 180, 104, 0.5);
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      cursor: pointer;
+      outline: none;
     }
 
     .dropdown-menu {
@@ -788,57 +806,67 @@
 
   <!-- PAMETNI HEADER -->
   <header class="sticky-header" id="stickyHeader">
-    <a href="#" class="header-brand-group" aria-label="Aureus Lux Naslovnica">
-      <svg class="header-mini-compass" viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="soft-shadow-hdr" x="-50%" y="-50%" width="200%" height="200%">
-            <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.8" />
-          </filter>
-        </defs>
-        <g filter="url(#soft-shadow-hdr)">
-          <!-- Sekundarni krakovi (NE, NW, SE, SW) -->
-          <g transform="rotate(45)">
-            <polygon points="0,0 -18,-18 0,-180" fill="url(#headline-gold-grad)" opacity="0.9" />
-            <polygon points="0,0 18,-18 0,-180" fill="url(#headline-gold-grad)" opacity="0.65" />
-            <polygon points="0,0 18,18 0,180" fill="url(#headline-gold-grad)" opacity="0.9" />
-            <polygon points="0,0 -18,18 0,180" fill="url(#headline-gold-grad)" opacity="0.65" />
-            <polygon points="0,0 18,-18 180,0" fill="url(#headline-gold-grad)" opacity="0.9" />
-            <polygon points="0,0 18,18 180,0" fill="url(#headline-gold-grad)" opacity="0.65" />
-            <polygon points="0,0 -18,18 -180,0" fill="url(#headline-gold-grad)" opacity="0.9" />
-            <polygon points="0,0 -18,-18 -180,0" fill="url(#headline-gold-grad)" opacity="0.65" />
+    <div class="header-left-group">
+      <select class="header-lang-select" onchange="changeLanguage(this.value)" id="headerLangSelect" aria-label="Odaberite jezik">
+        <option value="hr">🇭🇷 HR</option>
+        <option value="en">🇬🇧 EN</option>
+        <option value="de">🇩🇪 DE</option>
+        <option value="it">🇮🇹 IT</option>
+        <option value="es">🇪🇸 ES</option>
+        <option value="fr">🇫🇷 FR</option>
+      </select>
+      <a href="#" class="header-brand-group" aria-label="Aureus Lux Naslovnica">
+        <svg class="header-mini-compass" viewBox="-300 -300 600 600" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="soft-shadow-hdr" x="-50%" y="-50%" width="200%" height="200%">
+              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.8" />
+            </filter>
+          </defs>
+          <g filter="url(#soft-shadow-hdr)">
+            <!-- Sekundarni krakovi (NE, NW, SE, SW) -->
+            <g transform="rotate(45)">
+              <polygon points="0,0 -18,-18 0,-180" fill="url(#headline-gold-grad)" opacity="0.9" />
+              <polygon points="0,0 18,-18 0,-180" fill="url(#headline-gold-grad)" opacity="0.65" />
+              <polygon points="0,0 18,18 0,180" fill="url(#headline-gold-grad)" opacity="0.9" />
+              <polygon points="0,0 -18,18 0,180" fill="url(#headline-gold-grad)" opacity="0.65" />
+              <polygon points="0,0 18,-18 180,0" fill="url(#headline-gold-grad)" opacity="0.9" />
+              <polygon points="0,0 18,18 180,0" fill="url(#headline-gold-grad)" opacity="0.65" />
+              <polygon points="0,0 -18,18 -180,0" fill="url(#headline-gold-grad)" opacity="0.9" />
+              <polygon points="0,0 -18,-18 -180,0" fill="url(#headline-gold-grad)" opacity="0.65" />
+            </g>
+            <!-- Glavna četverokraka zvijezda (N, S, E, W) -->
+            <g>
+              <polygon points="0,0 -26,-26 0,-250" fill="url(#headline-gold-grad)" opacity="0.95" />
+              <polygon points="0,0 26,-26 0,-250" fill="url(#headline-gold-grad)" opacity="0.7" />
+              <polygon points="0,0 26,26 0,250" fill="url(#headline-gold-grad)" opacity="0.95" />
+              <polygon points="0,0 -26,26 0,250" fill="url(#headline-gold-grad)" opacity="0.7" />
+              <polygon points="0,0 26,-26 250,0" fill="url(#headline-gold-grad)" opacity="0.95" />
+              <polygon points="0,0 26,26 250,0" fill="url(#headline-gold-grad)" opacity="0.7" />
+              <polygon points="0,0 -26,26 -250,0" fill="url(#headline-gold-grad)" opacity="0.95" />
+              <polygon points="0,0 -26,-26 -250,0" fill="url(#headline-gold-grad)" opacity="0.7" />
+            </g>
+            <circle cx="0" cy="0" r="190" fill="none" stroke="url(#headline-gold-ring)" stroke-width="14" />
+            <circle cx="0" cy="0" r="120" fill="none" stroke="url(#headline-gold-ring)" stroke-width="9" />
+            <circle cx="0" cy="0" r="18" fill="url(#headline-gold-grad)" />
+            <circle cx="0" cy="0" r="7" fill="#e2cc82" />
           </g>
-          <!-- Glavna četverokraka zvijezda (N, S, E, W) -->
-          <g>
-            <polygon points="0,0 -26,-26 0,-250" fill="url(#headline-gold-grad)" opacity="0.95" />
-            <polygon points="0,0 26,-26 0,-250" fill="url(#headline-gold-grad)" opacity="0.7" />
-            <polygon points="0,0 26,26 0,250" fill="url(#headline-gold-grad)" opacity="0.95" />
-            <polygon points="0,0 -26,26 0,250" fill="url(#headline-gold-grad)" opacity="0.7" />
-            <polygon points="0,0 26,-26 250,0" fill="url(#headline-gold-grad)" opacity="0.95" />
-            <polygon points="0,0 26,26 250,0" fill="url(#headline-gold-grad)" opacity="0.7" />
-            <polygon points="0,0 -26,26 -250,0" fill="url(#headline-gold-grad)" opacity="0.95" />
-            <polygon points="0,0 -26,-26 -250,0" fill="url(#headline-gold-grad)" opacity="0.7" />
-          </g>
-          <circle cx="0" cy="0" r="190" fill="none" stroke="url(#headline-gold-ring)" stroke-width="14" />
-          <circle cx="0" cy="0" r="120" fill="none" stroke="url(#headline-gold-ring)" stroke-width="9" />
-          <circle cx="0" cy="0" r="18" fill="url(#headline-gold-grad)" />
-          <circle cx="0" cy="0" r="7" fill="#e2cc82" />
-        </g>
-      </svg>
-      <span class="header-mini-title brand-gold-text">AUREUS LUX</span>
-    </a>
-    <div class="hamburger-icon" onclick="toggleDropdown(event)" role="button" aria-label="Otvori navigaciju"><i class="fa-solid fa-bars"></i></div>
+        </svg>
+        <span class="header-mini-title brand-gold-text">AUREUS LUX</span>
+      </a>
+    </div>
+    <div class="hamburger-icon" onclick="toggleDropdown(event)" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')toggleDropdown(event)" aria-label="Otvori navigaciju"><i class="fa-solid fa-bars"></i></div>
   </header>
 
   <!-- PADAJUĆI IZBORNIK -->
   <nav id="dropdownMenu" class="dropdown-menu">
-    <a onclick="closeMenuAndNavigate('#')" id="menuHome"><i class="fa-solid fa-house"></i> Početna stranica</a>
-    <a onclick="closeMenuAndNavigate('#tours')" id="menuTours"><i class="fa-solid fa-ship"></i> Naše Ture</a>
-    <a onclick="closeMenuAndNavigate('#features')" id="menuFeatures"><i class="fa-solid fa-anchor"></i> Oprema i Usluga</a>
-    <a onclick="closeMenuAndNavigate('#about')" id="menuAbout"><i class="fa-solid fa-circle-info"></i> O nama i Kontakt</a>
-    <a onclick="openTermsModal();" id="menuTermsLink"><i class="fa-solid fa-file-contract"></i> Uvjeti korištenja i otkazivanja</a>
-    <a onclick="openTourSelectionModal();" style="color: #edd999;" id="menuBook"><i class="fa-solid fa-calendar-check"></i> Rezerviraj termin</a>
-    <a onclick="partnerLogin();" style="color: #2ec4b6;" id="menuPartner"><i class="fa-solid fa-handshake"></i> Partner Login</a>
-    <a onclick="adminLogin();" style="color: #d1b468;" id="menuAdmin"><i class="fa-solid fa-user-lock"></i> Admin prijava</a>
+    <a onclick="closeMenuAndNavigate('#')" tabindex="0" onkeydown="if(event.key==='Enter')closeMenuAndNavigate('#')" id="menuHome"><i class="fa-solid fa-house"></i> Početna stranica</a>
+    <a onclick="closeMenuAndNavigate('#tours')" tabindex="0" onkeydown="if(event.key==='Enter')closeMenuAndNavigate('#tours')" id="menuTours"><i class="fa-solid fa-ship"></i> Naše Ture</a>
+    <a onclick="closeMenuAndNavigate('#features')" tabindex="0" onkeydown="if(event.key==='Enter')closeMenuAndNavigate('#features')" id="menuFeatures"><i class="fa-solid fa-anchor"></i> Oprema i Usluga</a>
+    <a onclick="closeMenuAndNavigate('#about')" tabindex="0" onkeydown="if(event.key==='Enter')closeMenuAndNavigate('#about')" id="menuAbout"><i class="fa-solid fa-circle-info"></i> O nama i Kontakt</a>
+    <a onclick="openTermsModal();" tabindex="0" onkeydown="if(event.key==='Enter')openTermsModal();" id="menuTermsLink"><i class="fa-solid fa-file-contract"></i> Uvjeti korištenja i otkazivanja</a>
+    <a onclick="openTourSelectionModal();" tabindex="0" onkeydown="if(event.key==='Enter')openTourSelectionModal();" style="color: #edd999;" id="menuBook"><i class="fa-solid fa-calendar-check"></i> Rezerviraj termin</a>
+    <a onclick="partnerLogin();" tabindex="0" onkeydown="if(event.key==='Enter')partnerLogin();" style="color: #2ec4b6;" id="menuPartner"><i class="fa-solid fa-handshake"></i> Partner Login</a>
+    <a onclick="adminLogin();" tabindex="0" onkeydown="if(event.key==='Enter')adminLogin();" style="color: #d1b468;" id="menuAdmin"><i class="fa-solid fa-user-lock"></i> Admin prijava</a>
 
     <div class="lang-selector">
       <label id="lblLang"><i class="fa-solid fa-globe"></i> Odaberite Jezik</label>
@@ -1104,6 +1132,20 @@
         <div class="contact-row"><strong id="ownerName">Vlasnik:</strong> <span id="ownerNameVal">Stipe Majstorović</span></div>
         <div class="contact-row"><strong id="addrText">Adresa:</strong> <span id="addrVal">Kralja Tomislava 22, 21231 Klis</span></div>
         <div class="contact-row"><strong id="phoneText">Mobitel:</strong> <a href="tel:+385923359558" id="dynamicPhoneLink" style="color: #64dfdf; text-decoration: none; font-weight: 500;">+385 92 335 9558</a></div>
+        
+        <!-- DRUŠTVENE MREŽE -->
+        <div class="contact-row" style="margin-top: 15px; align-items: center;">
+          <strong id="socialText">Zapratite nas:</strong>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <a href="https://www.instagram.com/aureuslux_tours?stkn=MW1ydXE4cjl1dDE2OQ==" target="_blank" style="font-size: 1.4rem; text-decoration: none;" aria-label="Instagram">
+              <i class="fa-brands fa-instagram" style="background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+            </a>
+            <a href="https://www.tiktok.com" target="_blank" style="font-size: 1.4rem; color: #edd999; text-decoration: none;" aria-label="TikTok">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+          </div>
+        </div>
+
         <div style="margin-top: 18px; text-align: center;">
           <a href="tel:+385923359558" class="btn-gold" style="padding: 10px 20px; font-size: 0.78rem; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
             <i class="fa-solid fa-phone"></i> <span id="btnPhoneCallText">Rezervirajte Telefonski</span>
@@ -1191,7 +1233,7 @@
         <h3 class="section-title-decent" style="font-size: 1.3rem;" id="adminDetailTitle"><i class="fa-solid fa-file-invoice"></i> Detaljni Pregled Rezervacije</h3>
         <button class="cal-btn" style="background: #112240; border-color: #d1b468; padding: 8px 18px;" onclick="closeAdminDetail()" id="adminDetailCloseBtn">Zatvori &times;</button>
       </div>
-
+      
       <!-- OVDJE SE PRIKAZUJU SVE REZERVACIJE ZA TAJ DAN JEDNA ISPOD DRUGE -->
       <div id="adminDetailContentBody" style="display: flex; flex-direction: column; gap: 20px;">
       </div>
@@ -1519,15 +1561,15 @@
         <strong id="displayBookingCodeNumber" style="font-family: 'Cinzel Decorative', serif; font-size: 1.2rem; color: #edd999; letter-spacing: 2px;"></strong>
       </div>
 
-      <!-- INSTAGRAM LINK S GRADIENTOM IKONE I @AureusLux_tours -->
-      <div style="background: rgba(13, 27, 42, 0.7); border: 1px solid rgba(209, 180, 104, 0.35); padding: 14px; border-radius: 8px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 14px;">
-        <a href="https://www.instagram.com/aureuslux_tours?stkn=MW1ydXE4cjl1dDE2OQ==" target="_blank" style="font-size: 1.8rem; display: inline-flex; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="Instagram Aureus Lux">
-          <i class="fa-brands fa-instagram" style="background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 6px rgba(209,180,104,0.5));"></i>
-        </a>
-        <div style="text-align: left;">
-          <span style="font-size: 0.75rem; color: #94a3b8; display: block; font-weight: 300;" id="lblFollowUs">Zapratite nas na društvenim mrežama:</span>
-          <a href="https://www.instagram.com/aureuslux_tours?stkn=MW1ydXE4cjl1dDE2OQ==" target="_blank" style="font-size: 0.9rem; color: #edd999; text-decoration: none; font-weight: 600; letter-spacing: 0.5px; transition: color 0.2s;" onmouseover="this.style.color='#ffd700'" onmouseout="this.style.color='#edd999'">
-            @AureusLux_tours
+      <!-- DRUŠTVENE MREŽE (ZAPRATITE NAS) -->
+      <div style="background: rgba(13, 27, 42, 0.7); border: 1px solid rgba(209, 180, 104, 0.35); padding: 14px; border-radius: 8px; margin-bottom: 20px;">
+        <span style="font-size: 0.75rem; color: #94a3b8; display: block; font-weight: 300; margin-bottom: 10px;" id="lblFollowUs">Zapratite nas na društvenim mrežama:</span>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+          <a href="https://www.instagram.com/aureuslux_tours?stkn=MW1ydXE4cjl1dDE2OQ==" target="_blank" style="font-size: 1.6rem; display: inline-flex; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="Instagram Aureus Lux">
+            <i class="fa-brands fa-instagram" style="background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+          </a>
+          <a href="https://www.tiktok.com" target="_blank" style="font-size: 1.6rem; color: #edd999; display: inline-flex; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="TikTok Aureus Lux">
+            <i class="fa-brands fa-tiktok"></i>
           </a>
         </div>
       </div>
@@ -1564,7 +1606,7 @@
 
   <footer>
     <p id="footerText">&copy; 2027 AUREUS LUX - Obrt za najam broda i turističke usluge, vl. Stipe Majstorović, Klis. Sva prava pridržana.</p>
-    <div class="version-tag">v1.4.0</div>
+    <div class="version-tag">v1.4.1</div>
   </footer>
 
   <script>
@@ -1603,13 +1645,9 @@
     let partnerYear = today.getFullYear();
     let partnerMonth = today.getMonth();
 
-    // FUNKCIJA ZA SLANJE WHATSAPP OBAVIJESTI PREKO CALLMEBOT-a
     function sendWhatsAppNotification(bookingCode, dateStr, guestName, agencyName) {
-      // Generiramo link koji otvara admin panel i automatski modal s detaljima za taj datum
       const adminLink = `${window.location.origin}${window.location.pathname}#admin-date=${dateStr}`;
-      
       const message = `Nova rezervacija!%0ABroj: *${bookingCode}*%0ADatum: ${dateStr}%0AGost: ${guestName}%0AIzvor: ${agencyName}%0A%0APregledaj u admin panelu: ${adminLink}`;
-      
       const url = `https://api.callmebot.com/whatsapp.php?phone=${CALLMEBOT_PHONE}&text=${message}&apikey=${CALLMEBOT_APIKEY}`;
       
       fetch(url)
@@ -1639,8 +1677,6 @@
       renderCalendarHeaders();
       updateAdminTable();
       renderAdminCalendar();
-      
-      // Provjera ako je u URL-u zadan admin skok na datum (#admin-date=YYYY-MM-DD)
       checkUrlAdminHash();
     }
 
@@ -1649,7 +1685,6 @@
       if (hash.startsWith('#admin-date=')) {
         const dateStr = hash.replace('#admin-date=', '');
         if (dateStr) {
-          // Otvaramo admin panel i detalje datuma
           document.getElementById('adminFullscreenPanel').style.display = 'block';
           renderAdminCalendar();
           updateAdminTable();
@@ -2593,6 +2628,7 @@ Cordialement,
       document.getElementById('footerText').innerHTML = t.footerText;
 
       document.getElementById('mainLangSelect').value = langKey;
+      document.getElementById('headerLangSelect').value = langKey;
       renderCalendarHeaders();
       renderUserCalendar();
     }
@@ -2830,7 +2866,7 @@ Cordialement,
           subText = `<span class="pax-tag" style="color:#2ec4b6">${freeCount}</span>`;
         }
 
-        const clickAttr = disabled ? '' : `onclick="selectDate('${dateStr}')"`;
+        const clickAttr = disabled ? '' : `onclick="selectDate('${dateStr}')" tabindex="0" onkeydown="if(event.key==='Enter')selectDate('${dateStr}')"`;
         grid.innerHTML += `<button class="${btnClass}" ${clickAttr}><span>${d}</span>${subText}</button>`;
       }
     }
@@ -2852,10 +2888,6 @@ Cordialement,
       let paxStringText = "";
       if (selectedTourMode === 'shared') {
         const p = passengerDetails;
-        let pArr = [];
-        if (p.adults > 0) pArr.push(`${p.adults}`);
-        if (p.kids > 0) pArr.push(`${p.kids}`);
-        if (p.babies > 0) pArr.push(`${p.babies}`);
         paxStringText = ` (${p.adults + p.kids + p.babies})`;
       } else if (selectedTourMode === 'sunset') {
         paxStringText = " (2)";
@@ -3070,8 +3102,6 @@ Cordialement,
 
       saveCloudBookings(dateStr, bookingsDB[dateStr]);
       sendConfirmationEmail(b);
-
-      // SLANJE WHATSAPP OBAVIJESTI ZA WEB NARUDŽBU
       sendWhatsAppNotification(b.bookingCode, dateStr, b.name, 'Web Online');
 
       document.getElementById('verifyModal').style.display = 'none';
@@ -3138,7 +3168,6 @@ Cordialement,
 
     function closeAdminFullscreen() {
       document.getElementById('adminFullscreenPanel').style.display = 'none';
-      // Uklanjamo hash iz URL-a kad se zatvori admin
       if (window.location.hash.startsWith('#admin-date=')) {
         history.pushState("", document.title, window.location.pathname + window.location.search);
       }
@@ -3199,7 +3228,7 @@ Cordialement,
         }
 
         grid.innerHTML += `
-          <div class="admin-day ${dayClass}" onclick="openAdminDayDetails('${dateStr}')">
+          <div class="admin-day ${dayClass}" onclick="openAdminDayDetails('${dateStr}')" tabindex="0" onkeydown="if(event.key==='Enter')openAdminDayDetails('${dateStr}')">
             <div style="display:flex; justify-content:space-between; width:100%; padding:0 3px;">
               <span>${d}</span>
               ${sunsetIcon}
@@ -3257,7 +3286,9 @@ Cordialement,
         else tourTypeLabel = `⛵ Poludnevna (osoba: ${g.pax || 1})`;
 
         const tr = document.createElement('tr');
+        tr.tabIndex = 0;
         tr.onclick = () => openAdminDetailModal(dateStr);
+        tr.onkeydown = (e) => { if(e.key === 'Enter') openAdminDetailModal(dateStr); };
         tr.innerHTML = `
           <td><code style="color:#edd999; font-size:0.75rem;">${g.bookingCode || 'N/A'}</code></td>
           <td><strong>${formattedDate}</strong></td>
@@ -3600,7 +3631,7 @@ Cordialement,
           subText = `<span class="pax-tag" style="color:#2ec4b6">${freeCount}</span>`;
         }
 
-        const clickAttr = disabled ? '' : `onclick="partnerSelectDate('${dateStr}')"`;
+        const clickAttr = disabled ? '' : `onclick="partnerSelectDate('${dateStr}')" tabindex="0" onkeydown="if(event.key==='Enter')partnerSelectDate('${dateStr}')"`;
         grid.innerHTML += `<button class="${btnClass}" ${clickAttr}><span>${d}</span>${subText}</button>`;
       }
     }
@@ -3701,8 +3732,6 @@ Cordialement,
       }
 
       saveCloudBookings(dateStr, bookingsDB[dateStr]);
-
-      // SLANJE WHATSAPP OBAVIJESTI ZA PARTNER NARUDŽBU
       sendWhatsAppNotification(bookingCode, dateStr, name, currentPartnerAgencyName);
 
       alert(`Rezervacija je uspješno spremljena! Broj rezervacije: ${bookingCode}`);
